@@ -12,6 +12,19 @@ if(typeof(String.prototype.trim) === "undefined")
 		return String(this).replace(/^\s+|\s+$/g, '');
 	};
 }
+function hourDifference(arrayData1,arrayData2){
+
+	//Criacao de um array contendo dia, mes e ano
+	var ano1 = parseInt(arrayData1[2],10);
+	var ano2 = parseInt(arrayData2[2],10);
+	var mes1 = parseInt(arrayData1[1],10);
+	var mes2 = parseInt(arrayData2[1],10);
+	var dia1 = parseInt(arrayData1[0],10);
+	var dia2 = parseInt(arrayData2[0],10);
+	var d1 = new Date(ano1,mes1,dia1);
+	var d2 = new Date(ano2,mes2,dia2);
+	return ((d1-d2)/(1000*60*60));
+}
 
 var not_tested = new Array();
 not_tested[0]  = medicines.sort();
@@ -22,6 +35,51 @@ var resistent = new Array();
 //Document is ready, let's play
 $(document).ready(function(){
 
+/*---------------------------Auxiliar function-------------------------------*/
+$.fn.compareDate = function(argumento){
+	//Essa funcao eh utilizada para comprar a ordem
+	//cronologica entre duas datas.
+	//Caso a data do argumento seja menor, e retornado um numero positivo
+	//caso contrario, e retornado um numero negativo
+
+	//Caso uma delas nao foi preenchida, a funcao retorna 0
+	if ($(this).val().length == 0 || $(argumento).val().length == 0)
+		return 0;
+	//Criacao de um array contendo dia, mes e ano
+	var arrayData1 = $(this).val().split('/');
+	var arrayData2 = $(argumento).val().split('/');
+	var ano1 = parseInt(arrayData1[2],10);
+	var ano2 = parseInt(arrayData2[2],10);
+	var mes1 = parseInt(arrayData1[1],10);
+	var mes2 = parseInt(arrayData2[1],10);
+	var dia1 = parseInt(arrayData1[0],10);
+	var dia2 = parseInt(arrayData2[0],10);
+	//Compara anos
+	if (ano1 > ano2)
+		return 1;
+	else if (ano1 < ano2)
+		return -1*hourDifference(arrayData1,arrayData2);
+	else
+	{
+		//Compara mes
+		if (mes1 > mes2)
+			return hourDifference(arrayData1,arrayData2);
+		else if (mes1 < mes2)
+			return -1*hourDifference(arrayData1,arrayData2);
+		else
+		{
+			//Compara dia
+			if (dia1 > dia2)
+				return hourDifference(arrayData1,arrayData2);
+			else if (dia1 < dia2)
+				return -1*hourDifference(arrayData1,arrayData2);
+			//São iguais
+			else return 0;
+		}
+	}
+
+}
+/*---------------------------------------------------------------------------*/
 /*------------------------------Edition and Relation-----------------------------*/
 	//Relation between forms
 	//Unidade - Exames e Triagem
@@ -215,10 +273,10 @@ $(document).ready(function(){
 								var values = $(el).text().split(',');
 								var i;
 								for (i=0;i<values.length;i++){
-									$('#sensibilidade_tbresistente_' + num + '_' + values[i]).attr('checked',true);
-									$('#sensibilidade_tbresistente_' + num + '_' + values[i]).removeAttr('disabled');
-									$('#resistente_tbresistente_' + num + '_' + values[i]).attr('checked',false);
-									$('#resistente_tbresistente_' + num + '_' + values[i]).attr('disabled',true);
+									$('#sensibilidade_tbresistente_' + '_' + values[i]).attr('checked',true);
+									$('#sensibilidade_tbresistente_' + '_' + values[i]).removeAttr('disabled');
+									$('#resistente_tbresistente_' + '_' + values[i]).attr('checked',false);
+									$('#resistente_tbresistente_' + '_' + values[i]).attr('disabled',true);
 								}
 							}
 							if (tagname.search('valores_tbresistente_resistencia') != -1)
@@ -227,10 +285,10 @@ $(document).ready(function(){
 								var values = $(el).text().split(',');
 								var i;
 								for (i=0;i<values.length;i++){
-									$('#resistente_tbresistente_' + num + '_' + values[i]).attr('checked',true);
-									$('#resistente_tbresistente_' + num + '_' + values[i]).removeAttr('disabled');
-									$('#sensibilidade_tbresistente_' + num + '_' + values[i]).attr('checked',false);
-									$('#sensibilidade_tbresistente_' + num + '_' + values[i]).attr('disabled',true);
+									$('#resistente_tbresistente_' + '_' + values[i]).attr('checked',true);
+									$('#resistente_tbresistente_' + '_' + values[i]).removeAttr('disabled');
+									$('#sensibilidade_tbresistente_' + '_' + values[i]).attr('checked',false);
+									$('#sensibilidade_tbresistente_' + '_' + values[i]).attr('disabled',true);
 								}
 							}
 							if (tagname.search('valores_tbresistente_nao_testado') != -1)
@@ -777,6 +835,9 @@ $(document).ready(function(){
 	$('#genXpert').change(function(){
 		var dep = new Array();
 		dep[0] = '#divGenXpertPositivo';
+		dep[1] = '#divDataColetaGenXpert';
+		dep[2] = '#divDataRecebimentoGenXpert';
+		dep[3] = '#divDataResultadoGenXpert';
 		if($(this).val()=='positivo'){
 			for(div in dep){
 				var elems = $('*', dep[div]);
@@ -1013,8 +1074,66 @@ $(document).ready(function(){
 	$('#close').click(function(){
 		$("#layer1").hide();
 	});
-	///////////////
-
+	$('#data_aplicacao').change(function(){
+		var compare = parseInt($('#data_leitura').compareDate($('#data_aplicacao')),10);
+		if (compare < 72 && compare != 0)
+		{
+			alert('A Data da Leitura deve vir 72h após a Data de Aplicação');
+			$('#data_leitura').val('');
+			$('#data_aplicacao').val('');
+		}
+	});
+	$('#data_leitura').change(function(){
+		var compare = parseInt($('#data_leitura').compareDate($('#data_aplicacao')),10);
+		if (compare < 72 && compare != 0)
+		{
+			alert('A Data da Leitura deve vir 72h após a Data de Aplicação');
+			$('#data_leitura').val('');
+			$('#data_aplicacao').val('');
+		}
+	});
+	$('#dataRecebimentoGenXpert').change(function(){
+		if ($($('#dataRecebimentoGenXpert')).compareDate($('#dataResultadoGenXpert')) < 0)
+		{
+			alert('A Data do Recebimento deve ser anterior à Data do Resultado');
+			$('#dataRecebimentoGenXpert').val('');
+			$('#dataResultadoGenXpert').val('');
+		}
+		if ($($('#dataRecebimentoGenXpert')).compareDate($('#dataColetaGenXpert')) < 0)
+		{
+			alert('A Data da Coleta deve ser anterior à Data do Recebimento');
+			$('#dataRecebimentoGenXpert').val('');
+			$('#dataColetaGenXpert').val('');
+		}
+	});
+	$('#dataColetaGenXpert').change(function(){
+		if ($($('#dataColetaGenXpert')).compareDate($('#dataResultadoGenXpert')) > 0)
+		{
+			alert('A Data da Coleta deve ser anterior à Data do Resultado');
+			$('#dataColetaGenXpert').val('');
+			$('#dataResultadoGenXpert').val('');
+		}
+		if ($($('#dataColetaGenXpert')).compareDate($('#dataRecebimentoGenXpert')) > 0)
+		{
+			alert('A Data da Coleta deve ser anterior à Data do Recebimento');
+			$('#dataColetaGenXpert').val('');
+			$('#dataRecebimentoGenXpert').val('');
+		}
+	});
+	$('#dataResultadoGenXpert').change(function(){
+		if ($($('#dataRecebimentoGenXpert')).compareDate($('#dataResultadoGenXpert')) > 0)
+		{
+			alert('A Data do Recebimento deve ser anterior à Data do Resultado');
+			$('#dataRecebimentoGenXpert').val('');
+			$('#dataResultadoGenXpert').val('');
+		}
+		if ($($('#dataResultadoGenXpert')).compareDate($('#dataColetaGenXpert')) < 0)
+		{
+			alert('A Data da Coleta deve ser anterior à Data do Resultado');
+			$('#dataColetaGenXpert').val('');
+			$('#dataResultadoGenXpert').val('');
+		}
+	});
 	$('#form_exams').validate({
 		rules: {
 			soroColetado: {
