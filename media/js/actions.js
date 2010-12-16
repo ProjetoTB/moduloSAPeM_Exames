@@ -786,6 +786,7 @@ $.fn.compareDate = function(argumento){
 		ped[0] = '#divSidaContagemLinfocitos60dias';
 		ped[1] = '#divSIDAUsoAntiRetroviral';
 		ped[2] = '#divDataInicioUsoRetroviral';
+		ped[3] = '#divSidaContagemCD460dias';
 		// Se sim, disponibilizar colunas listadas a cima
 		if($(this).val()=='sim'){
 			for(div in dep){
@@ -948,6 +949,7 @@ $.fn.compareDate = function(argumento){
 		var dep = new Array();
 		dep[0] = '#divSIDAUsoAntiRetroviral';
 		dep[1] = '#divSidaContagemLinfocitos60dias';
+		dep[2] = '#divSidaContagemCD460dias';
 		var ped = new Array();
 		ped[0] = '#divDataInicioUsoRetroviral';
 		// Se sim, disponibilizar colunas listadas a cima
