@@ -54,30 +54,8 @@ $.fn.compareDate = function(argumento){
 	var mes2 = parseInt(arrayData2[1],10);
 	var dia1 = parseInt(arrayData1[0],10);
 	var dia2 = parseInt(arrayData2[0],10);
-	//Compara anos
-	if (ano1 > ano2)
-		return 1;
-	else if (ano1 < ano2)
-		return -1*hourDifference(arrayData1,arrayData2);
-	else
-	{
-		//Compara mes
-		if (mes1 > mes2)
-			return hourDifference(arrayData1,arrayData2);
-		else if (mes1 < mes2)
-			return -1*hourDifference(arrayData1,arrayData2);
-		else
-		{
-			//Compara dia
-			if (dia1 > dia2)
-				return hourDifference(arrayData1,arrayData2);
-			else if (dia1 < dia2)
-				return -1*hourDifference(arrayData1,arrayData2);
-			//São iguais
-			else return 0;
-		}
-	}
-
+	var hourDiff = parseInt(hourDifference(arrayData1,arrayData2),10);
+	return hourDiff;
 }
 /*---------------------------------------------------------------------------*/
 /*------------------------------Edition and Relation-----------------------------*/
@@ -1106,16 +1084,12 @@ $.fn.compareDate = function(argumento){
 		}
 	});
 	$('#dataRecebimentoGenXpert').change(function(){
-		console.log($('#dataRecebimentoGenXpert').val());
-		console.log($('#dataResultadoGenXpert').val());
-		console.log($('#dataColetaGenXpert').val());
-		if ($($('#dataRecebimentoGenXpert')).compareDate($('#dataResultadoGenXpert')) < 0)
+		if ($($('#dataRecebimentoGenXpert')).compareDate($('#dataResultadoGenXpert')) > 0)
 		{
 			alert('A Data do Recebimento deve ser anterior à Data do Resultado');
 			$('#dataRecebimentoGenXpert').val('');
 			$('#dataResultadoGenXpert').val('');
 		}
-		console.log($($('#dataRecebimentoGenXpert')).compareDate($('#dataColetaGenXpert')));
 		if ($($('#dataRecebimentoGenXpert')).compareDate($('#dataColetaGenXpert')) < 0)
 		{
 			alert('A Data da Coleta deve ser anterior à Data do Recebimento');
@@ -1149,6 +1123,48 @@ $.fn.compareDate = function(argumento){
 			alert('A Data da Coleta deve ser anterior à Data do Resultado');
 			$('#dataColetaGenXpert').val('');
 			$('#dataResultadoGenXpert').val('');
+		}
+	});
+	$('#dataRecebimentoFitaHain').change(function(){
+		if ($($('#dataRecebimentoFitaHain')).compareDate($('#dataResultadoFitaHain')) > 0)
+		{
+			alert('A Data do Recebimento deve ser anterior à Data do Resultado');
+			$('#dataRecebimentoFitaHain').val('');
+			$('#dataResultadoFitaHain').val('');
+		}
+		if ($($('#dataRecebimentoFitaHain')).compareDate($('#dataColetaFitaHain')) < 0)
+		{
+			alert('A Data da Coleta deve ser anterior à Data do Recebimento');
+			$('#dataRecebimentoFitaHain').val('');
+			$('#dataColetaFitaHain').val('');
+		}
+	});
+	$('#dataColetaFitaHain').change(function(){
+		if ($($('#dataColetaFitaHain')).compareDate($('#dataResultadoFitaHain')) > 0)
+		{
+			alert('A Data da Coleta deve ser anterior à Data do Resultado');
+			$('#dataColetaFitaHain').val('');
+			$('#dataResultadoFitaHain').val('');
+		}
+		if ($($('#dataColetaFitaHain')).compareDate($('#dataRecebimentoFitaHain')) > 0)
+		{
+			alert('A Data da Coleta deve ser anterior à Data do Recebimento');
+			$('#dataColetaFitaHain').val('');
+			$('#dataRecebimentoFitaHain').val('');
+		}
+	});
+	$('#dataResultadoFitaHain').change(function(){
+		if ($($('#dataRecebimentoFitaHain')).compareDate($('#dataResultadoFitaHain')) > 0)
+		{
+			alert('A Data do Recebimento deve ser anterior à Data do Resultado');
+			$('#dataRecebimentoFitaHain').val('');
+			$('#dataResultadoFitaHain').val('');
+		}
+		if ($($('#dataResultadoFitaHain')).compareDate($('#dataColetaFitaHain')) < 0)
+		{
+			alert('A Data da Coleta deve ser anterior à Data do Resultado');
+			$('#dataColetaFitaHain').val('');
+			$('#dataResultadoFitaHain').val('');
 		}
 	});
 	$('#form_exams').validate({
