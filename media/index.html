@@ -158,7 +158,7 @@
 				<input  name="data_sida" id="data_sida" type="text" class='number' maxlength=4 size='8'/>
 			</div>
 			<div id='divSidaContagemCD460dias' class='secondary'>
-				<label for='sidaContagemCD460dias'> Valor do CD4 presente no hemograma nos últimos 60 dias </label>
+				<label for='sidaContagemCD460dias'> Valor do CD4 nos últimos 60 dias </label>
 				<input  name="sidaContagemCD460dias" id="sidaContagemCD460dias" type="text" class='number' maxlength=4 size='5'/> mm<sup>3</sup>
 			</div>
 			<div id='divSidaContagemLinfocitos60dias' class='secondary'>
@@ -198,6 +198,60 @@
 			</thead>
 			</table>
 			<div class='add-row'><input value="Adicionar Linha" class='inputButton' id='addline_button' type="button"></div>
+		</fieldset>
+		<fieldset>
+		<legend>Resultado do BAAR um mês após a Triagem</legend>
+			<div id='divDataResultadoBaarUmMesAposTriagem' name='divDataResultadoBaarUmMesAposTriagem' class='primary required'>
+				<label for='divDataResultadoBaarUmMesAposTriagem'>Data do Resultado do BAAR:</label>
+				<input  name="dataResultadoBaarUmMesAposTriagem" id="dataResultadoBaarUmMesAposTriagem" class='data' type="text" />
+			</div>
+			<div id='divResultadoBaarUmMesAposTriagem' name='divDataResultadoBaarUmMesAposTriagem' class='primary required'>
+				<label for='divDataResultadoBaarUmMesAposTriagem'>Resultado do BAAR:</label>
+				<select name='resultadoBaarUmMesAposTriagem' id='resultadoBaarUmMesAposTriagem' class='selectOne'>
+					<option value=''          > ------    </option>
+					<option value='ignorado'  > Ignorado  </option>
+					<option value='negativo'  > Negativo  </option>
+					<option value='positivo_1'>   +1 	</option>
+					<option value='positivo_2'>   +2 	</option>
+					<option value='positivo_3'>   +3 	</option>
+					<option value='positivo_4'>   +4 	</option>
+				</select>
+			</div>
+			<div id='divResponsavelPelaColetaUmMesAposTriagem' name='divResponsavelPelaColetaUmMesAposTriagem' class='primary required'>
+				<label for='responsavelPelaColetaUmMesAposTriagem'>Responsável pela coleta:</label>
+				<input type='text' class='text' id='responsavelPelaColetaUmMesAposTriagem' name='responsavelPelaColetaUmMesAposTriagem' />
+			</div>
+			<div id='divResponsavelPeloExameUmMesAposTriagem' name='divResponsavelPeloExameUmMesAposTriagem' class='primary required'>
+				<label for='responsavelPeloExameUmMesAposTriagem'>Responsável pelo exame:</label>
+				<input type='text' class='text' id='responsavelPeloExameUmMesAposTriagem' name='responsavelPeloExameUmMesAposTriagem' />
+			</div>
+		</fieldset>
+		<fieldset>
+			<legend>Resultado do BAAR  no seguimento clínico (2 meses após a Triagem)</legend>
+			<div id='divDataResultadoBaarDoisMesesAposTriagem' name='divDataResultadoBaarDoisMesesAposTriagem' class='primary required'>
+				<label for='divDataResultadoBaarDoisMesesAposTriagem'>Data do Resultado do BAAR:</label>
+				<input  name="dataResultadoBaarDoisMesesAposTriagem" id="dataResultadoBaarDoisMesesAposTriagem" class='data' type="text" />
+			</div>
+			<div id='divResultadoBaarDoisMesesAposTriagem' name='divDataResultadoBaarDoisMesesAposTriagem' class='primary required'>
+				<label for='divDataResultadoBaarDoisMesesAposTriagem'>Resultado do BAAR:</label>
+				<select name='resultadoBaarDoisMesesAposTriagem' id='resultadoBaarDoisMesesAposTriagem' class='selectOne'>
+					<option value=''          > ------    </option>
+					<option value='ignorado'  > Ignorado  </option>
+					<option value='negativo'  > Negativo  </option>
+					<option value='positivo_1'>   +1 	</option>
+					<option value='positivo_2'>   +2 	</option>
+					<option value='positivo_3'>   +3 	</option>
+					<option value='positivo_4'>   +4 	</option>
+				</select>
+			</div>
+			<div id='divResponsavelPelaColetaDoisMesesAposTriagem' name='divResponsavelPelaColetaDoisMesesAposTriagem' class='primary required'>
+				<label for='responsavelPelaColetaDoisMesesAposTriagem'>Responsável pela coleta:</label>
+				<input type='text' class='text' id='responsavelPelaColetaDoisMesesAposTriagem' name='responsavelPelaColetaDoisMesesAposTriagem' />
+			</div>
+			<div id='divResponsavelPeloExameDoisMesesAposTriagem' name='divResponsavelPeloExameDoisMesesAposTriagem' class='primary required'>
+				<label for='responsavelPeloExameDoisMesesAposTriagem'>Responsável pelo exame:</label>
+				<input type='text' class='text' id='responsavelPeloExameDoisMesesAposTriagem' name='responsavelPeloExameDoisMesesAposTriagem' />
+			</div>
 		</fieldset>
 		<fieldset>
 			<legend>Diagnóstico </legend>
