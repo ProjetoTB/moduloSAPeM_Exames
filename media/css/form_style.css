@@ -349,4 +349,6 @@ div.tipbox table td{
 	color:#FFFFFF;
 }
 
-
+form div label.error{
+	color:red;
+}
