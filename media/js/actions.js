@@ -12,6 +12,38 @@ if(typeof(String.prototype.trim) === "undefined")
 		return String(this).replace(/^\s+|\s+$/g, '');
 	};
 }
+
+function getUrlbase(){
+	//Make the urlbase (necessary case SAPeM migrate to another server)
+	var urlString = $(location).attr('href');
+	var urlArray = urlString.split('/');
+	var indexToRunUrlString = 0; 
+	var urlbase = '';
+	for (indexToRunUrlString in urlArray)
+		if (urlArray[indexToRunUrlString] == 'sapem')
+			var indexToRecord = indexToRunUrlString;
+	for (indexToRunUrlString in urlArray.slice(0,parseInt(indexToRecord,10) + 1))
+		if (indexToRunUrlString == 0)
+			urlbase += urlArray[indexToRunUrlString];
+		else
+			urlbase += '/' + urlArray[indexToRunUrlString];
+	urlbase += '/';
+	return urlbase;
+}
+
+function loadUnidadesSaude(selectObj, num){
+	urlbase = getUrlbase();
+	$.ajax({
+		url: urlbase + 'unidadesSaude/json/',
+		dataType : 'json',
+		success : function(data){
+			$.each(data, function(key, value){
+				$(selectObj + num).append('<option>' + value.fields.nome + '</option>');
+			});
+		}
+	});
+}
+
 function hourDifference(arrayData1,arrayData2){
 
 	//Criacao de um array contendo dia, mes e ano
