@@ -450,17 +450,18 @@ $(document).ready(function(){
 					$('#hora_processamento_tbresistente_cultura_'+num).addClass('required');
 				else
 					$('#hora_processamento_tbresistente_cultura_'+num).removeClass('required');
-				if ($($('#data_processamento_tbresistente_cultura_' + num)).compareDate($('#data_resultado_tbresistente_cultura_' + num)) == 1)
-				{
-					alert('A Data do Processamento deve ser anterior à Data do Resultado');
-					$('#data_processamento_tbresistente_cultura_' + num).val('');
-					$('#data_resultado_tbresistente_cultura_' + num).val('');
+
+				if ($($(this)).compareDate($('#data_resultado_tbresistente_cultura_' + num)) > 0){
+					alert("A 'Data do Processamento' deve ser anterior à 'Data do Resultado'");
+					$(this).val('');
 				}
-				if ($($('#data_processamento_tbresistente_cultura_' + num)).compareDate($('#data_recebimento_tbresistente_cepa_' + num)) == -1)
-				{
-					alert('A Data do Recebimento deve ser anterior à Data do Processamento');
-					$('#data_processamento_tbresistente_cultura_' + num).val('');
-					$('#data_recebimento_tbresistente_cepa_' + num).val('');
+				if ($($(this)).compareDate($('#data_recebimento_tbresistente_cepa_' + num)) < 0){
+					alert("A 'Data do Processamento' deve ser posterior à 'Data do Recebimento'");
+					$(this).val('');
+				}
+				if ($($(this)).compareDate($('#data_recebimento_TSA_medico_' + num)) > 0){
+					alert("A 'Data do Processamento' deve ser anterior à 'Data do recebimento TSA médico'");
+					$(this).val('');
 				}
 			});
 			$('#data_recebimento_tbresistente_cepa_' + num).livequery('change', function(){
@@ -468,17 +469,18 @@ $(document).ready(function(){
 					$('#hora_recebimento_tbresistente_cepa_' + num).addClass('required');
 				else
 					$('#hora_recebimento_tbresistente_cepa_' + num).removeClass('required');
-				if ($($('#data_recebimento_tbresistente_cepa_' + num)).compareDate($('#data_resultado_tbresistente_cultura_' + num)) == 1)
-				{
-					alert('A Data do Recebimento deve ser anterior à Data do Resultado');
-					$('#data_recebimento_tbresistente_cepa_' + num).val('');
-					$('#data_resultado_tbresistente_cultura_' + num).val('');
+
+				if ($($(this)).compareDate($('#data_resultado_tbresistente_cultura_' + num)) > 0){
+					alert("A 'Data do Recebimento' deve ser anterior à 'Data do Resultado'");
+					$(this).val('');
 				}
-				if ($($('#data_recebimento_tbresistente_cepa_' + num)).compareDate($('#data_processamento_tbresistente_cultura_' + num)) == 1)
-				{
-					alert('A Data do Recebimento deve ser anterior à Data do Processamento');
-					$('#data_recebimento_tbresistente_cepa_' + num).val('');
-					$('#data_processamento_tbresistente_cultura_' + num).val('');
+				if ($($(this)).compareDate($('#data_processamento_tbresistente_cultura_' + num)) > 0){
+					alert("A 'Data do Recebimento' deve ser anterior à 'Data do Processamento'");
+					$(this).val('');
+				}
+				if ($($(this)).compareDate($('#data_recebimento_TSA_medico_' + num)) > 0){
+					alert("A 'Data do Recebimento' deve ser anterior à 'Data do recebimento TSA médico'");
+					$(this).val('');
 				}
 			});
 			$('#data_resultado_tbresistente_cultura_' + num).livequery('change', function(){
@@ -486,17 +488,31 @@ $(document).ready(function(){
 					$('#hora_resultado_tbresistente_cultura_' + num).addClass('required');
 				else
 					$('#hora_resultado_tbresistente_cultura_' + num).removeClass('required');
-				if ($($('#data_processamento_tbresistente_cultura_' + num)).compareDate($('#data_resultado_tbresistente_cultura_' + num)) == 1)
-				{
-					alert('A Data do Processamento deve ser anterior à Data do Resultado');
-					$('#data_processamento_tbresistente_cultura_' + num).val('');
-					$('#data_resultado_tbresistente_cultura_' + num).val('');
+				if ($($(this)).compareDate($('#data_processamento_tbresistente_cultura_' + num)) < 0){
+					alert("A 'Data do Resultado' deve ser posterior à 'Data do Processamento'");
+					$(this).val('');
 				}
-				if ($($('#data_resultado_tbresistente_cultura_' + num)).compareDate($('#data_recebimento_tbresistente_cepa_' + num)) == -1)
-				{
-					alert('A Data do Recebimento deve ser anterior à Data do Resultado');
-					$('#data_recebimento_tbresistente_cepa_' + num).val('');
-					$('#data_resultado_tbresistente_cultura_' + num).val('');
+				if ($($(this)).compareDate($('#data_recebimento_tbresistente_cepa_' + num)) < 0){
+					alert("A 'Data do Resultado' deve ser posterior à 'Data do Recebimento'");
+					$(this).val('');
+				}
+				if ($($(this)).compareDate($('#data_recebimento_TSA_medico_' + num)) > 0){
+					alert("A 'Data do Resultado' deve ser anterior à 'Data do recebimento TSA médico'");
+					$(this).val('');
+				}
+			});
+			$('#data_recebimento_TSA_medico_' + num).livequery('change', function(){
+				if ($($(this)).compareDate($('#data_processamento_tbresistente_cultura_' + num)) < 0){
+					alert("A 'Data do recebimento TSA médico' deve ser posterior à 'Data do Processamento'");
+					$(this).val('');
+				}
+				if ($($(this)).compareDate($('#data_recebimento_tbresistente_cepa_' + num)) < 0){
+					alert("A 'Data do recebimento TSA médico' deve ser posterior à 'Data do Recebimento'");
+					$(this).val('');
+				}
+				if ($($(this)).compareDate($('#data_resultado_tbresistente_cultura_' + num)) < 0){
+					alert("A 'Data do recebimento TSA médico' deve ser posterior à 'Data do Resultado'");
+					$(this).val('');
 				}
 			});
 		} else {
