@@ -117,9 +117,19 @@ function CEPACulturaRow(numCepa){
 	);
 	content = $.merge($.merge([], content) , $('<tr />')
 		.addClass(cRow)
-		.append($('<td colspan= "2"/>')
+		.append($('<td />')
 			.append('Responsável')
 			.addClass('description')
+		)
+		.append($('<td />')
+			.append($('<input type="text"/> ')
+				.attr('disabled', true)
+				.attr('name', 'cultura_coleta_responsavel_' + numCepa)
+				.attr(  'id', 'cultura_coleta_responsavel_' + numCepa)
+				.attr('size', '20')
+				.addClass('text')
+				.addClass('cultura_coleta_responsavel')
+			)
 		)
 		.append($('<td />')
 			.append('Resultado')
@@ -165,14 +175,18 @@ function CEPACulturaRow(numCepa){
 	);
 	content = $.merge($.merge([], content) , $('<tr />')
 		.addClass(cRow)
-		.append($('<td colspan="2"/>')
-			.append($('<input type="text"/> ')
+		.append($('<td />')
+			.append('Data do recebimento pelo médico')
+			.addClass('description')
+		)
+		.append($('<td />')
+			.append($('<input />')
 				.attr('disabled', true)
-				.attr('name', 'cultura_coleta_responsavel_' + numCepa)
-				.attr(  'id', 'cultura_coleta_responsavel_' + numCepa)
-				.attr('size', '20')
-				.addClass('text')
-				.addClass('cultura_coleta_responsavel')
+				.attr('name', 'data_recebimento_medico_' + numCepa)
+				.attr(  'id', 'data_recebimento_medico_' + numCepa)
+				.addClass('data')
+				.attr('size', '11')
+				.attr('readonly', 'readonly')
 			)
 		)
 		.append($('<td />')
@@ -319,6 +333,7 @@ $(document).ready(function(){
 			$('#resultado_cultura_cepa_' + num).removeAttr('disabled');
 			$('#dias_cultura_cepa_' + num).removeAttr('disabled');
 			$('#identificacao_cultura_cepa_' + num).removeAttr('disabled');
+			$('#data_recebimento_medico_' + num).removeAttr('disabled');
 			$('#data_processamento_cultura_' + num).livequery('change', function(){
 				if ($(this).val())
 					$('#hora_processamento_cultura_'+num).addClass('required');
@@ -404,6 +419,7 @@ $(document).ready(function(){
 			$('#identificacao_cultura_cepa_' + num).attr('disabled', true);
 			$('#dias_cultura_cepa_' + num).val('');
 			$('#dias_cultura_cepa_' + num).attr('disabled', true);
+			$('#data_recebimento_medico_' + num).attr('disabled', true);
 		}
 	});
 	$('select.metodo_cultura_cepa').livequery('change', function(){

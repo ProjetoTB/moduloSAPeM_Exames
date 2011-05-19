@@ -221,6 +221,7 @@ $.fn.compareDate = function(argumento){
 				$('#resultado_cultura_cepa_' + j).removeAttr('disabled');
 				$('#dias_cultura_cepa_' + j).removeAttr('disabled');
 				$('#identificacao_cultura_cepa_' + j).removeAttr('disabled');
+				$('#data_recebimento_medico_' + j).removeAttr('disabled');
 			}
 			//TBResistente
 			while(xml.getElementsByTagName('origem_tbresistente_' + indexTbResistente.toString())[0] != undefined)
