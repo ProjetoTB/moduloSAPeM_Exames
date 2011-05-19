@@ -185,9 +185,19 @@ function CEPATBResistenteRow(numCepa){
 	);
 	content = $.merge($.merge([], content) , $('<tr />')
 		.addClass(cRow)
-		.append($('<td colspan= "2"/>')
+		.append($('<td />')
 			.append('Responsável')
 			.addClass('description')
+		)
+		.append($('<td />')
+			.append($('<input type="text"/> ')
+				.attr('disabled', true)
+				.attr('name', 'cultura_coleta_tbresistente_responsavel_' + numCepa)
+				.attr(  'id', 'cultura_coleta_tbresistente_responsavel_' + numCepa)
+				.attr('size', '18')
+				.addClass('text')
+				.addClass('cultura_coleta_responsavel')
+			)
 		)
 		.append($('<td />')
 			.append('Data do resultado')
@@ -246,18 +256,19 @@ function CEPATBResistenteRow(numCepa){
 	);
 	content = $.merge($.merge([], content) , $('<tr />')
 		.addClass(cRow)
-		.append($('<td colspan="2"/>')
-			.append($('<input type="text"/> ')
-				.attr('disabled', true)
-				.attr('name', 'cultura_coleta_tbresistente_responsavel_' + numCepa)
-				.attr(  'id', 'cultura_coleta_tbresistente_responsavel_' + numCepa)
-				.attr('size', '20')
-				.addClass('text')
-				.addClass('cultura_coleta_responsavel')
-			)
+		.append($('<td />')
+			.append('Data do Recebimento TSA médico')
+			.addClass('description')
 		)
-		.append($('<td colspan="2"/>')
-			.append('')
+		.append($('<td />')
+			.append($('<input/>')
+				.attr('disabled', true)
+				.attr('name', 'data_recebimento_TSA_medico_' + numCepa)
+				.attr(  'id', 'data_recebimento_TSA_medico_' + numCepa)
+				.addClass('data')
+				.attr('size', '11')
+				.attr('readonly', 'readonly')
+			)
 		)
 		.append($('<td />')
 			.append('Resultado')
@@ -405,6 +416,7 @@ $(document).ready(function(){
 			$('#data_resultado_tbresistente_cultura_' + num).removeAttr('disabled');
 			$('#metodo_tbresistente_cepa_' + num).removeAttr('disabled');
 			$('#dias_tbresistente_cepa_' + num).removeAttr('disabled');
+			$('#data_recebimento_TSA_medico_' + num).removeAttr('disabled');
 			$('#identificacao_tbresistente_cepa_' + num).removeAttr('disabled');
 			for(var i= 0; i<l.length; i++){
 				$('#sensibilidade_tbresistente_'+num+'_'+l[i]).removeAttr('disabled');
@@ -522,6 +534,8 @@ $(document).ready(function(){
 			$('#identificacao_tbresistente_cepa_' + num).attr('disabled', true);
 			$('#dias_tbresistente_cepa_' + num).val('');
 			$('#dias_tbresistente_cepa_' + num).attr('disabled', true);
+			$('#data_recebimento_TSA_medico_' + num).val('');
+			$('#data_recebimento_TSA_medico_' + num).attr('disabled', true);
 			for(var i= 0; i<l.length; i++){
 				$('#sensibilidade_tbresistente_'+num+'_'+l[i]).attr('disabled', true);
 				$('#sensibilidade_tbresistente_'+num+'_'+l[i]).attr('checked', false);

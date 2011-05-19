@@ -248,6 +248,7 @@ $.fn.compareDate = function(argumento){
 				$('#dias_tbresistente_cepa_' + j).removeAttr('disabled');
 				$('#identificacao_tbresistente_cepa_' + j).removeAttr('disabled');
 				$('#data_tsa_tbresistente_cultura_' + j).removeAttr('disabled');
+				$('#data_recebimento_TSA_medico_' + j).removeAttr('disabled');
 				$('.input_sensibilidade_tbresistente').each(function(){
 					$(this).removeAttr('disabled');
 				});
