@@ -185,8 +185,7 @@ $.fn.compareDate = function(argumento){
 				$('#baciloscopia_metodo_' + j).removeAttr('disabled');
 				$('#baciloscopia_coleta_responsavel_' + j).removeAttr('disabled');
 				$('#baciloscopia_data_' + j).removeAttr('disabled');
-				$('#baciloscopia_hora_cepa_' + j).removeAttr('disabled');
-				$('#baciloscopia_material_cepa_' + j).removeAttr('disabled');
+				$('#baciloscopia_hora_' + j).removeAttr('disabled');
 				$('#numero_cepa_' + j).removeAttr('disabled');
 				$('#data_cepa_' + j).removeAttr('disabled');
 				$('#hora_cepa_' + j).removeAttr('disabled');
@@ -196,6 +195,7 @@ $.fn.compareDate = function(argumento){
 				$('#material_cepa_' + j).removeAttr('disabled');
 				$('#analise_responsavel_' + j).removeAttr('disabled');
 				$('#aspecto_escarro_' + j).removeAttr('disabled');
+				$('#baciloscopia_data_recebimento_medico_' + j).removeAttr('disabled');
 			}
 			//CepaCulturaRow
 			while(xml.getElementsByTagName('origem_cultura_' + indexCepaCulturaRow.toString())[0] != undefined)

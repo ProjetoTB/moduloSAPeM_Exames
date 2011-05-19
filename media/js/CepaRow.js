@@ -169,21 +169,31 @@ function CEPARow(numCepa){
 		.addClass(cRow)
 		.addClass(cRow)
 		.append($('<td />')
-			.append('Responsável pela Coleta')
+			.append('Data do Recebimento no labo')
 			.addClass('description')
 		)
 		.append($('<td />')
 			.append($('<input type="text"/> ')
 				.attr('disabled', true)
-				.attr('name', 'baciloscopia_coleta_responsavel_' + numCepa)
-				.attr(  'id', 'baciloscopia_coleta_responsavel_' + numCepa)
-				.attr('size', '20')
-				.addClass('text')
-				.addClass('baciloscopia_coleta_responsavel')
+				.attr('name', 'data_recebimento_cepa_' + numCepa)
+				.attr(  'id', 'data_recebimento_cepa_' + numCepa)
+				.attr('size', '10')
+				.addClass('data')
+				.attr('readonly', 'readonly')
+				.css('margin-right', '8px')
+			)
+			.appendText('hora: ')
+			.append($('<input/>')
+				.attr('disabled', true)
+				.attr('name', 'hora_recebimento_cepa_' + numCepa)
+				.attr(  'id', 'hora_recebimento_cepa_' + numCepa)
+				.addClass('hour')
+				.attr('size', '5')
+				.attr('maxlength','5')
 			)
 		)
 		.append($('<td />')
-			.append('Data do Resultado')
+			.append('Data do Resultado BAAR')
 			.addClass('description')
 		)
 		.append($('<td />')
@@ -193,13 +203,14 @@ function CEPARow(numCepa){
 				.attr(  'id', 'baciloscopia_data_' + numCepa)
 				.attr('size', '10')
 				.addClass('data')
+				.attr('readonly', 'readonly')
 				.css('margin-right', '8px')
 			)
 			.appendText('hora: ')
 			.append($('<input/>')
 				.attr('disabled', true)
-				.attr('name', 'baciloscopia_hora_cepa_' + numCepa)
-				.attr(  'id', 'baciloscopia_hora_cepa_' + numCepa)
+				.attr('name', 'baciloscopia_hora_' + numCepa)
+				.attr(  'id', 'baciloscopia_hora_' + numCepa)
 				.addClass('hour')
 				.attr('size', '5')
 				.attr('maxlength','5')
@@ -235,47 +246,19 @@ function CEPARow(numCepa){
 			)
 		)
 		.append($('<td />')
-			.append('Responsável pela Análise')
+			.append('Responsável pela coleta')
 			.addClass('description')
 		)
 		.append($('<td />')
 			.append($('<input type="text"/> ')
 				.attr('disabled', true)
-				.attr('name', 'analise_responsavel_' + numCepa)
-				.attr(  'id', 'analise_responsavel_' + numCepa)
-				.attr('size', '20')
+				.attr('name', 'baciloscopia_coleta_responsavel_' + numCepa)
+				.attr(  'id', 'baciloscopia_coleta_responsavel_' + numCepa)
+				.attr('size', '15')
 				.addClass('text')
 				.addClass('analise_responsavel')
 			)
 		)
-	);
-	content = $.merge($.merge([], content) , $('<tr />')
-		.addClass(cRow)
-		.append($('<td />')
-			.append('Data do Recebimento')
-			.addClass('description')
-		)
-		.append($('<td />')
-			.append($('<input/>')
-				.attr('disabled', true)
-				.attr('name', 'data_recebimento_cepa_' + numCepa)
-				.attr(  'id', 'data_recebimento_cepa_' + numCepa)
-				.addClass('data')
-				.attr('size', '11')
-				.attr('readonly', 'readonly')
-				.css('margin-right','8px')
-			)
-			.appendText('hora: ')
-			.append($('<input/>')
-				.attr('disabled', true)
-				.attr('name', 'hora_recebimento_cepa_' + numCepa)
-				.attr(  'id', 'hora_recebimento_cepa_' + numCepa)
-				.addClass('hour')
-				.attr('size', '5')
-				.attr('maxlength','5')
-			)
-		)
-		.append($('<td colspan="2"/>'))
 	);
 	content = $.merge($.merge([], content) , $('<tr />')
 		.addClass(cRow)
@@ -304,7 +287,40 @@ function CEPARow(numCepa){
 				)
 			)
 		)
+		.append($('<td />')
+			.append('Responsável pelo exame')
+			.addClass('description')
+		)
+		.append($('<td />')
+			.append($('<input type="text"/> ')
+				.attr('disabled', true)
+				.attr('name', 'analise_responsavel_' + numCepa)
+				.attr(  'id', 'analise_responsavel_' + numCepa)
+				.attr('size', '15')
+				.addClass('text')
+				.addClass('analise_responsavel')
+			)
+		)
+
+	);
+	content = $.merge($.merge([], content) , $('<tr />')
+		.addClass(cRow)
 		.append($('<td colspan="2"/>'))
+		.append($('<td />')
+			.append('Data do Receb médico/enferm')
+			.addClass('description')
+		)
+		.append($('<td />')
+			.append($('<input type="text"/> ')
+				.attr('disabled', true)
+				.attr('name', 'baciloscopia_data_recebimento_medico_' + numCepa)
+				.attr(  'id', 'baciloscopia_data_recebimento_medico_' + numCepa)
+				.attr('size', '10')
+				.addClass('data')
+				.attr('readonly', 'readonly')
+				.css('margin-right', '8px')
+			)
+		)
 	);
 	content = ($('<tbody cepanum="'+numCepa+'">').append(content))
 	return content;
@@ -382,20 +398,21 @@ $(document).ready( function(){
 		var origemStr = $(this).val();
 		num = parseInt($(this).attr('id').split('_')[2]);
 		if(origemStr.replace(/-/g,'')){
-			$('#baciloscopia_metodo_' + num).removeAttr('disabled');
-			$('#baciloscopia_coleta_responsavel_' + num).removeAttr('disabled');
-			$('#baciloscopia_data_' + num).removeAttr('disabled');
-			$('#baciloscopia_hora_cepa_' + num).removeAttr('disabled');
-			$('#baciloscopia_material_cepa_' + num).removeAttr('disabled');
 			$('#numero_cepa_' + num).removeAttr('disabled');
 			$('#data_cepa_' + num).removeAttr('disabled');
 			$('#hora_cepa_' + num).removeAttr('disabled');
-			$('#baciloscopia_resultado_cepa_' + num).removeAttr('disabled');
 			$('#data_recebimento_cepa_' + num).removeAttr('disabled');
 			$('#hora_recebimento_cepa_' + num).removeAttr('disabled');
-			$('#material_cepa_' + num).removeAttr('disabled');
-			$('#analise_responsavel_' + num).removeAttr('disabled');
 			$('#aspecto_escarro_' + num).removeAttr('disabled');
+			$('#material_cepa_' + num).removeAttr('disabled');
+			$('#baciloscopia_metodo_' + num).removeAttr('disabled');
+			$('#baciloscopia_resultado_cepa_' + num).removeAttr('disabled');
+			$('#baciloscopia_coleta_responsavel_' + num).removeAttr('disabled');
+			$('#baciloscopia_data_' + num).removeAttr('disabled');
+			$('#baciloscopia_hora_' + num).removeAttr('disabled');;
+			$('#analise_responsavel_' + num).removeAttr('disabled');
+			$('#baciloscopia_data_recebimento_medico_' + num).removeAttr('disabled');
+
 			$('#data_recebimento_cepa_' + num).livequery('change', function(){
 				if ($(this).val())
 					$('#hora_recebimento_cepa_'+num).addClass('required');
@@ -473,12 +490,10 @@ $(document).ready( function(){
 			$('#baciloscopia_coleta_responsavel_' + num).val('');
 			$('#baciloscopia_resultado_cepa_' + num).attr('disabled', true);
 			$('#baciloscopia_resultado_cepa_' + num).val('----');
-			$('#baciloscopia_material_cepa_' + num).attr('disabled', true);
-			$('#baciloscopia_material_cepa_' + num).val('----');
 			$('#baciloscopia_data_' + num).attr('disabled', true);
 			$('#baciloscopia_data_' + num).val('');
-			$('#baciloscopia_hora_cepa_' + num).attr('disabled', true);
-			$('#baciloscopia_hora_cepa_' + num).val('');
+			$('#baciloscopia_hora_' + num).attr('disabled', true);
+			$('#baciloscopia_hora_' + num).val('');
 			$('#numero_cepa_' + num).attr('disabled', true);
 			$('#numero_cepa_' + num).val('');
 			$('#analise_responsavel_' + num).attr('disabled',true);
@@ -495,6 +510,9 @@ $(document).ready( function(){
 			$('#hora_recebimento_cepa_' + num).val('');
 			$('#material_cepa_' + num).attr('disabled', true);
 			$('#material_cepa_' + num).val('');
+			$('#baciloscopia_data_recebimento_medico_' + num).attr('disabled', true);
+			$('#baciloscopia_data_recebimento_medico_' + num).val('');
+
 			$('#data_recebimento_cepa_' + num).livequery('change', function(){
 				if (Date.parse($('#data_recebimento_cepa_' + num).val()) > Date.parse($('#baciloscopia_data_' + num).val()))
 				{
