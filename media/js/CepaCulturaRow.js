@@ -339,17 +339,20 @@ $(document).ready(function(){
 					$('#hora_processamento_cultura_'+num).addClass('required');
 				else
 					$('#hora_processamento_cultura_'+num).removeClass('required');
-				if ($($('#data_processamento_cultura_' + num)).compareDate($('#data_resultado_cultura_' + num)) == 1)
-				{
-					alert('A Data do Processamento deve ser anterior à Data do Resultado');
-					$('#data_processamento_cultura_' + num).val('');
-					$('#data_resultado_cultura_' + num).val('');
+
+				if ($($(this)).compareDate($('#data_resultado_cultura_' + num)) > 0){
+					alert("A 'Data do Processamento' deve ser anterior à 'Data do resultado'");
+					$(this).val('');
 				}
-				if ($($('#data_processamento_cultura_' + num)).compareDate($('#data_cultura_cepa_' + num)) == -1)
-				{
-					alert('A Data do Recebimento deve ser anterior à Data do Processamento');
-					$('#data_processamento_cultura_' + num).val('');
-					$('#data_cultura_cepa_' + num).val('');
+
+				if ($($(this)).compareDate($('#data_cultura_cepa_' + num)) < 0){
+					alert("A 'Data do Processamento' deve ser posterior à 'Data do recebimento'");
+					$(this).val('');
+				}
+
+				if ($($(this)).compareDate($('#data_recebimento_medico_' + num)) > 0){
+					alert("A 'Data de Processamento' deve ser anterior à 'Data do recebimento pelo médico'");
+					$(this).val('');
 				}
 			});
 			$('#data_cultura_cepa_' + num).livequery('change', function(){
@@ -357,35 +360,56 @@ $(document).ready(function(){
 					$('#hora_cultura_cepa_' + num).addClass('required');
 				else
 					$('#hora_cultura_cepa_' + num).removeClass('required');
-				if ($($('#data_cultura_cepa_' + num)).compareDate($('#data_resultado_cultura_' + num)) == 1)
-				{
-					alert('A Data do Recebimento deve ser anterior à Data do Resultado');
-					$('#data_cultura_cepa_' + num).val('');
-					$('#data_resultado_cultura_' + num).val('');
+
+				if ($($(this)).compareDate($('#data_resultado_cultura_' + num)) > 0){
+					alert("A 'Data do recebimento' deve ser anterior à 'Data do resultado'");
+					$(this).val('');
 				}
-				if ($($('#data_cultura_cepa_' + num)).compareDate($('#data_processamento_cultura_' + num)) == 1)
-				{
-					alert('A Data do Recebimento deve ser anterior à Data do Processamento');
-					$('#data_cultura_cepa_' + num).val('');
-					$('#data_processamento_cultura_' + num).val('');
+
+				if ($($(this)).compareDate($('#data_processamento_cultura_' + num)) > 0){
+					alert("A 'Data do recebimento' deve ser anterior à 'Data do Processamento'");
+					$(this).val('');
 				}
+
+				if ($($(this)).compareDate($('#data_recebimento_medico_' + num)) > 0){
+					alert("A 'Data do recebimento' deve ser anterior à 'Data do recebimento pelo médico'");
+					$(this).val('');
+				}
+
 			});
 			$('#data_resultado_cultura_' + num).livequery('change', function(){
 				if ($(this).val())
 					$('#hora_resultado_cultura_' + num).addClass('required');
 				else
 					$('#hora_resultado_cultura_' + num).removeClass('required');
-				if ($($('#data_processamento_cultura_' + num)).compareDate($('#data_resultado_cultura_' + num)) == 1)
-				{
-					alert('A Data do Processamento deve ser anterior à Data do Resultado');
-					$('#data_processamento_cultura_' + num).val('');
-					$('#data_resultado_cultura_' + num).val('');
+
+				if ($($(this)).compareDate($('#data_processamento_cultura_' + num)) < 0){
+					alert("A 'Data do resultado' deve ser posterior à 'Data do Processamento'");
+					$(this).val('');
 				}
-				if ($($('#data_resultado_cultura_' + num)).compareDate($('#data_cultura_cepa_' + num)) == -1)
-				{
-					alert('A Data do Recebimento deve ser anterior à Data do Resultado');
-					$('#data_cultura_cepa_' + num).val('');
-					$('#data_resultado_cultura_' + num).val('');
+				
+				if ($($(this)).compareDate($('#data_cultura_cepa_' + num)) < 0){
+					alert("A 'Data do resultado' deve ser posterior à 'Data do recebimento'");
+					$(this).val('');
+				}
+
+				if ($($(this)).compareDate($('#data_recebimento_medico_' + num)) > 0){
+					alert("A 'Data do resultado' deve ser anterior à 'Data do recebimento pelo médico'");
+					$(this).val('');
+				}
+			});
+			$('#data_recebimento_medico_' + num).livequery('change', function(){
+				if ($($(this)).compareDate($('#data_cultura_cepa_' + num)) < 0){
+					alert("A 'Data do recebimento pelo médico' deve ser posterior à 'Data do recebimento'");
+					$(this).val('');
+				}
+				if ($($(this)).compareDate($('#data_processamento_cultura_' + num)) < 0){
+					alert("A 'Data do recebimento pelo médico' deve ser posterior à 'Data do Processamento'");
+					$(this).val('');
+				}
+				if ($($(this)).compareDate($('#data_resultado_cultura_' + num)) < 0){
+					alert("A 'Data do recebimento pelo médico' deve ser posterior à 'Data do resultado'");
+					$(this).val('');
 				}
 			});
 		} else {
