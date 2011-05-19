@@ -22,7 +22,7 @@ form fieldset {
 }
 
 form fieldset legend {
-	font-size: 150%;
+	font-size: 200%;
 	font-weight: normal;
 	margin: 0 0 0 0;
 	padding: 0 5px;
@@ -309,6 +309,10 @@ table.table_resistente td{
 label.disabledField {
 	color        : #999999;
 	font-weight  : normal;
+}
+
+fieldset.amostra{
+	width:		30%;
 }
 
 
