@@ -418,17 +418,21 @@ $(document).ready( function(){
 					$('#hora_recebimento_cepa_'+num).addClass('required');
 				else
 					$('#hora_recebimento_cepa_'+num).removeClass('required');
-				if ($($('#data_recebimento_cepa_' + num)).compareDate($('#baciloscopia_data_' + num)) == -1)
+
+				if ($($('#data_recebimento_cepa_' + num)).compareDate($('#baciloscopia_data_' + num)) > 0)
 				{
-					alert('A Data do Recebimento deve ser anterior à Data do Resultado');
-					$('#data_recebimento_cepa_' + num).val('');
-					$('#baciloscopia_data_' + num).val('');
+					alert("A 'Data do Recebimento no laboratório' deve ser anterior à 'Data do Resultado BAAR'");
+					$(this).val('');
 				}
-				if ($($('#data_recebimento_cepa_' + num)).compareDate($('#data_cepa_' + num)) == -1)
+				if ($($('#data_recebimento_cepa_' + num)).compareDate($('#data_cepa_' + num)) < 0)
 				{
-					alert('A Data da Coleta deve ser anterior à Data do Recebimento');
-					$('#data_recebimento_cepa_' + num).val('');
-					$('#data_cepa_' + num).val('');
+					alert("A 'Data do Recebimento no laboratório' deve ser posterior à 'Data da coleta'");
+					$(this).val('');
+				}
+
+				if ($($(this)).compareDate($('#baciloscopia_data_recebimento_medico_' + num)) > 0){
+					alert("A 'Data do Recebimento no laboratório' deve ser anterior à 'Data do Recebimento pelo médico/enfermeiro'");
+					$(this).val('');
 				}
 			});
 			$('#data_cepa_' + num).livequery('change', function(){
@@ -436,17 +440,19 @@ $(document).ready( function(){
 					$('#hora_cepa_' + num).addClass('required');
 				else
 					$('#hora_cepa_' + num).removeClass('required');
-				if ($($('#data_cepa_' + num)).compareDate($('#baciloscopia_data_' + num)) == 1)
+				if ($($('#data_cepa_' + num)).compareDate($('#data_recebimento_cepa_' + num)) > 0)
 				{
-					alert('A Data da Coleta deve ser anterior à Data do Resultado');
-					$('#data_cepa_' + num).val('');
-					$('#baciloscopia_data_' + num).val('');
+					alert("A 'Data da coleta' deve ser anterior à 'Data do Recebimento no laboratório'");
+					$(this).val('');
 				}
-				if ($($('#data_cepa_' + num)).compareDate($('#data_recebimento_cepa_' + num)) == 1)
+				if ($($('#data_cepa_' + num)).compareDate($('#baciloscopia_data_' + num)) > 0)
 				{
-					alert('A Data da Coleta deve ser anterior à Data do Recebimento');
-					$('#data_cepa_' + num).val('');
-					$('#data_recebimento_cepa_' + num).val('');
+					alert("A 'Data da coleta' deve ser anterior à 'Data do Resultado BAAR'");
+					$(this).val('');
+				}
+				if ($($(this)).compareDate($('#baciloscopia_data_recebimento_medico_' + num)) > 0){
+					alert("A 'Data da coleta' deve ser anterior à 'Data do Recebimento pelo médico/enfermeiro'");
+					$(this).val('');
 				}
 			});
 			$('#baciloscopia_data_' + num).livequery('change', function(){
@@ -454,17 +460,33 @@ $(document).ready( function(){
 					$('#baciloscopia_hora_cepa_' + num).addClass('required');
 				else
 					$('#baciloscopia_hora_cepa_' + num).removeClass('required');
-				if ($($('#data_recebimento_cepa_' + num)).compareDate($('#baciloscopia_data_' + num)) == 1)
+				if ($($('#baciloscopia_data_' + num)).compareDate($('#data_cepa_' + num)) < 0)
 				{
-					alert('A Data do Recebimento deve ser anterior à Data do Resultado');
-					$('#data_recebimento_cepa_' + num).val('');
-					$('#baciloscopia_data_' + num).val('');
+					alert("A 'Data do Resultado BAAR' deve ser posterior à 'Data da coleta'");
+					$(this).val('');
 				}
-				if ($($('#baciloscopia_data_' + num)).compareDate($('#data_cepa_' + num)) == -1)
+				if ($($('#data_recebimento_cepa_' + num)).compareDate($('#baciloscopia_data_' + num)) > 0)
 				{
-					alert('A Data da Coleta deve ser anterior à Data do Resultado');
-					$('#data_cepa_' + num).val('');
-					$('#baciloscopia_data_' + num).val('');
+					alert("A 'Data do Resultado BAAR' deve ser posterior à 'Data do Recebimento no laboratório'");
+					$(this).val('');
+				}
+				if ($($(this)).compareDate($('#baciloscopia_data_recebimento_medico_' + num)) > 0){
+					alert("A 'Data do Resultado BAAR' deve ser anterior à 'Data do Recebimento pelo médico/enfermeiro'");
+					$(this).val('');
+				}
+			});
+			$('#baciloscopia_data_recebimento_medico_' + num).livequery('change', function(){
+				if ($($(this)).compareDate($('#data_cepa_' + num)) < 0){
+					alert("A 'Data do recebimento pelo médico/enfermeiro' deve ser posterior à 'Data da coleta'");
+					$(this).val('');
+				}
+				if ($($(this)).compareDate($('#baciloscopia_data_' + num)) < 0){
+					alert("A 'Data do recebimento pelo médico/enfermeiro' deve ser posterior à 'Data do Resultado BAAR'");
+					$(this).val('');
+				}
+				if ($($(this)).compareDate($('#data_recebimento_cepa_' + num)) < 0){
+					alert("A 'Data do recebimento pelo médico/enfermeiro' deve ser posterior à 'Data do Recebimento no laboratório'");
+					$(this).val('');
 				}
 			});
 			var jaFoi = false;
