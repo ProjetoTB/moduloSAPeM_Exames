@@ -381,7 +381,6 @@ $(document).ready( function(){
 		var origemStr = $('#origem_cepa_'+ cepaNum).val();
 		if(origemStr.replace(/-/g,'')){
 			cepaNum++;
-			console.log(cepaNum);
 			var content = CEPARow(cepaNum);
 			$('table.cepa').append(CEPARow(cepaNum));
 			loadUnidadesSaude('#origem_cepa_', cepaNum);
