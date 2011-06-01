@@ -287,7 +287,7 @@
 			<div class='add-row'><input value="Adicionar Linha" class='inputButton' id='addlineCultura_button' type="button"></div>
 		</fieldset>
 		<fieldset>
-			<legend> Testes Moleculares(diagnóstico de TB) </legend>
+			<legend> Testes Moleculares (diagnóstico de TB) </legend>
 			<div id='divTestesMoleculares' class='primary required'>
 				<label for='testesMoleculares'>Testes Moleculares:</label>
 				<select name='testesMoleculares' id='testesMoleculares' class='selectOne'>
@@ -362,7 +362,16 @@
 		</fieldset>
 		<fieldset>
 			<legend>Testes Moleculares de Resistência</legend>
-			<div id='divGenXpert' name='divGenXpert' class='primary'>
+			<div id='divTestesMolecularesResistencia' name='divTestesMolecularesResistencia' class='primary'>
+				<label for='testesMolecularesResistencia'>  </label>
+				<select id='testesMolecularesResistencia' name='testesMolecularesResistencia' class='selectOne'>
+					<option value='---'			> ---		</option>
+					<option value='sim'			> Sim		</option>
+					<option value='nao'			> Não		</option>
+					<option value='ignorado'	> Ignorado	</option>
+				</select>
+			</div>
+			<div id='divGenXpert' name='divGenXpert' class='secondary'>
 				<label for='genXpert'>GenXpert: </label>
 				<select id='genXpert' name='genXpert' class='selectOne'>
 					<option value=''		>-------</option>
@@ -390,92 +399,97 @@
 				<label for='dataResultadoGenXpert'>Data do Resultado:</label>
 				<input id='dataResultadoGenXpert' class='data' type="text" />
 			</div>
-		</fieldset>
-		<fieldset>
-			<legend> MDRTBplus (Fita hain) </legend>
-			<div id='divFitaHain' class='primary'>
-			<fieldset>
-				<legend> Opções </legend>
-				<label for='fitaHain_0' class='labelCheckbox'>
-				<input id='fitaHain_0' name="fitaHain" value="controlOfTheConjugate" type="checkbox" /> Control of the conjugate
-				</label>
-				<label for='fitaHain_1' class='labelCheckbox'>
-				<input id='fitaHain_1' name="fitaHain" value="amplificationControl" type="checkbox" /> Amplification control
-				</label>
-				<label for='fitaHain_2' class='labelCheckbox'>
-				<input id='fitaHain_2' name="fitaHain" value="amplificationControlMTBC" type="checkbox" /> Amplification control MTBC
-				</label>
-				<label for='fitaHain_3' class='labelCheckbox'>
-				<input id='fitaHain_3' name="fitaHain" value="controlRpoB" type="checkbox" /> Control rpoB
-				</label>
-				<label for='fitaHain_4' class='labelCheckbox'>
-				<input id='fitaHain_4' name="fitaHain" value="rpoBWildType1" type="checkbox" /> rpoB Wild type 1
-				</label>
-				<label for='fitaHain_5' class='labelCheckbox'>
-				<input id='fitaHain_5' name="fitaHain" value="rpoBWildType2" type="checkbox" /> rpoB Wild type 2
-				</label>
-				<label for='fitaHain_6' class='labelCheckbox'>
-				<input id='fitaHain_6' name="fitaHain" value="rpoBWildType3" type="checkbox" /> rpoB Wild type 3
-				</label>
-				<label for='fitaHain_7' class='labelCheckbox'>
-				<input id='fitaHain_7' name="fitaHain" value="rpoBWildType4" type="checkbox" /> rpoB Wild type 4
-				</label>
-				<label for='fitaHain_8' class='labelCheckbox'>
-				<input id='fitaHain_8' name="fitaHain" value="rpoBWildType5" type="checkbox" /> rpoB Wild type 5
-				</label>
-				<label for='fitaHain_9' class='labelCheckbox'>
-				<input id='fitaHain_9' name="fitaHain" value="rpoBMutD516V" type="checkbox" /> rpoB Mut D516V
-				</label>
-				<label for='fitaHain_10' class='labelCheckbox'>
-				<input id='fitaHain_10' name="fitaHain" value="rpoBMutH526Y" type="checkbox" /> rpoB Mut H526Y
-				</label>
-				<label for='fitaHain_11' class='labelCheckbox'>
-				<input id='fitaHain_11' name="fitaHain" value="rpoBMutH526D" type="checkbox" /> rpoB Mut H526D
-				</label>
-				<label for='fitaHain_12' class='labelCheckbox'>
-				<input id='fitaHain_12' name="fitaHain" value="rpoBMutS531L" type="checkbox" /> rpoB Mut S531L
-				</label>
-				<label for='fitaHain_13' class='labelCheckbox'>
-				<input id='fitaHain_13' name="fitaHain" value="controlKatG" type="checkbox" /> Control katG
-				</label>
-				<label for='fitaHain_14' class='labelCheckbox'>
-				<input id='fitaHain_14' name="fitaHain" value="ktaGWildType" type="checkbox" /> ktaG wild type
-				</label>
-				<label for='fitaHain_15' class='labelCheckbox'>
-				<input id='fitaHain_15' name="fitaHain" value="ktaGS315T1" type="checkbox" /> ktaG S315T1 (ACC)
-				</label>
-				<label for='fitaHain_16' class='labelCheckbox'>
-				<input id='fitaHain_16' name="fitaHain" value="ktaGS315T2" type="checkbox" /> ktaG S315T2 (ACA)
-				</label>
-			</fieldset><br />
-			<fieldset>
-				<legend> Isoniazida	</legend>
-				<label for='isoniazida' class='labelRadio'>
-					<input type="radio" name="isoniazida" value="sensivel"/> Sensível
-				</label>
-				<label for='isoniazida' class='labelRadio'>
-					<input type="radio" name="isoniazida" value="resistente" /> Resistente
-				</label>
-			</fieldset>
-			<fieldset>
-				<legend> Rifampicina </legend>
-				<label for='rifampicina' class='labelRadio'>
-					<input type="radio" name="rifampicina" value="sensivel"/> Sensível
-				</label>
-				<label for='rifampicina' class='labelRadio'>
-					<input type="radio" name="rifampicina" value="resistente" /> Resistente
-				</label>
-			</fieldset>
-		</div>
-			<div id='divDataColetaFitaHain' class='primary'>
+			<div id='divFitaHain' class='secondary'>
+				<label for='fitaHain'> FitaHain: </label>
+				<select id='fitaHain' name='fitaHain' class='selectOne'>
+					<option value=''		> -----		</option>
+					<option value='sim'		> Sim		</option>
+					<option value='nao'		> Não		</option>
+				</select>
+			</div>
+			<div id='divOpcoes' class='secondary'>
+				<fieldset>
+					<legend> Opções </legend>
+					<label for='fitaHain_0' class='labelCheckbox'>
+						<input id='fitaHain_0' name="fitaHain" value="controlOfTheConjugate" type="checkbox" /> Control of the conjugate
+					</label>
+					<label for='fitaHain_1' class='labelCheckbox'>
+						<input id='fitaHain_1' name="fitaHain" value="amplificationControl" type="checkbox" /> Amplification control
+					</label>
+					<label for='fitaHain_2' class='labelCheckbox'>
+						<input id='fitaHain_2' name="fitaHain" value="amplificationControlMTBC" type="checkbox" /> Amplification control MTBC
+					</label>
+					<label for='fitaHain_3' class='labelCheckbox'>
+						<input id='fitaHain_3' name="fitaHain" value="controlRpoB" type="checkbox" /> Control rpoB
+					</label>
+					<label for='fitaHain_4' class='labelCheckbox'>
+						<input id='fitaHain_4' name="fitaHain" value="rpoBWildType1" type="checkbox" /> rpoB Wild type 1
+					</label>
+					<label for='fitaHain_5' class='labelCheckbox'>
+						<input id='fitaHain_5' name="fitaHain" value="rpoBWildType2" type="checkbox" /> rpoB Wild type 2
+					</label>
+					<label for='fitaHain_6' class='labelCheckbox'>
+						<input id='fitaHain_6' name="fitaHain" value="rpoBWildType3" type="checkbox" /> rpoB Wild type 3
+					</label>
+					<label for='fitaHain_7' class='labelCheckbox'>
+						<input id='fitaHain_7' name="fitaHain" value="rpoBWildType4" type="checkbox" /> rpoB Wild type 4
+					</label>
+					<label for='fitaHain_8' class='labelCheckbox'>
+						<input id='fitaHain_8' name="fitaHain" value="rpoBWildType5" type="checkbox" /> rpoB Wild type 5
+					</label>
+					<label for='fitaHain_9' class='labelCheckbox'>
+						<input id='fitaHain_9' name="fitaHain" value="rpoBMutD516V" type="checkbox" /> rpoB Mut D516V
+					</label>
+					<label for='fitaHain_10' class='labelCheckbox'>
+						<input id='fitaHain_10' name="fitaHain" value="rpoBMutH526Y" type="checkbox" /> rpoB Mut H526Y
+					</label>
+					<label for='fitaHain_11' class='labelCheckbox'>
+						<input id='fitaHain_11' name="fitaHain" value="rpoBMutH526D" type="checkbox" /> rpoB Mut H526D
+					</label>
+					<label for='fitaHain_12' class='labelCheckbox'>
+						<input id='fitaHain_12' name="fitaHain" value="rpoBMutS531L" type="checkbox" /> rpoB Mut S531L
+					</label>
+					<label for='fitaHain_13' class='labelCheckbox'>
+						<input id='fitaHain_13' name="fitaHain" value="controlKatG" type="checkbox" /> Control katG
+					</label>
+					<label for='fitaHain_14' class='labelCheckbox'>
+						<input id='fitaHain_14' name="fitaHain" value="ktaGWildType" type="checkbox" /> ktaG wild type
+					</label>
+					<label for='fitaHain_15' class='labelCheckbox'>
+						<input id='fitaHain_15' name="fitaHain" value="ktaGS315T1" type="checkbox" /> ktaG S315T1 (ACC)
+					</label>
+					<label for='fitaHain_16' class='labelCheckbox'>
+						<input id='fitaHain_16' name="fitaHain" value="ktaGS315T2" type="checkbox" /> ktaG S315T2 (ACA)
+					</label>
+				</fieldset><br />
+				<fieldset>
+					<legend> Isoniazida	</legend>
+					<label for='isoniazida' class='labelRadio'>
+						<input type="radio" name="isoniazida" value="sensivel"/> Sensível
+					</label>
+					<label for='isoniazida' class='labelRadio'>
+						<input type="radio" name="isoniazida" value="resistente" /> Resistente
+					</label>
+				</fieldset>
+				<fieldset>
+					<legend> Rifampicina </legend>
+					<label for='rifampicina' class='labelRadio'>
+						<input type="radio" name="rifampicina" value="sensivel"/> Sensível
+					</label>
+					<label for='rifampicina' class='labelRadio'>
+						<input type="radio" name="rifampicina" value="resistente" /> Resistente
+					</label>
+				</fieldset>
+			</div>
+			<div id='divDataColetaFitaHain' class='secondary'>
 				<label for='dataColetaFitaHain'>Data da Coleta:</label>
 				<input id='dataColetaFitaHain' class='data' type="text" />
 			</div>
-			<div id='divDataRecebimentoFitaHain' class='primary'>
+			<div id='divDataRecebimentoFitaHain' class='secondary'>
 				<label for='dataRecebimentoFitaHain'>Data do Recebimento no Laboratório:</label>
 				<input id='dataRecebimentoFitaHain' class='data' type="text" />
 			</div>
-			<div id='divDataResultadoFitaHain' class='primary'>
+			<div id='divDataResultadoFitaHain' class='secondary'>
 				<label for='dataResultadoFitaHain'>Data do Resultado:</label>
 				<input id='dataResultadoFitaHain' class='data' type="text" />
 			</div>

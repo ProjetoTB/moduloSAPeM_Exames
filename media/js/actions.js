@@ -895,10 +895,60 @@ $.fn.compareDate = function(argumento){
 			}
 		}
 	});
+	$('#fitaHain').change(function(){
+		var dep = new Array();
+		dep[0] = '#divOpcoes';
+		dep[1] = '#divDataColetaFitaHain';
+		dep[2] = '#divDataRecebimentoFitaHain';
+		dep[3] = '#divDataResultadoFitaHain';
+		if($(this).val()=='sim'){
+			for(div in dep){
+				var elems = $('*', dep[div]);
+				$(elems).each(function(){
+					var element = $(this);
+					if (   element[0].nodeName != 'FIELDSET'
+					    && element[0].nodeName != 'SMALL'
+					    && element[0].nodeName != 'OPTION')
+						$(this).addClass('required');
+				});
+				if($(dep[div]).css('display') != 'block')
+					$(dep[div]).toggle(function() {
+						$(this).css('background-color', hlcolor);
+						$(this).animate({backgroundColor : "white"}, 4000);
+					});
+			}
+		}
+		// Se nao, ocultar colunas listadas a cima
+		else {
+			for(div in dep){
+				var elems = $('*', dep[div]);
+				$(elems).each(function(){
+					var element = $(this);
+					if (   element[0].nodeName != 'FIELDSET'
+					    && element[0].nodeName != 'SMALL'
+					    && element[0].nodeName != 'OPTION')
+						$(this).removeClass('required');
+				});
+				if($(dep[div]).css('display') != 'none')
+					$(dep[div]).toggle();
+			}
+		}
+	});
 	$('#testesMolecularesResistencia').change(function(){
 		var dep = new Array();
 		dep[0] = '#divGenXpert';
 		dep[1] = '#divFitaHain';
+
+		var ped = new Array();
+		ped[0] = '#divGenXpertPositivo';
+		ped[1] = '#divDataColetaGenXpert';
+		ped[2] = '#divDataRecebimentoGenXpert';
+		ped[3] = '#divDataResultadoGenXpert';
+		ped[4] = '#divOpcoes';
+		ped[5] = '#divDataColetaFitaHain';
+		ped[6] = '#divDataRecebimentoFitaHain';
+		ped[7] = '#divDataResultadoFitaHain';
+
 		// Se sim, disponibilizar colunas listadas a cima
 		if($(this).val()=='sim'){
 			for(div in dep){
@@ -930,6 +980,18 @@ $.fn.compareDate = function(argumento){
 				});
 				if($(dep[div]).css('display') != 'none')
 					$(dep[div]).toggle();
+			}
+			for(div in ped){
+				var elems = $('*', ped[div]);
+				$(elems).each(function(){
+					var element = $(this);
+					if (   element[0].nodeName != 'FIELDSET'
+					    && element[0].nodeName != 'SMALL'
+					    && element[0].nodeName != 'OPTION')
+						$(this).removeClass('required');
+				});
+				if($(ped[div]).css('display') != 'none')
+					$(ped[div]).toggle();
 			}
 		}
 	});
