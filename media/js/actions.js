@@ -38,7 +38,11 @@ function loadUnidadesSaude(selectObj, num){
 		dataType : 'json',
 		success : function(data){
 			$.each(data, function(key, value){
-				$(selectObj + num).append('<option>' + value.fields.nome + '</option>');
+				us = value.fields.nome;
+				if (value.fields.cidade != '')
+					us += " - " + value.fields.cidade;
+				us += " \(" + value.fields.UF + "\)";
+				$(selectObj + num).append('<option>' + us + '</option>');
 			});
 		}
 	});
