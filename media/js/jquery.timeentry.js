@@ -902,6 +902,8 @@ $.extend(TimeEntry.prototype, {
 				(value < 60 ? value : key));
 			var fields = this._constrainTime(inst, [hour, minute, second]);
 			this._setTime(inst, new Date(0, 0, 0, fields[0], fields[1], fields[2]));
+			if (inst._lastChr != "")
+				this._changeField(inst, +1, false);
 			inst._lastChr = chr;
 		}
 		else if (!this._get(inst, 'show24Hours')) { // Set am/pm based on first char of names
