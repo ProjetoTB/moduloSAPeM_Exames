@@ -446,10 +446,12 @@ $(document).ready(function(){
 					$('#resultado_tbresistente_cepa_' + num).val('');
 			});
 			$('#data_processamento_tbresistente_cultura_' + num).livequery('change', function(){
+				/* Em 17/06, Dani solicitou retirada de obrigatoriedade dos campos 'Hora'
 				if ($(this).val())
 					$('#hora_processamento_tbresistente_cultura_'+num).addClass('required');
 				else
 					$('#hora_processamento_tbresistente_cultura_'+num).removeClass('required');
+				*/
 
 				if ($($(this)).compareDate($('#data_resultado_tbresistente_cultura_' + num)) > 0){
 					alert("A 'Data do Processamento' deve ser anterior à 'Data do Resultado'");
@@ -465,10 +467,12 @@ $(document).ready(function(){
 				}
 			});
 			$('#data_recebimento_tbresistente_cepa_' + num).livequery('change', function(){
+				/* Em 17/06, Dani solicitou retirada de obrigatoriedade dos campos 'Hora'
 				if ($(this).val())
 					$('#hora_recebimento_tbresistente_cepa_' + num).addClass('required');
 				else
 					$('#hora_recebimento_tbresistente_cepa_' + num).removeClass('required');
+				*/
 
 				if ($($(this)).compareDate($('#data_resultado_tbresistente_cultura_' + num)) > 0){
 					alert("A 'Data do Recebimento' deve ser anterior à 'Data do Resultado'");
@@ -484,10 +488,12 @@ $(document).ready(function(){
 				}
 			});
 			$('#data_resultado_tbresistente_cultura_' + num).livequery('change', function(){
+				/* Em 17/06, Dani solicitou retirada de obrigatoriedade dos campos 'Hora'
 				if ($(this).val())
 					$('#hora_resultado_tbresistente_cultura_' + num).addClass('required');
 				else
 					$('#hora_resultado_tbresistente_cultura_' + num).removeClass('required');
+				*/
 				if ($($(this)).compareDate($('#data_processamento_tbresistente_cultura_' + num)) < 0){
 					alert("A 'Data do Resultado' deve ser posterior à 'Data do Processamento'");
 					$(this).val('');

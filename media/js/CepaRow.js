@@ -413,10 +413,12 @@ $(document).ready( function(){
 			$('#baciloscopia_data_recebimento_medico_' + num).removeAttr('disabled');
 
 			$('#data_recebimento_cepa_' + num).livequery('change', function(){
+				/* Em 17/06, Dani solicitou retirada de obrigatoriedade dos campos 'Hora'
 				if ($(this).val())
 					$('#hora_recebimento_cepa_'+num).addClass('required');
 				else
 					$('#hora_recebimento_cepa_'+num).removeClass('required');
+				*/
 
 				if ($($('#data_recebimento_cepa_' + num)).compareDate($('#baciloscopia_data_' + num)) > 0)
 				{
@@ -435,10 +437,12 @@ $(document).ready( function(){
 				}
 			});
 			$('#data_cepa_' + num).livequery('change', function(){
+				/* Em 17/06, Dani solicitou retirada de obrigatoriedade dos campos 'Hora'
 				if ($(this).val())
 					$('#hora_cepa_' + num).addClass('required');
 				else
 					$('#hora_cepa_' + num).removeClass('required');
+				*/
 				if ($($('#data_cepa_' + num)).compareDate($('#data_recebimento_cepa_' + num)) > 0)
 				{
 					alert("A 'Data da coleta' deve ser anterior à 'Data do Recebimento no laboratório'");
@@ -455,10 +459,12 @@ $(document).ready( function(){
 				}
 			});
 			$('#baciloscopia_data_' + num).livequery('change', function(){
+				/* Em 17/06, Dani solicitou retirada de obrigatoriedade dos campos 'Hora'
 				if ($(this).val())
 					$('#baciloscopia_hora_cepa_' + num).addClass('required');
 				else
 					$('#baciloscopia_hora_cepa_' + num).removeClass('required');
+				*/
 				if ($($('#baciloscopia_data_' + num)).compareDate($('#data_cepa_' + num)) < 0)
 				{
 					alert("A 'Data do Resultado BAAR' deve ser posterior à 'Data da coleta'");
