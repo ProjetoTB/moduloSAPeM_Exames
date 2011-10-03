@@ -808,7 +808,10 @@ $.fn.compareDate = function(argumento){
 	$('#exameSida').change(function(){
 		var dep = new Array();
 		dep[0] = '#divSIDA';
-		dep[1] = '#divDataSida';
+
+		var depNotReq = new Array();
+		depNotReq[0] = '#divDataSida';
+
 		var ped = new Array();
 		ped[0] = '#divSidaContagemLinfocitos60dias';
 		ped[1] = '#divSIDAUsoAntiRetroviral';
@@ -829,6 +832,23 @@ $.fn.compareDate = function(argumento){
 					$(dep[div]).toggle(function() {
 						$(this).css('background-color', hlcolor);
 						$(this).animate({backgroundColor : "white"}, 4000);
+					});
+			}
+			for(div in depNotReq){
+				var elems = $('*', depNotReq[div]);
+				$(elems).each(function(){
+					var element = $(this);
+					if (   element[0].nodeName != 'FIELDSET'
+					    && element[0].nodeName != 'SMALL'
+					    && element[0].nodeName != 'OPTION'){
+						$(this).removeClass('required');
+					}
+				});
+				if($(depNotReq[div]).css('display') != 'block')
+					$(depNotReq[div]).toggle(function() {
+						$(this).css('background-color', hlcolor);
+						$(this).animate({backgroundColor : "white"}, 4000);
+						$(this).css('display', '');
 					});
 			}
 		}
