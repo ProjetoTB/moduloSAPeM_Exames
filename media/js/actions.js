@@ -528,18 +528,23 @@ $(document).ready(function(){
 	//Prova Realizada?
 	$('#provaRealizada').change(function(){
 		var dep = new Array();
-		dep[0] = '#divDataAplicacao';
-		dep[1] = '#divLeituraRealizada';
+		dep[0] = '#divLeituraRealizada';
+		var notReq = new Array();
+		notReq[0] = "#divDataAplicacao";
 		var ped = new Array();
 		ped[0] = '#divResultadoLeitura';
 		ped[1] = '#divDataLeitura';
 		ped[2] = '#divPt';
+
 		// Se sim, disponibilizar colunas listadas a cima
-		if($(this).val()=='sim')
+		if($(this).val()=='sim'){
 			$().showFields(dep);
+			$().showNotRequiredFields(notReq);
+		}
 		// Se nao, ocultar colunas listadas a cima
 		else {
 			$().hideFields(dep);
+			$().hideFields(notReq);
 			$().hideFields(ped);
 		}
 	});
@@ -547,14 +552,19 @@ $(document).ready(function(){
 	$('#leituraRealizada').change(function(){
 		var dep = new Array();
 		dep[0] = '#divResultadoLeitura';
-		dep[1] = '#divDataLeitura';
-		dep[2] = '#divPt';
+		dep[1] = '#divPt';
+		var notReq = new Array();
+		notReq[0] = '#divDataLeitura';
 		// Se sim, disponibilizar colunas listadas a cima
-		if($(this).val()=='sim')
+		if($(this).val()=='sim'){
 			$().showFields(dep);
+			$().showNotRequiredFields(notReq);
+		}
 		// Se nao, ocultar colunas listadas a cima
-		else 
+		else{
 			$().hideFields(dep);
+			$().hideFields(notReq);
+		}
 	});
 
 	//testesMoleculares
