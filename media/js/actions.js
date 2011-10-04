@@ -72,27 +72,79 @@ var resistent = new Array();
 $(document).ready(function(){
 
 /*---------------------------Auxiliar function-------------------------------*/
-$.fn.compareDate = function(argumento){
-	//Essa funcao eh utilizada para comprar a ordem
-	//cronologica entre duas datas.
-	//Caso a data do argumento seja menor, e retornado um numero positivo
-	//caso contrario, e retornado um numero negativo
+	$.fn.compareDate = function(argumento){
+		//Essa funcao eh utilizada para comprar a ordem
+		//cronologica entre duas datas.
+		//Caso a data do argumento seja menor, e retornado um numero positivo
+		//caso contrario, e retornado um numero negativo
 
-	//Caso uma delas nao foi preenchida, a funcao retorna 0
-	if ($(this).val().length == 0 || $(argumento).val().length == 0)
-		return 0;
-	//Criacao de um array contendo dia, mes e ano
-	var arrayData1 = $(this).val().split('/');
-	var arrayData2 = $(argumento).val().split('/');
-	var ano1 = parseInt(arrayData1[2],10);
-	var ano2 = parseInt(arrayData2[2],10);
-	var mes1 = parseInt(arrayData1[1],10);
-	var mes2 = parseInt(arrayData2[1],10);
-	var dia1 = parseInt(arrayData1[0],10);
-	var dia2 = parseInt(arrayData2[0],10);
-	var hourDiff = parseInt(hourDifference(arrayData1,arrayData2),10);
-	return hourDiff;
-}
+		//Caso uma delas nao foi preenchida, a funcao retorna 0
+		if ($(this).val().length == 0 || $(argumento).val().length == 0)
+			return 0;
+		//Criacao de um array contendo dia, mes e ano
+		var arrayData1 = $(this).val().split('/');
+		var arrayData2 = $(argumento).val().split('/');
+		var ano1 = parseInt(arrayData1[2],10);
+		var ano2 = parseInt(arrayData2[2],10);
+		var mes1 = parseInt(arrayData1[1],10);
+		var mes2 = parseInt(arrayData2[1],10);
+		var dia1 = parseInt(arrayData1[0],10);
+		var dia2 = parseInt(arrayData2[0],10);
+		var hourDiff = parseInt(hourDifference(arrayData1,arrayData2),10);
+		return hourDiff;
+	}
+	$.fn.showFields = function(argumento){
+		var dep = argumento;
+		for(div in dep){
+			var elems = $('*', dep[div]);
+			$(elems).each(function(){
+				var element = $(this);
+				if (   element[0].nodeName != 'FIELDSET'
+					&& element[0].nodeName != 'SMALL'
+					&& element[0].nodeName != 'OPTION')
+					$(this).addClass('required');
+					$(this).removeAttr('disabled',false);
+			});
+			if($(dep[div]).css('display') != 'block')
+				$(dep[div]).toggle(function() {
+					$(this).css('background-color', hlcolor);
+					$(this).animate({backgroundColor : "white"}, 4000);
+				});
+		}
+	}
+	$.fn.hideFields = function(argumento){
+		var dep = argumento;
+		for(div in dep){
+			var elems = $('*', dep[div]);
+			$(elems).each(function(){
+					var element = $(this);
+					if (   element[0].nodeName != 'FIELDSET'
+						&& element[0].nodeName != 'SMALL'
+						&& element[0].nodeName != 'OPTION')
+						$(this).removeClass('required');
+					});
+			if($(dep[div]).css('display') != 'none')
+				$(dep[div]).toggle();
+		}
+	}
+	$.fn.showNotRequiredFields = function(argumento){
+		var dep = argumento;
+		for(div in dep){
+			var elems = $('*', dep[div]);
+			$(elems).each(function(){
+				var element = $(this);
+				if (   element[0].nodeName != 'FIELDSET'
+					&& element[0].nodeName != 'SMALL'
+					&& element[0].nodeName != 'OPTION')
+					$(this).removeAttr('disabled',false);
+				});
+			if($(dep[div]).css('display') != 'block')
+				$(dep[div]).toggle(function() {
+					$(this).css('background-color', hlcolor);
+					$(this).animate({backgroundColor : "white"}, 4000);
+					});
+		}
+	}
 /*---------------------------------------------------------------------------*/
 /*------------------------------Edition and Relation-----------------------------*/
 	//Make the urlbase (necessary case SAPeM migrate to another server)
@@ -442,115 +494,37 @@ $.fn.compareDate = function(argumento){
 		var dep = new Array();
 		dep[0] = '#divNSoro';
 		// Se sim, disponibilizar colunas listadas a cima
-		if($(this).val()=='sim'){
-			for(div in dep){
-				var elems = $('*', dep[div]);
-				$(elems).each(function(){
-					var element = $(this);
-					if (   element[0].nodeName != 'FIELDSET'
-					    && element[0].nodeName != 'SMALL'
-					    && element[0].nodeName != 'OPTION')
-						$(this).addClass('required');
-				});
-				if($(dep[div]).css('display') != 'block')
-					$(dep[div]).toggle(function() {
-						$(this).css('background-color', hlcolor);
-						$(this).animate({backgroundColor : "white"}, 4000);
-					});
-			}
-		}
+		if($(this).val()=='sim')
+			$().showFields(dep);
 		// Se nao, ocultar colunas listadas a cima
-		if($(this).val()=='nao' || $(this).val() == 'ignorado'){
-			for(div in dep){
-				var elems = $('*', dep[div]);
-				$(elems).each(function(){
-					var element = $(this);
-					if (   element[0].nodeName != 'FIELDSET'
-					    && element[0].nodeName != 'SMALL'
-					    && element[0].nodeName != 'OPTION')
-						$(this).removeClass('required');
-				});
-				if($(dep[div]).css('display') != 'none')
-					$(dep[div]).toggle();
-			}
-		}
+		if($(this).val()=='nao' || $(this).val() == 'ignorado')
+			$().hideFields(dep);
 	});
+
 	$('#sangueColetado').change(function(){
 		var dep = new Array();
 		dep[0] = '#divNSangue';
 		// Se sim, disponibilizar colunas listadas a cima
-		if($(this).val()=='sim'){
-			for(div in dep){
-				var elems = $('*', dep[div]);
-				$(elems).each(function(){
-					var element = $(this);
-					if (   element[0].nodeName != 'FIELDSET'
-					    && element[0].nodeName != 'SMALL'
-					    && element[0].nodeName != 'OPTION')
-						$(this).addClass('required');
-				});
-				if($(dep[div]).css('display') != 'block')
-					$(dep[div]).toggle(function() {
-						$(this).css('background-color', hlcolor);
-						$(this).animate({backgroundColor : "white"}, 4000);
-					});
-			}
-		}
+		if($(this).val()=='sim')
+			$().showFields(dep);
 		// Se nao, ocultar colunas listadas a cima
-		if($(this).val()=='nao' || $(this).val() == 'ignorado'){
-			for(div in dep){
-				var elems = $('*', dep[div]);
-				$(elems).each(function(){
-					var element = $(this);
-					if (   element[0].nodeName != 'FIELDSET'
-					    && element[0].nodeName != 'SMALL'
-					    && element[0].nodeName != 'OPTION')
-						$(this).removeClass('required');
-				});
-				if($(dep[div]).css('display') != 'none')
-					$(dep[div]).toggle();
-			}
-		}
+		if($(this).val()=='nao' || $(this).val() == 'ignorado')
+			$().hideFields(dep);
 	});
+
 	//IGRA
 	$('#IGRA').change(function(){
 		var dep = new Array();
 		dep[0] = '#divIGRAMetodo';
 		dep[1] = '#divIGRAResultado'
 		// Se sim, disponibilizar colunas listadas a cima
-		if($(this).val()=='sim'){
-			for(div in dep){
-				var elems = $('*', dep[div]);
-				$(elems).each(function(){
-					var element = $(this);
-					if (   element[0].nodeName != 'FIELDSET'
-					    && element[0].nodeName != 'SMALL'
-					    && element[0].nodeName != 'OPTION')
-						$(this).addClass('required');
-				});
-				if($(dep[div]).css('display') != 'block')
-					$(dep[div]).toggle(function() {
-						$(this).css('background-color', hlcolor);
-						$(this).animate({backgroundColor : "white"}, 4000);
-					});
-			}
-		}
+		if($(this).val()=='sim')
+			$().showFields(dep);
 		// Se nao, ocultar colunas listadas a cima
-		else {
-			for(div in dep){
-				var elems = $('*', dep[div]);
-				$(elems).each(function(){
-					var element = $(this);
-					if (   element[0].nodeName != 'FIELDSET'
-					    && element[0].nodeName != 'SMALL'
-					    && element[0].nodeName != 'OPTION')
-						$(this).removeClass('required');
-				});
-				if($(dep[div]).css('display') != 'none')
-					$(dep[div]).toggle();
-			}
-		}
+		else
+			$().hideFields(dep);
 	});
+
 	//Prova Realizada?
 	$('#provaRealizada').change(function(){
 		var dep = new Array();
@@ -561,90 +535,28 @@ $.fn.compareDate = function(argumento){
 		ped[1] = '#divDataLeitura';
 		ped[2] = '#divPt';
 		// Se sim, disponibilizar colunas listadas a cima
-		if($(this).val()=='sim'){
-			for(div in dep){
-				var elems = $('*', dep[div]);
-				$(elems).each(function(){
-					var element = $(this);
-					if (   element[0].nodeName != 'FIELDSET'
-					    && element[0].nodeName != 'SMALL'
-					    && element[0].nodeName != 'OPTION')
-						$(this).addClass('required');
-				});
-				if($(dep[div]).css('display') != 'block')
-					$(dep[div]).toggle(function() {
-						$(this).css('background-color', hlcolor);
-						$(this).animate({backgroundColor : "white"}, 4000);
-					});
-			}
-		}
+		if($(this).val()=='sim')
+			$().showFields(dep);
 		// Se nao, ocultar colunas listadas a cima
 		else {
-			for(div in dep){
-				var elems = $('*', dep[div]);
-				$(elems).each(function(){
-					var element = $(this);
-					if (   element[0].nodeName != 'FIELDSET'
-					    && element[0].nodeName != 'SMALL'
-					    && element[0].nodeName != 'OPTION')
-						$(this).removeClass('required');
-				});
-				if($(dep[div]).css('display') != 'none')
-					$(dep[div]).toggle();
-			}
-			for(div in ped){
-				var elems = $('*', ped[div]);
-				$(elems).each(function(){
-					var element = $(this);
-					if (   element[0].nodeName != 'FIELDSET'
-					    && element[0].nodeName != 'SMALL'
-					    && element[0].nodeName != 'OPTION')
-						$(this).removeClass('required');
-				});
-				if($(ped[div]).css('display') != 'none')
-					$(ped[div]).toggle();
-			}
+			$().hideFields(dep);
+			$().hideFields(ped);
 		}
 	});
+
 	$('#leituraRealizada').change(function(){
 		var dep = new Array();
 		dep[0] = '#divResultadoLeitura';
 		dep[1] = '#divDataLeitura';
 		dep[2] = '#divPt';
 		// Se sim, disponibilizar colunas listadas a cima
-		if($(this).val()=='sim'){
-			for(div in dep){
-				var elems = $('*', dep[div]);
-				$(elems).each(function(){
-					var element = $(this);
-					if (   element[0].nodeName != 'FIELDSET'
-					    && element[0].nodeName != 'SMALL'
-					    && element[0].nodeName != 'OPTION')
-						$(this).addClass('required');
-				});
-				if($(dep[div]).css('display') != 'block')
-					$(dep[div]).toggle(function() {
-						$(this).css('background-color', hlcolor);
-						$(this).animate({backgroundColor : "white"}, 4000);
-					});
-			}
-		}
+		if($(this).val()=='sim')
+			$().showFields(dep);
 		// Se nao, ocultar colunas listadas a cima
-		else {
-			for(div in dep){
-				var elems = $('*', dep[div]);
-				$(elems).each(function(){
-					var element = $(this);
-					if (   element[0].nodeName != 'FIELDSET'
-					    && element[0].nodeName != 'SMALL'
-					    && element[0].nodeName != 'OPTION')
-						$(this).removeClass('required');
-				});
-				if($(dep[div]).css('display') != 'none')
-					$(dep[div]).toggle();
-			}
-		}
+		else 
+			$().hideFields(dep);
 	});
+
 	//testesMoleculares
 	$('#testesMoleculares').change(function(){
 		var dep = new Array();
@@ -654,39 +566,13 @@ $.fn.compareDate = function(argumento){
 		dep[3] = '#divDataRecebimentoLaboratorioPCR';
 		dep[4] = '#divDataResultadoPCR';
 		// Se sim, disponibilizar colunas listadas a cima
-		if($(this).val()=='sim'){
-			for(div in dep){
-				var elems = $('*', dep[div]);
-				$(elems).each(function(){
-					var element = $(this);
-					if (   element[0].nodeName != 'FIELDSET'
-					    && element[0].nodeName != 'SMALL'
-					    && element[0].nodeName != 'OPTION')
-						$(this).addClass('required');
-				});
-				if($(dep[div]).css('display') != 'block')
-					$(dep[div]).toggle(function() {
-						$(this).css('background-color', hlcolor);
-						$(this).animate({backgroundColor : "white"}, 4000);
-					});
-			}
-		}
+		if($(this).val()=='sim')
+			$().showFields(dep);
 		// Se nao, ocultar colunas listadas a cima
-		else {
-			for(div in dep){
-				var elems = $('*', dep[div]);
-				$(elems).each(function(){
-					var element = $(this);
-					if (   element[0].nodeName != 'FIELDSET'
-					    && element[0].nodeName != 'SMALL'
-					    && element[0].nodeName != 'OPTION')
-						$(this).removeClass('required');
-				});
-				if($(dep[div]).css('display') != 'none')
-					$(dep[div]).toggle();
-			}
-		}
+		else 
+			$().hideFields(dep);
 	});
+
 	$('#data_coleta_pcr').change(function(){
 		if (Date.parse($('#data_coleta_pcr').val()) > Date.parse($('#data_recebimento_laboratorio_pcr').val()))
 		{
@@ -701,6 +587,7 @@ $.fn.compareDate = function(argumento){
 			$('#data_resultado_pcr').val('');
 		}
 	});
+
 	$('#data_recebimento_laboratorio_pcr').change(function(){
 		if (Date.parse($('#data_coleta_pcr').val()) > Date.parse($('#data_recebimento_laboratorio_pcr').val()))
 		{
@@ -715,6 +602,7 @@ $.fn.compareDate = function(argumento){
 			$('#data_recebimento_laboratorio_pcr').val('');
 		}
 	});
+
 	$('#data_resultado_pcr').change(function(){
 		if (Date.parse($('#data_coleta_pcr').val()) > Date.parse($('#data_resultado_pcr').val()))
 		{
@@ -729,81 +617,30 @@ $.fn.compareDate = function(argumento){
 			$('#data_recebimento_laboratorio_pcr').val('');
 		}
 	});
+
 	$('#pcrMetodo').change(function(){
 		var dep = new Array();
 		dep[0] = '#divOutroMetodoPCR';
 		// Se sim, disponibilizar colunas listadas a cima
-		if($(this).val()=='outro'){
-			for(div in dep){
-				var elems = $('*', dep[div]);
-				$(elems).each(function(){
-					var element = $(this);
-					if (   element[0].nodeName != 'FIELDSET'
-					    && element[0].nodeName != 'SMALL'
-					    && element[0].nodeName != 'OPTION')
-						$(this).addClass('required');
-				});
-				if($(dep[div]).css('display') != 'block')
-					$(dep[div]).toggle(function() {
-						$(this).css('background-color', hlcolor);
-						$(this).animate({backgroundColor : "white"}, 4000);
-					});
-			}
-		}
+		if($(this).val()=='outro')
+			$().showFields(dep);
 		// Se nao, ocultar colunas listadas a cima
-		else {
-			for(div in dep){
-				var elems = $('*', dep[div]);
-				$(elems).each(function(){
-					var element = $(this);
-					if (   element[0].nodeName != 'FIELDSET'
-					    && element[0].nodeName != 'SMALL'
-					    && element[0].nodeName != 'OPTION')
-						$(this).removeClass('required');
-				});
-				if($(dep[div]).css('display') != 'none')
-					$(dep[div]).toggle();
-			}
-		}
+		else 
+			$().hideFields(dep);
 	});
+
 	//Detecão TB Resistente
 	$('#detecao_tb_resistente').change(function(){
 		var dep = new Array();
 		dep[0] = '#divTbResistenteMetodo';
 		// Se sim, disponibilizar colunas listadas a cima
-		if($(this).val()=='sim'){
-			for(div in dep){
-				var elems = $('*', dep[div]);
-				$(elems).each(function(){
-					var element = $(this);
-					if (   element[0].nodeName != 'FIELDSET'
-					    && element[0].nodeName != 'SMALL'
-					    && element[0].nodeName != 'OPTION')
-						$(this).addClass('required');
-				});
-				if($(dep[div]).css('display') != 'block')
-					$(dep[div]).toggle(function() {
-						$(this).css('background-color', hlcolor);
-						$(this).animate({backgroundColor : "white"}, 4000);
-					});
-			}
-		}
+		if($(this).val()=='sim')
+			$().showFields(dep);
 		// Se nao, ocultar colunas listadas a cima
-		else {
-			for(div in dep){
-				var elems = $('*', dep[div]);
-				$(elems).each(function(){
-					var element = $(this);
-					if (   element[0].nodeName != 'FIELDSET'
-					    && element[0].nodeName != 'SMALL'
-					    && element[0].nodeName != 'OPTION')
-						$(this).removeClass('required');
-				});
-				if($(dep[div]).css('display') != 'none')
-					$(dep[div]).toggle();
-			}
-		}
+		else 
+			$().hideFields(dep);
 	});
+
 	//HIV
 	$('#exameSida').change(function(){
 		var dep = new Array();
@@ -819,105 +656,28 @@ $.fn.compareDate = function(argumento){
 		ped[3] = '#divSidaContagemCD460dias';
 		// Se sim, disponibilizar colunas listadas a cima
 		if($(this).val()=='sim'){
-			for(div in dep){
-				var elems = $('*', dep[div]);
-				$(elems).each(function(){
-					var element = $(this);
-					if (   element[0].nodeName != 'FIELDSET'
-					    && element[0].nodeName != 'SMALL'
-					    && element[0].nodeName != 'OPTION')
-						$(this).addClass('required');
-				});
-				if($(dep[div]).css('display') != 'block')
-					$(dep[div]).toggle(function() {
-						$(this).css('background-color', hlcolor);
-						$(this).animate({backgroundColor : "white"}, 4000);
-					});
-			}
-			for(div in depNotReq){
-				var elems = $('*', depNotReq[div]);
-				$(elems).each(function(){
-					var element = $(this);
-					if (   element[0].nodeName != 'FIELDSET'
-					    && element[0].nodeName != 'SMALL'
-					    && element[0].nodeName != 'OPTION'){
-						$(this).removeClass('required');
-					}
-				});
-				if($(depNotReq[div]).css('display') != 'block')
-					$(depNotReq[div]).toggle(function() {
-						$(this).css('background-color', hlcolor);
-						$(this).animate({backgroundColor : "white"}, 4000);
-						$(this).css('display', '');
-					});
-			}
+			$().showFields(dep);
+			$().showNotRequiredFields(depNotReq);
 		}
 		// Se nao, ocultar colunas listadas a cima
 		else {
-			for(div in dep){
-				var elems = $('*', dep[div]);
-				$(elems).each(function(){
-					var element = $(this);
-					if (   element[0].nodeName != 'FIELDSET'
-					    && element[0].nodeName != 'SMALL'
-					    && element[0].nodeName != 'OPTION')
-						$(this).removeClass('required');
-				});
-				if($(dep[div]).css('display') != 'none')
-					$(dep[div]).toggle();
-			}
-			for(div in ped){
-				var elems = $('*', ped[div]);
-				$(elems).each(function(){
-					var element = $(this);
-					if (   element[0].nodeName != 'FIELDSET'
-					    && element[0].nodeName != 'SMALL'
-					    && element[0].nodeName != 'OPTION')
-						$(this).removeClass('required');
-				});
-				if($(ped[div]).css('display') != 'none')
-					$(ped[div]).toggle();
-			}
+			$().hideFields(dep);
+			$().hideFields(depNotReq);
+			$().hideFields(ped);
 		}
 	});
+
 	$('#genXpert').change(function(){
 		var dep = new Array();
 		dep[0] = '#divGenXpertPositivo';
 		dep[1] = '#divDataColetaGenXpert';
 		dep[2] = '#divDataRecebimentoGenXpert';
 		dep[3] = '#divDataResultadoGenXpert';
-		if($(this).val()=='positivo'){
-			for(div in dep){
-				var elems = $('*', dep[div]);
-				$(elems).each(function(){
-					var element = $(this);
-					if (   element[0].nodeName != 'FIELDSET'
-					    && element[0].nodeName != 'SMALL'
-					    && element[0].nodeName != 'OPTION')
-						$(this).addClass('required');
-				});
-				if($(dep[div]).css('display') != 'block')
-					$(dep[div]).toggle(function() {
-						$(this).css('background-color', hlcolor);
-						$(this).animate({backgroundColor : "white"}, 4000);
-					});
-			}
-		}
+		if($(this).val()=='positivo')
+			$().showFields(dep);
 		// Se nao, ocultar colunas listadas a cima
-		else {
-			for(div in dep){
-				var elems = $('*', dep[div]);
-				$(elems).each(function(){
-					var element = $(this);
-					if (   element[0].nodeName != 'FIELDSET'
-					    && element[0].nodeName != 'SMALL'
-					    && element[0].nodeName != 'OPTION')
-						$(this).removeClass('required');
-				});
-				if($(dep[div]).css('display') != 'none')
-					$(dep[div]).toggle();
-			}
-		}
+		else 
+			$().hideFields(dep);
 	});
 	$('#fitaHain').change(function(){
 		var dep = new Array();
@@ -925,38 +685,11 @@ $.fn.compareDate = function(argumento){
 		dep[1] = '#divDataColetaFitaHain';
 		dep[2] = '#divDataRecebimentoFitaHain';
 		dep[3] = '#divDataResultadoFitaHain';
-		if($(this).val()=='sim'){
-			for(div in dep){
-				var elems = $('*', dep[div]);
-				$(elems).each(function(){
-					var element = $(this);
-					if (   element[0].nodeName != 'FIELDSET'
-					    && element[0].nodeName != 'SMALL'
-					    && element[0].nodeName != 'OPTION')
-						$(this).addClass('required');
-				});
-				if($(dep[div]).css('display') != 'block')
-					$(dep[div]).toggle(function() {
-						$(this).css('background-color', hlcolor);
-						$(this).animate({backgroundColor : "white"}, 4000);
-					});
-			}
-		}
+		if($(this).val()=='sim')
+			$().showFields(dep);
 		// Se nao, ocultar colunas listadas a cima
-		else {
-			for(div in dep){
-				var elems = $('*', dep[div]);
-				$(elems).each(function(){
-					var element = $(this);
-					if (   element[0].nodeName != 'FIELDSET'
-					    && element[0].nodeName != 'SMALL'
-					    && element[0].nodeName != 'OPTION')
-						$(this).removeClass('required');
-				});
-				if($(dep[div]).css('display') != 'none')
-					$(dep[div]).toggle();
-			}
-		}
+		else 
+			$().hideFields(dep);
 	});
 	$('#testesMolecularesResistencia').change(function(){
 		var dep = new Array();
@@ -974,86 +707,25 @@ $.fn.compareDate = function(argumento){
 		ped[7] = '#divDataResultadoFitaHain';
 
 		// Se sim, disponibilizar colunas listadas a cima
-		if($(this).val()=='sim'){
-			for(div in dep){
-				var elems = $('*', dep[div]);
-				$(elems).each(function(){
-					var element = $(this);
-					if (   element[0].nodeName != 'FIELDSET'
-					    && element[0].nodeName != 'SMALL'
-					    && element[0].nodeName != 'OPTION')
-						$(this).addClass('required');
-				});
-				if($(dep[div]).css('display') != 'block')
-					$(dep[div]).toggle(function() {
-						$(this).css('background-color', hlcolor);
-						$(this).animate({backgroundColor : "white"}, 4000);
-					});
-			}
-		}
+		if($(this).val()=='sim')
+			$().showFields(dep);
 		// Se nao, ocultar colunas listadas a cima
 		else {
-			for(div in dep){
-				var elems = $('*', dep[div]);
-				$(elems).each(function(){
-					var element = $(this);
-					if (   element[0].nodeName != 'FIELDSET'
-					    && element[0].nodeName != 'SMALL'
-					    && element[0].nodeName != 'OPTION')
-						$(this).removeClass('required');
-				});
-				if($(dep[div]).css('display') != 'none')
-					$(dep[div]).toggle();
-			}
-			for(div in ped){
-				var elems = $('*', ped[div]);
-				$(elems).each(function(){
-					var element = $(this);
-					if (   element[0].nodeName != 'FIELDSET'
-					    && element[0].nodeName != 'SMALL'
-					    && element[0].nodeName != 'OPTION')
-						$(this).removeClass('required');
-				});
-				if($(ped[div]).css('display') != 'none')
-					$(ped[div]).toggle();
-			}
+			$().hideFields(dep);
+			$().hideFields(ped);
 		}
 	});
+
 	$('#sidaUsoAntiRetroviral').change(function(){
 		var dep = new Array();
 		dep[0] = '#divDataInicioUsoRetroviral';
 		// Se sim, disponibilizar colunas listadas a cima
-		if($(this).val()=='sim'){
-			for(div in dep){
-				var elems = $('*', dep[div]);
-				$(elems).each(function(){
-					var element = $(this);
-					if (   element[0].nodeName != 'FIELDSET'
-					    && element[0].nodeName != 'SMALL'
-					    && element[0].nodeName != 'OPTION')
-						$(this).addClass('required');
-				});
-				if($(dep[div]).css('display') != 'block')
-					$(dep[div]).toggle(function() {
-						$(this).css('background-color', hlcolor);
-						$(this).animate({backgroundColor : "white"}, 4000);
-					});
-			}
-		} else {
-			for(div in dep){
-				var elems = $('*', dep[div]);
-				$(elems).each(function(){
-					var element = $(this);
-					if (   element[0].nodeName != 'FIELDSET'
-					    && element[0].nodeName != 'SMALL'
-					    && element[0].nodeName != 'OPTION')
-						$(this).removeClass('required');
-				});
-				if($(dep[div]).css('display') != 'none')
-					$(dep[div]).toggle();
-			}
-		}
+		if($(this).val()=='sim')
+			$().showFields(dep);
+		else
+			$().hideFields(dep);
 	});
+
 	$('#sida').change(function(){
 		var dep = new Array();
 		dep[0] = '#divSIDAUsoAntiRetroviral';
@@ -1062,53 +734,17 @@ $.fn.compareDate = function(argumento){
 		var ped = new Array();
 		ped[0] = '#divDataInicioUsoRetroviral';
 		// Se sim, disponibilizar colunas listadas a cima
-		if($(this).val()=='positivo'){
-			for(div in dep){
-				var elems = $('*', dep[div]);
-				$(elems).each(function(){
-					var element = $(this);
-					if (   element[0].nodeName != 'FIELDSET'
-					    && element[0].nodeName != 'SMALL'
-					    && element[0].nodeName != 'OPTION')
-						$(this).addClass('required');
-				});
-				if($(dep[div]).css('display') != 'block')
-					$(dep[div]).toggle(function() {
-						$(this).css('background-color', hlcolor);
-						$(this).animate({backgroundColor : "white"}, 4000);
-					});
-			}
-		}
+		if($(this).val()=='positivo')
+			$().showFields(dep);
 		// Se nao, ocultar colunas listadas a cima
 		else {
-			for(div in dep){
-				var elems = $('*', dep[div]);
-				$(elems).each(function(){
-					var element = $(this);
-					if (   element[0].nodeName != 'FIELDSET'
-					    && element[0].nodeName != 'SMALL'
-					    && element[0].nodeName != 'OPTION')
-						$(this).removeClass('required');
-				});
-				if($(dep[div]).css('display') != 'none')
-					$(dep[div]).toggle();
-			}
-			for(div in ped){
-				var elems = $('*', ped[div]);
-				$(elems).each(function(){
-					var element = $(this);
-					if (   element[0].nodeName != 'FIELDSET'
-					    && element[0].nodeName != 'SMALL'
-					    && element[0].nodeName != 'OPTION')
-						$(this).removeClass('required');
-				});
-				if($(ped[div]).css('display') != 'none')
-					$(ped[div]).toggle();
-			}
+			$().hideFields(dep);
+			$().hideFields(ped);
 		}
 	});
 
 	$('div.secondary').css('display', 'none');
+
 	//Toggle Options
 	//Soro
 	var soroNum = 1;
