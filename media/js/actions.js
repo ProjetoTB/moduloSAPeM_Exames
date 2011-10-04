@@ -572,15 +572,20 @@ $(document).ready(function(){
 		var dep = new Array();
 		dep[0] = '#divPCRMetodo';
 		dep[1] = '#divPCRResultado';
-		dep[2] = '#divDataColetaPCR';
-		dep[3] = '#divDataRecebimentoLaboratorioPCR';
-		dep[4] = '#divDataResultadoPCR';
+		var notReq = new Array();
+		notReq[0] = '#divDataColetaPCR';
+		notReq[1] = '#divDataRecebimentoLaboratorioPCR';
+		notReq[2] = '#divDataResultadoPCR';
 		// Se sim, disponibilizar colunas listadas a cima
-		if($(this).val()=='sim')
+		if($(this).val()=='sim'){
 			$().showFields(dep);
+			$().showNotRequiredFields(notReq);
+		}
 		// Se nao, ocultar colunas listadas a cima
-		else 
+		else{
 			$().hideFields(dep);
+			$().hideFields(notReq);
+		}
 	});
 
 	$('#data_coleta_pcr').change(function(){
