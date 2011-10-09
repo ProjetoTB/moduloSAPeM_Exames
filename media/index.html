@@ -72,8 +72,8 @@
 			<legend>Prova Tuberculínica (PT)</legend>
 			<div id='divProvaRealizada' class='primary required'>
 				<label for='provaRealizada'>Prova Tuberculínica Realizada?</label>
-				<select name='provaRealizada' id='provaRealizada' class='selectOne'>
-					<option value=''    > ------    </option>
+				<select name='provaRealizada' id='provaRealizada' class='selectOne required'>
+					<option value=''    >    </option>
 					<option value='sim'	> Sim 		</option>
 					<option value='nao'	> Não 		</option>
 				</select>
@@ -85,7 +85,7 @@
 			<div id='divLeituraRealizada' name='divLeituraRealizada' class='secondary'>
 				<label for='leituraRealizada'>A Leitura foi Realizada?</label>
 				<select id='leituraRealizada' name='leituraRealizada'>
-					<option value=''	>----	</option>
+					<option value=''	>	</option>
 					<option value='sim'	>Sim	</option>
 					<option value='nao'	>Não	</option>
 				</select>
@@ -107,8 +107,8 @@
 			<legend> IGRA </legend>
 			<div id='divIGRA' class='primary required'>
 				<label for='IGRA'>IGRA:</label>
-				<select name='IGRA' id='IGRA' class='selectOne'>
-					<option value=''             > ------    </option>
+				<select name='IGRA' id='IGRA' class='selectOne required'>
+					<option value=''             >     </option>
 					<option value='sim'          > Sim       </option>
 					<option value='nao'          > Não  </option>
 				</select>
@@ -116,7 +116,7 @@
 			<div id='divIGRAMetodo' class='secondary'>
 				<label for='IGRAMetodo'>Método:</label>
 				<select name='IGRAMetodo' id='IGRAMetodo' class='selectOne'>
-					<option value=''          > ------      </option>
+					<option value=''          >      </option>
 					<option value='quantiferon'> Quantiferon   </option>
 					<option value='t-spot' > T-Spot   </option>
 					<option id='outros_options_IGRA' > Outros Métodos  </option>
@@ -128,7 +128,7 @@
 			<div id='divIGRAResultado' class='secondary'>
 				<label for='IGRAResultado'>Resultado:</label>
 				<select name='IGRAResultado' id='IGRAResultado' class='selectOne'>
-						<option value=''          > ------     </option>
+						<option value=''          >      </option>
 						<option value='positivo'  > Positivo   </option>
 						<option value='negativo'  > Negativo   </option>
 						<option value='ignorado'  > Ignorado   </option>
@@ -139,7 +139,7 @@
 			<legend>HIV/SIDA (Caso tenha feito o exame após a triagem)</legend>
 			<div id='divExameSIDA' class='primary required'>
 				<label for='exameSida'>Realizou o exame:</label>
-				<select name='exameSida' id='exameSida' class='selectOne sinais'>
+				<select name='exameSida' id='exameSida' class='selectOne sinais required'>
 					<option value='ignorado' selected> Ignorado  </option>
 					<option value='sim'> Sim  </option>
 					<option value='nao'> N&atilde;o  </option>
@@ -172,7 +172,8 @@
 			<div id='divSIDAUsoAntiRetroviral' class='secondary'>
 				<label for='sidaUsoAntiRetroviral'> Uso de anti-retroviral? </label>
 				<select name='sidaUsoAntiRetroviral' id='sidaUsoAntiRetroviral' class='selectOne required'>
-					<option value='ignorado' selected> Ignorado  </option>
+					<option value=''> </option>
+					<option value='ignorado'> Ignorado  </option>
 					<option value='sim'> Sim  </option>
 					<option value='nao'> N&atilde;o  </option>
 				</select>
@@ -207,8 +208,8 @@
 			</div>
 			<div id='divResultadoBaarUmMesAposTriagem' name='divDataResultadoBaarUmMesAposTriagem' class='primary required'>
 				<label for='divDataResultadoBaarUmMesAposTriagem'>Resultado do BAAR:</label>
-				<select name='resultadoBaarUmMesAposTriagem' id='resultadoBaarUmMesAposTriagem' class='selectOne'>
-					<option value=''          > ------    </option>
+				<select name='resultadoBaarUmMesAposTriagem' id='resultadoBaarUmMesAposTriagem' class='selectOne required'>
+					<option value=''          > </option>
 					<option value='ignorado'  > Ignorado  </option>
 					<option value='negativo'  > Negativo  </option>
 					<option value='positivo'  > Positivo  </option>
@@ -220,11 +221,11 @@
 			</div>
 			<div id='divResponsavelPelaColetaUmMesAposTriagem' name='divResponsavelPelaColetaUmMesAposTriagem' class='primary required'>
 				<label for='responsavelPelaColetaUmMesAposTriagem'>Responsável pela coleta:</label>
-				<input type='text' class='text' id='responsavelPelaColetaUmMesAposTriagem' name='responsavelPelaColetaUmMesAposTriagem' />
+				<input type='text' class='text required' id='responsavelPelaColetaUmMesAposTriagem' name='responsavelPelaColetaUmMesAposTriagem' />
 			</div>
 			<div id='divResponsavelPeloExameUmMesAposTriagem' name='divResponsavelPeloExameUmMesAposTriagem' class='primary required'>
 				<label for='responsavelPeloExameUmMesAposTriagem'>Responsável pelo exame:</label>
-				<input type='text' class='text' id='responsavelPeloExameUmMesAposTriagem' name='responsavelPeloExameUmMesAposTriagem' />
+				<input type='text' class='text required' id='responsavelPeloExameUmMesAposTriagem' name='responsavelPeloExameUmMesAposTriagem' />
 			</div>
 		</fieldset>
 		<fieldset>
@@ -235,8 +236,8 @@
 			</div>
 			<div id='divResultadoBaarDoisMesesAposTriagem' name='divDataResultadoBaarDoisMesesAposTriagem' class='primary required'>
 				<label for='divDataResultadoBaarDoisMesesAposTriagem'>Resultado do BAAR:</label>
-				<select name='resultadoBaarDoisMesesAposTriagem' id='resultadoBaarDoisMesesAposTriagem' class='selectOne'>
-					<option value=''          > ------    </option>
+				<select name='resultadoBaarDoisMesesAposTriagem' id='resultadoBaarDoisMesesAposTriagem' class='selectOne required'>
+					<option value=''          > </option>
 					<option value='ignorado'  > Ignorado  </option>
 					<option value='negativo'  > Negativo  </option>
 					<option value='positivo'  > Positivo  </option>
@@ -248,11 +249,11 @@
 			</div>
 			<div id='divResponsavelPelaColetaDoisMesesAposTriagem' name='divResponsavelPelaColetaDoisMesesAposTriagem' class='primary required'>
 				<label for='responsavelPelaColetaDoisMesesAposTriagem'>Responsável pela coleta:</label>
-				<input type='text' class='text' id='responsavelPelaColetaDoisMesesAposTriagem' name='responsavelPelaColetaDoisMesesAposTriagem' />
+				<input type='text' class='text required' id='responsavelPelaColetaDoisMesesAposTriagem' name='responsavelPelaColetaDoisMesesAposTriagem' />
 			</div>
 			<div id='divResponsavelPeloExameDoisMesesAposTriagem' name='divResponsavelPeloExameDoisMesesAposTriagem' class='primary required'>
 				<label for='responsavelPeloExameDoisMesesAposTriagem'>Responsável pelo exame:</label>
-				<input type='text' class='text' id='responsavelPeloExameDoisMesesAposTriagem' name='responsavelPeloExameDoisMesesAposTriagem' />
+				<input type='text' class='text required' id='responsavelPeloExameDoisMesesAposTriagem' name='responsavelPeloExameDoisMesesAposTriagem' />
 			</div>
 		</fieldset>
 		<fieldset>
@@ -292,16 +293,16 @@
 			<legend> Testes Moleculares (diagnóstico de TB) </legend>
 			<div id='divTestesMoleculares' class='primary required'>
 				<label for='testesMoleculares'>Testes Moleculares:</label>
-				<select name='testesMoleculares' id='testesMoleculares' class='selectOne'>
-					<option value=''             > ------    </option>
-					<option value='sim'          > Sim       </option>
+				<select name='testesMoleculares' id='testesMoleculares' class='selectOne required'>
+					<option value=''             >  </option>
+					<option value='sim'          > Sim  </option>
 					<option value='nao'          > Não  </option>
 				</select>
 			</div>
 			<div id='divPCRMetodo' class='secondary'>
 				<label for='pcrMetodo'>Método:</label>
 				<select name='pcrMetodo' id='pcrMetodo' class='selectOne'>
-					<option value=''          > ------      </option>
+					<option value=''          >  </option>
 					<option value='COBASTaqmanMtbTest'     > COBAS Taqman Mtb Test </option>
 					<option value='gen_probe' > Gen Probe   </option>
 					<option value='MtBQPCRAlert' > MtBQ - PCR Alert   </option>
@@ -316,7 +317,7 @@
 			<div id='divPCRResultado' class='secondary'>
 				<label for='pcr'>Resultado:</label>
 				<select name='pcrResultado' id='pcrResultado' class='select'>
-					<option value=''             > ------    </option>
+					<option value=''                  > </option>
 					<option value='positivo'          > Positivo  </option>
 					<option value='negativo'          > Negativo  </option>
 					<option value='ignorado'          > Ignorado  </option>
@@ -339,8 +340,8 @@
 			<legend> Teste de Sensibilidade </legend>
 			<div id='divTesteSensibilidade' class='primary required'>
 				<label for='testeSensibilidade'>Teste de Sensibilidade:</label>
-				<select name='testeSensibilidade' id='testeSensibilidade' class='selectOne'>
-					<option value=''             	> ------    	</option>
+				<select name='testeSensibilidade' id='testeSensibilidade' class='selectOne required'>
+					<option value=''             	> </option>
 					<option value='realizado'       > Realizado  	</option>
 					<option value='naoRealizado'    > Não Relizado  </option>
 					<option value='contaminado'     > Contaminado  	</option>
@@ -367,7 +368,7 @@
 			<div id='divTestesMolecularesResistencia' name='divTestesMolecularesResistencia' class='primary'>
 				<label for='testesMolecularesResistencia'>  </label>
 				<select id='testesMolecularesResistencia' name='testesMolecularesResistencia' class='selectOne'>
-					<option value='---'			> ---		</option>
+					<option value=''			> </option>
 					<option value='sim'			> Sim		</option>
 					<option value='nao'			> Não		</option>
 					<option value='ignorado'	> Ignorado	</option>
@@ -376,7 +377,7 @@
 			<div id='divGenXpert' name='divGenXpert' class='secondary'>
 				<label for='genXpert'>GenXpert: </label>
 				<select id='genXpert' name='genXpert' class='selectOne'>
-					<option value=''		>-------</option>
+					<option value=''		> </option>
 					<option value='negativo'>Negativo</option>
 					<option value='positivo'>Positivo</option>
 				</select>
@@ -384,7 +385,7 @@
 			<div id='divGenXpertPositivo' name='divGenXpertPositivo' class='secondary'>
 				<label for='genXpertPositivo'></label>
 				<select id='genXpertPositivo' name='genXpertPositivo'>
-					<option value=''				>-------</option>
+					<option value=''				> </option>
 					<option value='rifSensivel'		>Rif Sensível</option>
 					<option value='rifResistente'	>Rif Resistente</option>
 				</select>
@@ -404,7 +405,7 @@
 			<div id='divFitaHain' class='secondary'>
 				<label for='fitaHain'> FitaHain: </label>
 				<select id='fitaHain' name='fitaHain' class='selectOne'>
-					<option value=''		> -----		</option>
+					<option value=''		> </option>
 					<option value='sim'		> Sim		</option>
 					<option value='nao'		> Não		</option>
 				</select>
