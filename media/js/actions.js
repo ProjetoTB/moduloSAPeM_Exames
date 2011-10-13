@@ -42,7 +42,7 @@ function loadUnidadesSaude(selectObj, num){
 				if (value.fields.cidade != '')
 					us += " - " + value.fields.cidade;
 				us += " \(" + value.fields.UF + "\)";
-				$(selectObj + num).append('<option>' + us + '</option>');
+				$(selectObj + num).append("<option value='"+ us +"'>" + us + "</option>");
 			});
 		}
 	});
@@ -233,11 +233,11 @@ $(document).ready(function(){
 				cepaRow[indexCepaRow] = value;
 				indexCepaRow++;
 			}
+
 			for (var j=1;j< cepaRow.length;j++)
 			{
 				$('#addline_button').click();
 				$('table').find('#origem_cepa_' + j);
-				$('#origem_cepa_' + j).val(cepaRow[j]);
 				$('#baciloscopia_metodo_' + j).removeAttr('disabled');
 				$('#baciloscopia_coleta_responsavel_' + j).removeAttr('disabled');
 				$('#baciloscopia_data_' + j).removeAttr('disabled');
@@ -423,6 +423,13 @@ $(document).ready(function(){
 				$('table').find('#sangueColetado_' + j ).val(sangueColetado[j]);
 				$('table').find('#numeroSangue_' + j ).val(numeroSangue[j]);
 			}
+
+			for (var j=1;j< cepaRow.length;j++){
+				$('table').find('#origem_cepa_' + j);
+				console.log(cepaRow[j]);
+				$('table').find('#origem_cepa_' + j).val(cepaRow[j]);
+			}
+
 		}
 	});
 /*-------------------------------------------------------------------------------*/
@@ -452,10 +459,6 @@ $(document).ready(function(){
 			return false;
 		$('.hour').timeEntry({show24Hours: true});
 	});
-
-	/*$('.hour').livequery('keyup', function() {
-		$('.hour').timeEntry({show24Hours: true});
-	});*/
 
 	$(function(){
 		$('.data').livequery('click', function() {

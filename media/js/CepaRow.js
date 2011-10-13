@@ -12,7 +12,7 @@ function soroRow(numSoro){
 				.addClass('required')
 				.attr('name', 'soroColetado_' + numSoro)
 				.attr('id'  , 'soroColetado_' + numSoro)
-				.append($("<option> ----  </option>"))
+				.append($("<option value=''>  </option>"))
 				.append($("<option value='sim'> Sim  </option>"))
 				.append($("<option value='nao'> N&atilde;o  </option>"))
 				.append($("<option value='ignorado'> Ignorado  </option>"))
@@ -43,7 +43,7 @@ function sangueRow(numSangue){
 				.addClass('required')
 				.attr('name', 'sangueColetado_' + numSangue)
 				.attr('id'  , 'sangueColetado_' + numSangue)
-				.append($("<option> ----  </option>"))
+				.append($("<option value=''> </option>"))
 				.append($("<option value='sim'> Sim  </option>"))
 				.append($("<option value='nao'> N&atilde;o  </option>"))
 				.append($("<option value='ignorado'> Ignorado  </option>"))
@@ -71,7 +71,7 @@ function CEPARow(numCepa){
 				.attr('name', 'origem_cepa_' + numCepa)
 				.attr(  'id', 'origem_cepa_' + numCepa)
 				.addClass('origem_cepa')
-				.append($('<option> --- </option>'))
+				.append($('<option value=\'\'> </option>'))
 			)
 			.attr('rowspan', '6')
 		)
@@ -99,7 +99,9 @@ function CEPARow(numCepa){
 				.attr('name', 'baciloscopia_metodo_' + numCepa)
 				.attr(  'id', 'baciloscopia_metodo_' + numCepa)
 				.addClass('baciloscopia_metodo')
-				.append($('<option> ---- </option>'))
+				.append($('<option> </option>')
+					.attr('value', '')
+				)
 				.append($('<option> Ziehl </option>')
 					.attr('value', 'ziehl')
 				)
@@ -146,7 +148,9 @@ function CEPARow(numCepa){
 				.attr('name', 'baciloscopia_resultado_cepa_' + numCepa)
 				.attr(  'id', 'baciloscopia_resultado_cepa_' + numCepa)
 				.addClass('baciloscopia_resultado_cepa')
-				.append($('<option> ---- </option>'))
+				.append($('<option> </option>')
+					.attr('value', '')
+				)
 				.append($('<option> Negativo </option>')
 					.attr('value', 'negativo')
 				)
@@ -233,7 +237,9 @@ function CEPARow(numCepa){
 				.attr('name', 'aspecto_escarro_' + numCepa)
 				.attr(  'id', 'aspecto_escarro_' + numCepa)
 				.addClass('aspecto_escarro')
-				.append($('<option> ---- </option>'))
+				.append($('<option> </option>')
+					.attr('value', '')
+				)
 				.append($('<option> Saliva </option>')
 					.attr('value', 'saliva')
 				)
@@ -330,6 +336,28 @@ function CEPARow(numCepa){
 }
 
 $(document).ready( function(){
+	var cepaNum = 1;
+	var content = CEPARow(cepaNum);
+	$('table.cepa').append(content);
+	loadUnidadesSaude('#origem_cepa_', cepaNum);
+	// add row button
+	
+	$("#addline_button").click(function(){
+		var origemStr = $('#origem_cepa_'+ cepaNum).val();
+		if(origemStr.replace(/-/g,'')){
+			cepaNum++;
+			var content = CEPARow(cepaNum);
+			$('table.cepa').append(CEPARow(cepaNum));
+			loadUnidadesSaude('#origem_cepa_', cepaNum);
+			$('input.data').datepicker({
+				dateFormat: 'dd/mm/yy',
+				monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+				maxDate: '+0d',
+				dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S']
+			});
+		}
+	});
+
 	/*---------------------------Auxiliar function-------------------------------*/
 	$.fn.compareDate = function(argumento){
 		//Essa funcao eh utilizada para comprar a ordem
@@ -374,28 +402,7 @@ $(document).ready( function(){
 
 	}
 	/*---------------------------------------------------------------------------*/
-	var cepaNum = 1;
-	var content = CEPARow(cepaNum);
-	$('table.cepa').append(content);
-	loadUnidadesSaude('#origem_cepa_', cepaNum);
-	// add row button
 	
-	$("#addline_button").click(function(){
-		var origemStr = $('#origem_cepa_'+ cepaNum).val();
-		if(origemStr.replace(/-/g,'')){
-			cepaNum++;
-			var content = CEPARow(cepaNum);
-			$('table.cepa').append(CEPARow(cepaNum));
-			loadUnidadesSaude('#origem_cepa_', cepaNum);
-			$('input.data').datepicker({
-				dateFormat: 'dd/mm/yy',
-				monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
-				maxDate: '+0d',
-				dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S']
-			});
-		}
-	});
-
 	$('select.origem_cepa').livequery('change', function(){
 		var origemStr = $(this).val();
 		num = parseInt($(this).attr('id').split('_')[2]);
