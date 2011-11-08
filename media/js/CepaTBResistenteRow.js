@@ -240,20 +240,6 @@ function CEPATBResistenteRow(numCepa){
 				.attr('readonly', 'readonly')
 			)
 		)
-		/*.append($('<td />')
-			.append('Número de Dias')
-			.addClass('description')
-		)
-		.append($('<td />')
-			.append($('<input/>')
-				.attr('disabled', true)
-				.attr('name', 'dias_tbresistente_cepa_' + numCepa)
-				.attr(  'id', 'dias_tbresistente_cepa_' + numCepa)
-				.attr(  'size', 2)
-				.addClass('dias_tbresistente_cepa')
-				.addClass('number')
-			)
-		)*/
 	);
 	content = $.merge($.merge([], content) , $('<tr />')
 		.addClass(cRow)
@@ -280,32 +266,6 @@ function CEPATBResistenteRow(numCepa){
 				)
 			)
 		)
-		/*.append($('<td />')
-			.append('Identificação')
-			.addClass('description')
-		)
-		.append($('<td />')
-			.append($('<select /> ')
-				.attr('disabled', true)
-				.css(  'width', '100px')
-				.attr('name', 'identificacao_tbresistente_cepa_' + numCepa)
-				.attr(  'id', 'identificacao_tbresistente_cepa_' + numCepa)
-				.addClass('identificacao_tbresistente_cepa')
-				.append($('<option> ---- </option>'))
-				.append($('<option> Micobacterium Tuberculosis (MTB)</option>')
-					.attr('value', 'mtb')
-				)
-				.append($('<option> Micobacterium N&atilde;o Tuberculosis (MNT)</option>')
-					.attr('value', 'mnt')
-				)
-				.append($('<option> N&atilde;o se aplica </option>')
-					.attr('value', 'nao_se_aplica')
-				)
-				.append($('<option> Ignorado </option>')
-					.attr('value', 'ignorado')
-				)
-			)
-		)*/
 		.append($('<td />')
 			.append('Data do Recebimento TSA médico')
 			.addClass('description')
@@ -448,13 +408,6 @@ $(document).ready(function(){
 					$('#resultado_tbresistente_cepa_' + num).val('');
 			});
 			$('#data_processamento_tbresistente_cultura_' + num).livequery('change', function(){
-				/* Em 17/06, Dani solicitou retirada de obrigatoriedade dos campos 'Hora'
-				if ($(this).val())
-					$('#hora_processamento_tbresistente_cultura_'+num).addClass('required');
-				else
-					$('#hora_processamento_tbresistente_cultura_'+num).removeClass('required');
-				*/
-
 				if ($($(this)).compareDate($('#data_resultado_tbresistente_cultura_' + num)) > 0){
 					alert("A 'Data do Processamento' deve ser anterior à 'Data do Resultado'");
 					$(this).val('');
@@ -469,13 +422,6 @@ $(document).ready(function(){
 				}
 			});
 			$('#data_recebimento_tbresistente_cepa_' + num).livequery('change', function(){
-				/* Em 17/06, Dani solicitou retirada de obrigatoriedade dos campos 'Hora'
-				if ($(this).val())
-					$('#hora_recebimento_tbresistente_cepa_' + num).addClass('required');
-				else
-					$('#hora_recebimento_tbresistente_cepa_' + num).removeClass('required');
-				*/
-
 				if ($($(this)).compareDate($('#data_resultado_tbresistente_cultura_' + num)) > 0){
 					alert("A 'Data do Recebimento' deve ser anterior à 'Data do Resultado'");
 					$(this).val('');
@@ -490,12 +436,6 @@ $(document).ready(function(){
 				}
 			});
 			$('#data_resultado_tbresistente_cultura_' + num).livequery('change', function(){
-				/* Em 17/06, Dani solicitou retirada de obrigatoriedade dos campos 'Hora'
-				if ($(this).val())
-					$('#hora_resultado_tbresistente_cultura_' + num).addClass('required');
-				else
-					$('#hora_resultado_tbresistente_cultura_' + num).removeClass('required');
-				*/
 				if ($($(this)).compareDate($('#data_processamento_tbresistente_cultura_' + num)) < 0){
 					alert("A 'Data do Resultado' deve ser posterior à 'Data do Processamento'");
 					$(this).val('');
@@ -597,6 +537,16 @@ $(document).ready(function(){
 					$('#data_recebimento_tbresistente_cepa_'+num).val('');
 					$('#data_resultado_tbresistente_cultura_'+num).val('');
 				}
+			});
+			$('.input_resistente_tbresistente').livequery('change',function(){
+				var oneChecked = false;
+				for(var i= 0; i<l.length; i++)
+					if ($('#resistente_tbresistente_'+num+'_'+l[i]).is(':checked'))
+						oneChecked = true;
+				if (oneChecked)
+					$('#resultado_tbresistente_cepa_' + num).val('resistente');
+				else
+					$('#resultado_tbresistente_cepa_' + num).val('');
 			});
 		}
 	});

@@ -36,13 +36,18 @@ function loadUnidadesSaude(selectObj, num){
 	$.ajax({
 		url: urlbase + 'unidadesSaude/json/',
 		dataType : 'json',
+		cache: false,
+		cache: false,
 		success : function(data){
 			$.each(data, function(key, value){
 				us = value.fields.nome;
 				if (value.fields.cidade != '')
 					us += " - " + value.fields.cidade;
 				us += " \(" + value.fields.UF + "\)";
-				$(selectObj + num).append("<option value='"+ us +"'>" + us + "</option>");
+				$(selectObj + num)
+					.append($('<option>'+us+'</option>')
+					.attr('value', us)
+				);
 			});
 		}
 	});
@@ -227,7 +232,7 @@ $(document).ready(function(){
 				indexNumeroSangue++;
 			}
 			//CepaRow
-			while(xml.getElementsByTagName('origem_cepa_' + indexCepaRow.toString())[0] != undefined)
+			while(xml.getElementsByTagName('origem_cepa_' + indexCepaRow.toString())[0] != undefined && xml.getElementsByTagName('origem_cepa_' + indexCepaRow.toString())[0].childNodes[0] != undefined)
 			{
 				var value = xml.getElementsByTagName('origem_cepa_' + indexCepaRow.toString())[0].childNodes[0].nodeValue;
 				cepaRow[indexCepaRow] = value;
@@ -252,9 +257,14 @@ $(document).ready(function(){
 				$('#analise_responsavel_' + j).removeAttr('disabled');
 				$('#aspecto_escarro_' + j).removeAttr('disabled');
 				$('#baciloscopia_data_recebimento_medico_' + j).removeAttr('disabled');
+
+				loadUnidadesSaude('#origem_cepa_', j);
+
+				$('table').find('#origem_cepa_' + j);
+				$('table').find('#origem_cepa_' + j).val(cepaRow[j]);
 			}
 			//CepaCulturaRow
-			while(xml.getElementsByTagName('origem_cultura_' + indexCepaCulturaRow.toString())[0] != undefined)
+			while(xml.getElementsByTagName('origem_cultura_' + indexCepaCulturaRow.toString())[0] != undefined && xml.getElementsByTagName('origem_cultura_' + indexCepaCulturaRow.toString())[0].childNodes[0] != undefined)
 			{
 				var value = xml.getElementsByTagName('origem_cultura_' + indexCepaCulturaRow.toString())[0].childNodes[0].nodeValue;
 				cepaCulturaRow[indexCepaCulturaRow] = value;
@@ -275,12 +285,16 @@ $(document).ready(function(){
 				$('#hora_resultado_cultura_' + j).removeAttr('disabled');
 				$('#metodo_cultura_cepa_' + j).removeAttr('disabled');
 				$('#resultado_cultura_cepa_' + j).removeAttr('disabled');
-				$('#dias_cultura_cepa_' + j).removeAttr('disabled');
 				$('#identificacao_cultura_cepa_' + j).removeAttr('disabled');
 				$('#data_recebimento_medico_' + j).removeAttr('disabled');
+
+				loadUnidadesSaude('#origem_cultura_', j);
+
+				$('table').find('#origem_cultura_' + j);
+				$('table').find('#origem_cultura_' + j).val(cepaCulturaRow[j]);
 			}
 			//TBResistente
-			while(xml.getElementsByTagName('origem_tbresistente_' + indexTbResistente.toString())[0] != undefined)
+			while(xml.getElementsByTagName('origem_tbresistente_' + indexTbResistente.toString())[0] != undefined && xml.getElementsByTagName('origem_tbresistente_' + indexTbResistente.toString())[0].childNodes[0] != undefined)
 			{
 				var value = xml.getElementsByTagName('origem_tbresistente_' + indexTbResistente.toString())[0].childNodes[0].nodeValue;
 				tbResistente[indexTbResistente] = value;
@@ -293,17 +307,12 @@ $(document).ready(function(){
 				$('#origem_tbresistente_' + j).val(tbResistente[j]);
 				$('#numero_cepa_tbresistente_cultura_' + j).removeAttr('disabled');
 				$('#cultura_coleta_tbresistente_responsavel_' + j).removeAttr('disabled');
-				$('#data_cultura_tbresistente_cepa_' + j).removeAttr('disabled');
-				$('#hora_cultura_tbresistente_cepa_' + j).removeAttr('disabled');
 				$('#hora_processamento_tbresistente_cultura_' + j).removeAttr('disabled');
 				$('#hora_resultado_tbresistente_cultura_' + j).removeAttr('disabled');
 				$('#data_processamento_tbresistente_cultura_' + j).removeAttr('disabled');
 				$('#data_resultado_tbresistente_cultura_' + j).removeAttr('disabled');
 				$('#metodo_tbresistente_cepa_' + j).removeAttr('disabled');
 				$('#resultado_tbresistente_cepa_' + j).removeAttr('disabled');
-				$('#dias_tbresistente_cepa_' + j).removeAttr('disabled');
-				$('#identificacao_tbresistente_cepa_' + j).removeAttr('disabled');
-				$('#data_tsa_tbresistente_cultura_' + j).removeAttr('disabled');
 				$('#data_recebimento_TSA_medico_' + j).removeAttr('disabled');
 				$('.input_sensibilidade_tbresistente').each(function(){
 					$(this).removeAttr('disabled');
@@ -311,6 +320,11 @@ $(document).ready(function(){
 				$('.input_resistente_tbresistente').each(function(){
 					$(this).removeAttr('disabled');
 				});
+
+				loadUnidadesSaude('#origem_tbresistente_', j);
+
+				$('table').find('#origem_tbresistente_' + j);
+				$('table').find('#origem_tbresistente_' + j).val(tbResistente[j]);
 			}
 			if (xml.getElementsByTagName('error')[0] == undefined){
 				if (urlString.search("edit") != -1){
@@ -321,7 +335,6 @@ $(document).ready(function(){
 						var el = $(this).get(0);
 						if($(el)[0].nodeType == xml.ELEMENT_NODE){
 							var tagname = $(el)[0].tagName;
-							//console.log(tagname + ' : ' + $(el).text());
 							var hlcolor = '#FFF8C6';
 							//Radio
 							if (tagname == 'amostra')
@@ -352,10 +365,11 @@ $(document).ready(function(){
 								var values = $(el).text().split(',');
 								var i;
 								for (i=0;i<values.length;i++){
-									$('#sensibilidade_tbresistente_' + '_' + values[i]).attr('checked',true);
-									$('#sensibilidade_tbresistente_' + '_' + values[i]).removeAttr('disabled');
-									$('#resistente_tbresistente_' + '_' + values[i]).attr('checked',false);
-									$('#resistente_tbresistente_' + '_' + values[i]).attr('disabled',true);
+									$('#sensibilidade_tbresistente_' + num + '_' + values[i]).attr('checked',true);
+									$('#sensibilidade_tbresistente_' + num + '_' + values[i]).removeAttr('disabled');
+									$('#resistente_tbresistente_' + num + '_' + values[i]).attr('checked',false);
+									$('#resistente_tbresistente_' + num + '_' + values[i]).attr('disabled',true);
+									$('#resultado_tbresistente_cepa_' + num).val('sensivel');
 								}
 							}
 							if (tagname.search('valores_tbresistente_resistencia') != -1)
@@ -364,15 +378,15 @@ $(document).ready(function(){
 								var values = $(el).text().split(',');
 								var i;
 								for (i=0;i<values.length;i++){
-									$('#resistente_tbresistente_' + '_' + values[i]).attr('checked',true);
-									$('#resistente_tbresistente_' + '_' + values[i]).removeAttr('disabled');
-									$('#sensibilidade_tbresistente_' + '_' + values[i]).attr('checked',false);
-									$('#sensibilidade_tbresistente_' + '_' + values[i]).attr('disabled',true);
+									$('#resistente_tbresistente_' + num + '_' + values[i]).attr('checked',true);
+									$('#resistente_tbresistente_' + num + '_' + values[i]).removeAttr('disabled');
+									$('#sensibilidade_tbresistente_' + num + '_' + values[i]).attr('checked',false);
+									$('#sensibilidade_tbresistente_' + num + '_' + values[i]).attr('disabled',true);
+									$('#resultado_tbresistente_cepa_' + num).val('resistente');
 								}
 							}
 							if (tagname.search('valores_tbresistente_nao_testado') != -1)
 								$('#nao_testado_tbresistente_' + tagname[tagname.length-1]).html($(el).text());
-							//console.log(tagname + ' : '  + $(el).text());
 							if ($(el).text())
 								$('#'+tagname).removeAttr('disabled');
 							$('#'+tagname).val($(el).text());
@@ -387,7 +401,6 @@ $(document).ready(function(){
 						if($(el)[0].nodeType == xml.ELEMENT_NODE){
 							var tagname = $(el)[0].tagName;
 							idDiv = $('#'+tagname).parent().attr('id');
-							//console.log(tagname + ' : ' + $(el).text());
 							var hlcolor = '#FFF8C6';
 							if (tagname == 'numeroPaciente')
 								$('#' + tagname).val($(el).text());
@@ -423,13 +436,24 @@ $(document).ready(function(){
 				$('table').find('#sangueColetado_' + j ).val(sangueColetado[j]);
 				$('table').find('#numeroSangue_' + j ).val(numeroSangue[j]);
 			}
-
+			// Complete Baciloscopia table
 			for (var j=1;j< cepaRow.length;j++){
+				loadUnidadesSaude('#origem_cepa_', j);
 				$('table').find('#origem_cepa_' + j);
-				console.log(cepaRow[j]);
 				$('table').find('#origem_cepa_' + j).val(cepaRow[j]);
 			}
-
+			// Complete Cultura table
+			for (var j=1; j< cepaCulturaRow.length; j++){
+				loadUnidadesSaude('#origem_cultura_', j);
+				$('table').find('#origem_cultura_'+j);
+				$('table').find('#origem_cultura_'+j).val(cepaCulturaRow[j]);
+			}
+			// Complete TB resistente table
+			for (var j=1; j< tbResistente.length; j++){
+				loadUnidadesSaude('#origem_tbresistente_', j);
+				$('table').find('#origem_tbresistente_'+  parseInt(j));
+				$('table').find('#origem_tbresistente_' + parseInt(j)).val(tbResistente[j]);
+			}
 		}
 	});
 /*-------------------------------------------------------------------------------*/
