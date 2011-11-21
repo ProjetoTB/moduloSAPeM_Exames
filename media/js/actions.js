@@ -37,7 +37,6 @@ function loadUnidadesSaude(selectObj, num){
 		url: urlbase + 'unidadesSaude/json/',
 		dataType : 'json',
 		cache: false,
-		cache: false,
 		success : function(data){
 			$.each(data, function(key, value){
 				us = value.fields.nome;
@@ -262,6 +261,7 @@ $(document).ready(function(){
 
 				$('table').find('#origem_cepa_' + j);
 				$('table').find('#origem_cepa_' + j).val(cepaRow[j]);
+				$('table').find('#origem_cepa_' + j).change();
 			}
 			//CepaCulturaRow
 			while(xml.getElementsByTagName('origem_cultura_' + indexCepaCulturaRow.toString())[0] != undefined && xml.getElementsByTagName('origem_cultura_' + indexCepaCulturaRow.toString())[0].childNodes[0] != undefined)
@@ -292,6 +292,7 @@ $(document).ready(function(){
 
 				$('table').find('#origem_cultura_' + j);
 				$('table').find('#origem_cultura_' + j).val(cepaCulturaRow[j]);
+				$('table').find('#origem_cultura_' + j).change();
 			}
 			//TBResistente
 			while(xml.getElementsByTagName('origem_tbresistente_' + indexTbResistente.toString())[0] != undefined && xml.getElementsByTagName('origem_tbresistente_' + indexTbResistente.toString())[0].childNodes[0] != undefined)
@@ -325,6 +326,7 @@ $(document).ready(function(){
 
 				$('table').find('#origem_tbresistente_' + j);
 				$('table').find('#origem_tbresistente_' + j).val(tbResistente[j]);
+				$('table').find('#origem_tbresistente_' + j).change();
 			}
 			if (xml.getElementsByTagName('error')[0] == undefined){
 				if (urlString.search("edit") != -1){
@@ -345,16 +347,6 @@ $(document).ready(function(){
 							//Checkbox
 							if (tagname == 'fitaHain')
 								$('input[name=fitaHain]').each(function(){
-									if ($(el).text().search($(this).val()) != -1)
-										$(this).attr('checked',true);
-								});
-							if (tagname == 'isoniazida')
-								$('input[name=isoniazida]').each(function(){
-									if ($(el).text().search($(this).val()) != -1)
-										$(this).attr('checked',true);
-								});
-							if (tagname == 'rifampicina')
-								$('input[name=rifampicina]').each(function(){
 									if ($(el).text().search($(this).val()) != -1)
 										$(this).attr('checked',true);
 								});
@@ -438,21 +430,24 @@ $(document).ready(function(){
 			}
 			// Complete Baciloscopia table
 			for (var j=1;j< cepaRow.length;j++){
-				loadUnidadesSaude('#origem_cepa_', j);
+				//loadUnidadesSaude('#origem_cepa_', j);
 				$('table').find('#origem_cepa_' + j);
 				$('table').find('#origem_cepa_' + j).val(cepaRow[j]);
+				$('table').find('#origem_cepa_' + j).change();
 			}
 			// Complete Cultura table
 			for (var j=1; j< cepaCulturaRow.length; j++){
-				loadUnidadesSaude('#origem_cultura_', j);
+				//loadUnidadesSaude('#origem_cultura_', j);
 				$('table').find('#origem_cultura_'+j);
 				$('table').find('#origem_cultura_'+j).val(cepaCulturaRow[j]);
+				$('table').find('#origem_cultura_'+j).change();
 			}
 			// Complete TB resistente table
 			for (var j=1; j< tbResistente.length; j++){
-				loadUnidadesSaude('#origem_tbresistente_', j);
-				$('table').find('#origem_tbresistente_'+  parseInt(j));
-				$('table').find('#origem_tbresistente_' + parseInt(j)).val(tbResistente[j]);
+				//loadUnidadesSaude('#origem_tbresistente_', j);
+				$('table').find('#origem_tbresistente_'+  j);
+				$('table').find('#origem_tbresistente_' + j).val(tbResistente[j]);
+				$('table').find('#origem_tbresistente_'+  j).change();
 			}
 		}
 	});
@@ -711,53 +706,52 @@ $(document).ready(function(){
 
 	$('#genXpert').change(function(){
 		var dep = new Array();
-		dep[0] = '#divGenXpertPositivo';
-		dep[1] = '#divDataColetaGenXpert';
-		dep[2] = '#divDataRecebimentoGenXpert';
-		dep[3] = '#divDataResultadoGenXpert';
-		if($(this).val()=='positivo')
+		dep[0] = '#divDataColetaGenXpert';
+		dep[1] = '#divDataRecebimentoGenXpert';
+		dep[2] = '#divDataRecebimentoGenXpertMedico';
+		dep[3] = '#divResultadoGenXpert';
+		dep[4] = '#divDataResultadoGenXpert';
+		if($(this).val()=='sim')
 			$().showFields(dep);
 		// Se nao, ocultar colunas listadas a cima
 		else 
 			$().hideFields(dep);
 	});
+
+	$('#resultadoGenXpert').change(function(){
+		var dep = new Array();
+		dep[0] = '#divGenXpertPositivo';
+		if ($(this).val() == 'positivo')
+			$().showFields(dep);
+		else
+			$().hideFields(dep);
+	});
+
 	$('#fitaHain').change(function(){
 		var dep = new Array();
-		dep[0] = '#divOpcoes';
-		dep[1] = '#divDataColetaFitaHain';
-		dep[2] = '#divDataRecebimentoFitaHain';
-		dep[3] = '#divDataResultadoFitaHain';
+		dep[0] = '#divDataColetaFitaHain';
+		dep[1] = '#divDataRecebimentoFitaHain';
+		dep[2] = '#divDataRecebimentoMedico';
+		dep[3] = '#divOpcoes';
+		dep[4] = '#divResultadoFitaHain';
+		dep[5] = '#divDataResultadoFitaHain';
 		if($(this).val()=='sim')
 			$().showFields(dep);
 		// Se nao, ocultar colunas listadas a cima
 		else 
 			$().hideFields(dep);
 	});
-	$('#testesMolecularesResistencia').change(function(){
+
+	$('#resultadoFitaHain').change(function(){
 		var dep = new Array();
-		dep[0] = '#divGenXpert';
-		dep[1] = '#divFitaHain';
-
-		var ped = new Array();
-		ped[0] = '#divGenXpertPositivo';
-		ped[1] = '#divDataColetaGenXpert';
-		ped[2] = '#divDataRecebimentoGenXpert';
-		ped[3] = '#divDataResultadoGenXpert';
-		ped[4] = '#divOpcoes';
-		ped[5] = '#divDataColetaFitaHain';
-		ped[6] = '#divDataRecebimentoFitaHain';
-		ped[7] = '#divDataResultadoFitaHain';
-
-		// Se sim, disponibilizar colunas listadas a cima
-		if($(this).val()=='sim')
+		dep[0] = '#divIsoniazida';
+		dep[1] = '#divRifampicina';
+		if ($(this).val() == 'detectado')
 			$().showFields(dep);
-		// Se nao, ocultar colunas listadas a cima
-		else {
+		else
 			$().hideFields(dep);
-			$().hideFields(ped);
-		}
 	});
-
+	
 	$('#sidaUsoAntiRetroviral').change(function(){
 		var dep = new Array();
 		dep[0] = '#divDataInicioUsoRetroviral';

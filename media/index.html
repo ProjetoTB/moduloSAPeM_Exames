@@ -365,29 +365,12 @@
 		</fieldset>
 		<fieldset>
 			<legend>Testes Moleculares de Resistência</legend>
-			<div id='divTestesMolecularesResistencia' name='divTestesMolecularesResistencia' class='primary'>
-				<label for='testesMolecularesResistencia'>  </label>
-				<select id='testesMolecularesResistencia' name='testesMolecularesResistencia' class='selectOne'>
-					<option value=''			> </option>
-					<option value='sim'			> Sim		</option>
-					<option value='nao'			> Não		</option>
-					<option value='ignorado'	> Ignorado	</option>
-				</select>
-			</div>
-			<div id='divGenXpert' name='divGenXpert' class='secondary'>
-				<label for='genXpert'>GenXpert: </label>
-				<select id='genXpert' name='genXpert' class='selectOne'>
+			<div id='divGenXpert' name='divGenXpert' class='primary'>
+				<label for='genXpert' class='required'>GenXpert realizado? </label>
+				<select id='genXpert' name='genXpert' class='selectOne required'>
 					<option value=''		> </option>
-					<option value='negativo'>Negativo</option>
-					<option value='positivo'>Positivo</option>
-				</select>
-			</div>
-			<div id='divGenXpertPositivo' name='divGenXpertPositivo' class='secondary'>
-				<label for='genXpertPositivo'></label>
-				<select id='genXpertPositivo' name='genXpertPositivo'>
-					<option value=''				> </option>
-					<option value='rifSensivel'		>Rif Sensível</option>
-					<option value='rifResistente'	>Rif Resistente</option>
+					<option value='sim'>Sim</option>
+					<option value='nao'>Nao</option>
 				</select>
 			</div>
 			<div id='divDataColetaGenXpert' class='secondary'>
@@ -398,17 +381,50 @@
 				<label for='dataRecebimentoGenXpert'>Data do Recebimento no Laboratório:</label>
 				<input id='dataRecebimentoGenXpert' class='data' type="text" />
 			</div>
+			<div id='divDataRecebimentoGenXpertMedico' class='secondary'>
+				<label for='dataRecebimentoGenXpertMedico'>Data do Recebimento pelo Médico: </label>
+				<input id='dataRecebimentoGenXpertMedico' class='data' type='text'/>
+			</div>
+			<div id='divResultadoGenXpert' name='divResultadoGenXpert' class='secondary'>
+				<label for='resultadoGenXpert'> Resultado: </label>
+				<select id='resultadoGenXpert' name='resultadoGenXpert'>
+					<option value=''></option>
+					<option value='positivo'> Positivo </option>
+					<option value='negativo'> Negativo </option>
+				</select>
+			</div>
+			<div id='divGenXpertPositivo' name='divGenXpertPositivo' class='secondary'>
+				<label for='genXpertPositivo'></label>
+				<select id='genXpertPositivo' name='genXpertPositivo'>
+					<option value=''				> </option>
+					<option value='rifSensivel'		>Rif Sensível</option>
+					<option value='rifResistente'	>Rif Resistente</option>
+				</select>
+			</div>
 			<div id='divDataResultadoGenXpert' class='secondary'>
 				<label for='dataResultadoGenXpert'>Data do Resultado:</label>
 				<input id='dataResultadoGenXpert' class='data' type="text" />
 			</div>
-			<div id='divFitaHain' class='secondary'>
-				<label for='fitaHain'> FitaHain: </label>
-				<select id='fitaHain' name='fitaHain' class='selectOne'>
+			</br></br></br>
+			<div id='divFitaHain' class='primary'>
+				<label for='fitaHain' class='required'> FitaHain realizado? </label>
+				<select id='fitaHain' name='fitaHain' class='selectOne required'>
 					<option value=''		> </option>
 					<option value='sim'		> Sim		</option>
 					<option value='nao'		> Não		</option>
 				</select>
+			</div>
+			<div id='divDataColetaFitaHain' class='secondary'>
+				<label for='dataColetaFitaHain'>Data da Coleta:</label>
+				<input id='dataColetaFitaHain' class='data' type="text" />
+			</div>
+			<div id='divDataRecebimentoFitaHain' class='secondary'>
+				<label for='dataRecebimentoFitaHain'>Data do Recebimento no Laboratório:</label>
+				<input id='dataRecebimentoFitaHain' class='data' type="text" />
+			</div>
+			<div id='divDataRecebimentoMedico' class='secondary'>
+				<label for='dataRecebimentoMedico'> Data do Recebimento pelo Médico: </label>
+				<input id='dataRecebimentoMedico' class='data' type='text'/>
 			</div>
 			<div id='divOpcoes' class='secondary'>
 				<fieldset>
@@ -465,32 +481,30 @@
 						<input id='fitaHain_16' name="fitaHain" value="ktaGS315T2" type="checkbox" /> ktaG S315T2 (ACA)
 					</label>
 				</fieldset><br />
-				<fieldset>
-					<legend> Isoniazida	</legend>
-					<label for='isoniazida' class='labelRadio'>
-						<input type="radio" name="isoniazida" value="sensivel"/> Sensível
-					</label>
-					<label for='isoniazida' class='labelRadio'>
-						<input type="radio" name="isoniazida" value="resistente" /> Resistente
-					</label>
-				</fieldset>
-				<fieldset>
-					<legend> Rifampicina </legend>
-					<label for='rifampicina' class='labelRadio'>
-						<input type="radio" name="rifampicina" value="sensivel"/> Sensível
-					</label>
-					<label for='rifampicina' class='labelRadio'>
-						<input type="radio" name="rifampicina" value="resistente" /> Resistente
-					</label>
-				</fieldset>
 			</div>
-			<div id='divDataColetaFitaHain' class='secondary'>
-				<label for='dataColetaFitaHain'>Data da Coleta:</label>
-				<input id='dataColetaFitaHain' class='data' type="text" />
+			<div id='divResultadoFitaHain' class='secondary'>
+				<label for='resultadoFitaHain'> Resultado: </label>
+				<select id='resultadoFitaHain' name='resultadoFitaHain'>
+					<option value=''				> </option>
+					<option value='detectado'		> Detectado </option>
+					<option value='naoDetectado'	> Não detectado </option>
+				</select>
 			</div>
-			<div id='divDataRecebimentoFitaHain' class='secondary'>
-				<label for='dataRecebimentoFitaHain'>Data do Recebimento no Laboratório:</label>
-				<input id='dataRecebimentoFitaHain' class='data' type="text" />
+			<div id='divIsoniazida' class='secondary'>
+				<label for='isoniazida'> Isoniazida </label>
+				<select id='isoniaziada' name='isoniazida'>
+					<option value=''			> </option>
+					<option value='sensivel'	> Sensível </option>
+					<option value='resistente>'	> Resistente </option>
+				</select>
+			</div>
+			<div id='divRifampicina' class='secondary'>
+				<label for='rifampicina'> Rifampicina </label>
+				<select id='rifampicina' name='rifampicina'>
+					<option value=''			> </option>
+					<option value='sensivel'	> Sensível </option>
+					<option value='resistente'	> Resistente </option>
+				</select>
 			</div>
 			<div id='divDataResultadoFitaHain' class='secondary'>
 				<label for='dataResultadoFitaHain'>Data do Resultado:</label>
