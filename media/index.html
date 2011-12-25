@@ -73,9 +73,10 @@
 			<div id='divProvaRealizada' class='primary required'>
 				<label for='provaRealizada'>Prova Tuberculínica Realizada?</label>
 				<select name='provaRealizada' id='provaRealizada' class='selectOne required'>
-					<option value=''    >    </option>
-					<option value='sim'	> Sim 		</option>
-					<option value='nao'	> Não 		</option>
+					<option value=''         > </option>
+					<option value='sim'      > Sim </option>
+					<option value='nao'      > Não </option>
+					<option value='ignorado' > Ignorado </option>
 				</select>
 			</div>
 			<div id='divDataAplicacao' class='secondary'>
@@ -85,9 +86,9 @@
 			<div id='divLeituraRealizada' name='divLeituraRealizada' class='secondary'>
 				<label for='leituraRealizada'>A Leitura foi Realizada?</label>
 				<select id='leituraRealizada' name='leituraRealizada'>
-					<option value=''	>	</option>
-					<option value='sim'	>Sim	</option>
-					<option value='nao'	>Não	</option>
+					<option value=''    > </option>
+					<option value='sim' > Sim </option>
+					<option value='nao' > Não </option>
 				</select>
 			</div>
 			<div id='divResultadoLeitura' class='secondary'>
@@ -108,18 +109,19 @@
 			<div id='divIGRA' class='primary required'>
 				<label for='IGRA'>IGRA:</label>
 				<select name='IGRA' id='IGRA' class='selectOne required'>
-					<option value=''             >     </option>
-					<option value='sim'          > Sim       </option>
-					<option value='nao'          > Não  </option>
+					<option value=''        > </option>
+					<option value='sim'     > Sim </option>
+					<option value='nao'     > Não </option>
+					<option value='ignorado'> Ignorado </option>
 				</select>
 			</div>
 			<div id='divIGRAMetodo' class='secondary'>
 				<label for='IGRAMetodo'>Método:</label>
 				<select name='IGRAMetodo' id='IGRAMetodo' class='selectOne'>
-					<option value=''          >      </option>
-					<option value='quantiferon'> Quantiferon   </option>
-					<option value='t-spot' > T-Spot   </option>
-					<option id='outros_options_IGRA' > Outros Métodos  </option>
+					<option value=''                    > </option>
+					<option value='quantiferon'         > Quantiferon </option>
+					<option value='t-spot'              > T-Spot </option>
+					<option value='outros_options_IGRA' > Outros Métodos </option>
 				</select>
 			</div>
 			<div id='divIGRAOutros' class='secondary'>
@@ -128,10 +130,10 @@
 			<div id='divIGRAResultado' class='secondary'>
 				<label for='IGRAResultado'>Resultado:</label>
 				<select name='IGRAResultado' id='IGRAResultado' class='selectOne'>
-						<option value=''          >      </option>
-						<option value='positivo'  > Positivo   </option>
-						<option value='negativo'  > Negativo   </option>
-						<option value='ignorado'  > Ignorado   </option>
+						<option value=''         > </option>
+						<option value='positivo' > Positivo </option>
+						<option value='negativo' > Negativo </option>
+						<option value='ignorado' > Ignorado </option>
 				</select>
 			</div>
 		</fieldset>
@@ -140,15 +142,16 @@
 			<div id='divExameSIDA' class='primary required'>
 				<label for='exameSida'>Realizou o exame:</label>
 				<select name='exameSida' id='exameSida' class='selectOne sinais required'>
-					<option value='ignorado' selected> Ignorado  </option>
-					<option value='sim'> Sim  </option>
-					<option value='nao'> N&atilde;o  </option>
+					<option value=''         > </option>
+					<option value='sim'      > Sim  </option>
+					<option value='nao'      > Não  </option>
+					<option value='ignorado' > Ignorado </option>
 				</select>
 			</div>
 			<div id='divSIDA' class='secondary'>
 				<label for='sida'>Resultado:</label>
 				<select name='sida' id='sida' class='selectOne sinais'>
-					<option value='pendente' selected> Pendente  </option>
+					<option value='pendente'> Pendente  </option>
 					<option value='positivo'> Positivo </option>
 					<option value='negativo'> Negativo  </option>
 				</select>
@@ -172,10 +175,10 @@
 			<div id='divSIDAUsoAntiRetroviral' class='secondary'>
 				<label for='sidaUsoAntiRetroviral'> Uso de anti-retroviral? </label>
 				<select name='sidaUsoAntiRetroviral' id='sidaUsoAntiRetroviral' class='selectOne required'>
-					<option value=''> </option>
-					<option value='ignorado'> Ignorado  </option>
-					<option value='sim'> Sim  </option>
-					<option value='nao'> N&atilde;o  </option>
+					<option value=''         > </option>
+					<option value='sim'      > Sim  </option>
+					<option value='nao'      > Não  </option>
+					<option value='ignorado' > Ignorado </option>
 				</select>
 			</div>
 			<div id='divDataInicioUsoRetroviral' class='secondary'>
@@ -213,10 +216,10 @@
 					<option value='ignorado'  > Ignorado  </option>
 					<option value='negativo'  > Negativo  </option>
 					<option value='positivo'  > Positivo  </option>
-					<option value='positivo_1'>   +1 	</option>
-					<option value='positivo_2'>   +2 	</option>
-					<option value='positivo_3'>   +3 	</option>
-					<option value='positivo_4'>   +4 	</option>
+					<option value='positivo_1'>   +1 </option>
+					<option value='positivo_2'>   +2 </option>
+					<option value='positivo_3'>   +3 </option>
+					<option value='positivo_4'>   +4 </option>
 				</select>
 			</div>
 			<div id='divResponsavelPelaColetaUmMesAposTriagem' name='divResponsavelPelaColetaUmMesAposTriagem' class='primary'>
@@ -294,20 +297,21 @@
 			<div id='divTestesMoleculares' class='primary required'>
 				<label for='testesMoleculares'>Testes Moleculares:</label>
 				<select name='testesMoleculares' id='testesMoleculares' class='selectOne required'>
-					<option value=''             >  </option>
-					<option value='sim'          > Sim  </option>
-					<option value='nao'          > Não  </option>
+					<option value=''         >  </option>
+					<option value='sim'      > Sim  </option>
+					<option value='nao'      > Não  </option>
+					<option value='ignorado' > Ignorado </option>
 				</select>
 			</div>
 			<div id='divPCRMetodo' class='secondary'>
 				<label for='pcrMetodo'>Método:</label>
 				<select name='pcrMetodo' id='pcrMetodo' class='selectOne'>
-					<option value=''          >  </option>
-					<option value='COBASTaqmanMtbTest'     > COBAS Taqman Mtb Test </option>
-					<option value='gen_probe' > Gen Probe   </option>
-					<option value='MtBQPCRAlert' > MtBQ - PCR Alert   </option>
-					<option value='detectTb'  > Detect TB   </option>
-					<option value='outro' > Outro   </option>
+					<option value=''                   >  </option>
+					<option value='COBASTaqmanMtbTest' > COBAS Taqman Mtb Test </option>
+					<option value='gen_probe'          > Gen Probe   </option>
+					<option value='MtBQPCRAlert'       > MtBQ - PCR Alert   </option>
+					<option value='detectTb'           > Detect TB   </option>
+					<option value='outro'              > Outro   </option>
 				</select>
 			</div>
 			<div id='divOutroMetodoPCR' class='secondary'>
@@ -341,18 +345,18 @@
 			<div id='divTesteSensibilidade' class='primary required'>
 				<label for='testeSensibilidade'>Teste de Sensibilidade:</label>
 				<select name='testeSensibilidade' id='testeSensibilidade' class='selectOne required'>
-					<option value=''             	> </option>
-					<option value='realizado'       > Realizado  	</option>
+					<option value=''                > </option>
+					<option value='realizado'       > Realizado  </option>
 					<option value='naoRealizado'    > Não Relizado  </option>
-					<option value='contaminado'     > Contaminado  	</option>
-					<option value='ignorado'        > Ignorado  	</option>
+					<option value='contaminado'     > Contaminado </option>
+					<option value='ignorado'        > Ignorado </option>
 				</select>
 			</div>
 			<table class='datatable cepaTBResistente'>
 			<thead>
 				<tr>
 					<th > Nome do Laboratório </th>
-					<th colspan='2'> CEPA		 </th>
+					<th colspan='2'> CEPA </th>
 					<th colspan='2'> Teste       </th>
 					<th colspan='2' id='th_sensibilidade_tbresistente'>
 						Sensibilidade
@@ -368,9 +372,10 @@
 			<div id='divGenXpert' name='divGenXpert' class='primary'>
 				<label for='genXpert' class='required'>GenXpert realizado? </label>
 				<select id='genXpert' name='genXpert' class='selectOne required'>
-					<option value=''		> </option>
-					<option value='sim'>Sim</option>
-					<option value='nao'>Nao</option>
+					<option value=''         > </option>
+					<option value='sim'      > Sim </option>
+					<option value='nao'      > Nao </option>
+					<option value='ignorado' > Ignorado </option>
 				</select>
 			</div>
 			<div id='divDataColetaGenXpert' class='secondary'>
@@ -388,7 +393,7 @@
 			<div id='divResultadoGenXpert' name='divResultadoGenXpert' class='secondary'>
 				<label for='resultadoGenXpert'> Resultado: </label>
 				<select id='resultadoGenXpert' name='resultadoGenXpert'>
-					<option value=''></option>
+					<option value=''        > </option>
 					<option value='positivo'> Positivo </option>
 					<option value='negativo'> Negativo </option>
 				</select>
@@ -396,22 +401,23 @@
 			<div id='divGenXpertPositivo' name='divGenXpertPositivo' class='secondary'>
 				<label for='genXpertPositivo'></label>
 				<select id='genXpertPositivo' name='genXpertPositivo'>
-					<option value=''				> </option>
-					<option value='rifSensivel'		>Rif Sensível</option>
-					<option value='rifResistente'	>Rif Resistente</option>
+					<option value=''              > </option>
+					<option value='rifSensivel'   > Rif Sensível </option>
+					<option value='rifResistente' > Rif Resistente </option>
 				</select>
 			</div>
 			<div id='divDataResultadoGenXpert' class='secondary'>
-				<label for='dataResultadoGenXpert'>Data do Resultado:</label>
+				<label for='dataResultadoGenXpert'> Data do Resultado: </label>
 				<input id='dataResultadoGenXpert' class='data' type="text" />
 			</div>
 			</br></br></br>
 			<div id='divFitaHain' class='primary'>
 				<label for='fitaHain' class='required'> FitaHain realizado? </label>
 				<select id='fitaHain' name='fitaHain' class='selectOne required'>
-					<option value=''		> </option>
-					<option value='sim'		> Sim		</option>
-					<option value='nao'		> Não		</option>
+					<option value=''         > </option>
+					<option value='sim'      > Sim </option>
+					<option value='nao'      > Não </option>
+					<option value='ignorado' > Ignorado </option>
 				</select>
 			</div>
 			<div id='divDataColetaFitaHain' class='secondary'>
@@ -485,25 +491,25 @@
 			<div id='divResultadoFitaHain' class='secondary'>
 				<label for='resultadoFitaHain'> Resultado: </label>
 				<select id='resultadoFitaHain' name='resultadoFitaHain'>
-					<option value=''				> </option>
-					<option value='detectado'		> Detectado </option>
-					<option value='naoDetectado'	> Não detectado </option>
+					<option value=''             > </option>
+					<option value='detectado'    > Detectado </option>
+					<option value='naoDetectado' > Não detectado </option>
 				</select>
 			</div>
 			<div id='divIsoniazida' class='secondary'>
 				<label for='isoniazida'> Isoniazida </label>
-				<select id='isoniaziada' name='isoniazida'>
-					<option value=''			> </option>
-					<option value='sensivel'	> Sensível </option>
-					<option value='resistente>'	> Resistente </option>
+				<select id='isoniaziada' name='isoniaziada'>
+					<option value=''            > </option>
+					<option value='sensivel'    > Sensível </option>
+					<option value='resistente>' > Resistente </option>
 				</select>
 			</div>
 			<div id='divRifampicina' class='secondary'>
 				<label for='rifampicina'> Rifampicina </label>
 				<select id='rifampicina' name='rifampicina'>
-					<option value=''			> </option>
-					<option value='sensivel'	> Sensível </option>
-					<option value='resistente'	> Resistente </option>
+					<option value=''           > </option>
+					<option value='sensivel'   > Sensível </option>
+					<option value='resistente' > Resistente </option>
 				</select>
 			</div>
 			<div id='divDataResultadoFitaHain' class='secondary'>

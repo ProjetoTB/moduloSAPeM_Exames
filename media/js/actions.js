@@ -241,7 +241,6 @@ $(document).ready(function(){
 			for (var j=1;j< cepaRow.length;j++)
 			{
 				$('#addline_button').click();
-				$('table').find('#origem_cepa_' + j);
 				$('#baciloscopia_metodo_' + j).removeAttr('disabled');
 				$('#baciloscopia_coleta_responsavel_' + j).removeAttr('disabled');
 				$('#baciloscopia_data_' + j).removeAttr('disabled');
@@ -517,7 +516,7 @@ $(document).ready(function(){
 		dep[0] = '#divNSoro';
 		// Se sim, disponibilizar colunas listadas a cima
 		if($(this).val()=='sim')
-			$().showFields(dep);
+			$().showNotRequiredFields(dep);
 		// Se nao, ocultar colunas listadas a cima
 		if($(this).val()=='nao' || $(this).val() == 'ignorado')
 			$().hideFields(dep);
@@ -528,7 +527,7 @@ $(document).ready(function(){
 		dep[0] = '#divNSangue';
 		// Se sim, disponibilizar colunas listadas a cima
 		if($(this).val()=='sim')
-			$().showFields(dep);
+			$().showNotRequiredFields(dep);
 		// Se nao, ocultar colunas listadas a cima
 		if($(this).val()=='nao' || $(this).val() == 'ignorado')
 			$().hideFields(dep);
@@ -541,7 +540,7 @@ $(document).ready(function(){
 		dep[1] = '#divIGRAResultado'
 		// Se sim, disponibilizar colunas listadas a cima
 		if($(this).val()=='sim')
-			$().showFields(dep);
+			$().showNotRequiredFields(dep);
 		// Se nao, ocultar colunas listadas a cima
 		else
 			$().hideFields(dep);
@@ -560,7 +559,7 @@ $(document).ready(function(){
 
 		// Se sim, disponibilizar colunas listadas a cima
 		if($(this).val()=='sim'){
-			$().showFields(dep);
+			$().showNotRequiredFields(dep);
 			$().showNotRequiredFields(notReq);
 		}
 		// Se nao, ocultar colunas listadas a cima
@@ -579,7 +578,7 @@ $(document).ready(function(){
 		notReq[0] = '#divDataLeitura';
 		// Se sim, disponibilizar colunas listadas a cima
 		if($(this).val()=='sim'){
-			$().showFields(dep);
+			$().showNotRequiredFields(dep);
 			$().showNotRequiredFields(notReq);
 		}
 		// Se nao, ocultar colunas listadas a cima
@@ -600,7 +599,7 @@ $(document).ready(function(){
 		notReq[2] = '#divDataResultadoPCR';
 		// Se sim, disponibilizar colunas listadas a cima
 		if($(this).val()=='sim'){
-			$().showFields(dep);
+			$().showNotRequiredFields(dep);
 			$().showNotRequiredFields(notReq);
 		}
 		// Se nao, ocultar colunas listadas a cima
@@ -660,7 +659,7 @@ $(document).ready(function(){
 		dep[0] = '#divOutroMetodoPCR';
 		// Se sim, disponibilizar colunas listadas a cima
 		if($(this).val()=='outro')
-			$().showFields(dep);
+			$().showNotRequiredFields(dep);
 		// Se nao, ocultar colunas listadas a cima
 		else 
 			$().hideFields(dep);
@@ -672,7 +671,7 @@ $(document).ready(function(){
 		dep[0] = '#divTbResistenteMetodo';
 		// Se sim, disponibilizar colunas listadas a cima
 		if($(this).val()=='sim')
-			$().showFields(dep);
+			$().showNotRequiredFields(dep);
 		// Se nao, ocultar colunas listadas a cima
 		else 
 			$().hideFields(dep);
@@ -693,7 +692,7 @@ $(document).ready(function(){
 		ped[3] = '#divSidaContagemCD460dias';
 		// Se sim, disponibilizar colunas listadas a cima
 		if($(this).val()=='sim'){
-			$().showFields(dep);
+			$().showNotRequiredFields(dep);
 			$().showNotRequiredFields(depNotReq);
 		}
 		// Se nao, ocultar colunas listadas a cima
@@ -712,7 +711,7 @@ $(document).ready(function(){
 		dep[3] = '#divResultadoGenXpert';
 		dep[4] = '#divDataResultadoGenXpert';
 		if($(this).val()=='sim')
-			$().showFields(dep);
+			$().showNotRequiredFields(dep);
 		// Se nao, ocultar colunas listadas a cima
 		else 
 			$().hideFields(dep);
@@ -722,7 +721,7 @@ $(document).ready(function(){
 		var dep = new Array();
 		dep[0] = '#divGenXpertPositivo';
 		if ($(this).val() == 'positivo')
-			$().showFields(dep);
+			$().showNotRequiredFields(dep);
 		else
 			$().hideFields(dep);
 	});
@@ -736,7 +735,7 @@ $(document).ready(function(){
 		dep[4] = '#divResultadoFitaHain';
 		dep[5] = '#divDataResultadoFitaHain';
 		if($(this).val()=='sim')
-			$().showFields(dep);
+			$().showNotRequiredFields(dep);
 		// Se nao, ocultar colunas listadas a cima
 		else 
 			$().hideFields(dep);
@@ -747,7 +746,7 @@ $(document).ready(function(){
 		dep[0] = '#divIsoniazida';
 		dep[1] = '#divRifampicina';
 		if ($(this).val() == 'detectado')
-			$().showFields(dep);
+			$().showNotRequiredFields(dep);
 		else
 			$().hideFields(dep);
 	});
@@ -757,7 +756,7 @@ $(document).ready(function(){
 		dep[0] = '#divDataInicioUsoRetroviral';
 		// Se sim, disponibilizar colunas listadas a cima
 		if($(this).val()=='sim')
-			$().showFields(dep);
+			$().showNotRequiredFields(dep);
 		else
 			$().hideFields(dep);
 	});
@@ -771,7 +770,7 @@ $(document).ready(function(){
 		ped[0] = '#divDataInicioUsoRetroviral';
 		// Se sim, disponibilizar colunas listadas a cima
 		if($(this).val()=='positivo')
-			$().showFields(dep);
+			$().showNotRequiredFields(dep);
 		// Se nao, ocultar colunas listadas a cima
 		else {
 			$().hideFields(dep);
