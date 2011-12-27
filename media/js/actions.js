@@ -797,6 +797,25 @@ $(document).ready(function(){
 		}
 	});
 
+	$('#baarDoisMesesAposTriagemRealizado').change(function(){
+		var required = new Array();
+		required[0] = '#divResultadoBaarDoisMesesAposTriagem';
+
+		var notRequired = new Array();
+		notRequired[0] = '#divDataResultadoBaarDoisMesesAposTriagem';
+		notRequired[1] = '#divResponsavelPelaColetaDoisMesesAposTriagem';
+		notRequired[2] = '#divResponsavelPeloExameDoisMesesAposTriagem';
+
+		if ($(this).val() == 'sim'){
+			$().showFields(required);
+			$().showNotRequiredFields(notRequired);
+		}
+		else{
+			$().hideFields(required);
+			$().hideFields(notRequired);
+		}
+	});
+
 	$('div.secondary').css('display', 'none');
 
 	//Toggle Options
