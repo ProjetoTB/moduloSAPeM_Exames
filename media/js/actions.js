@@ -713,13 +713,19 @@ $(document).ready(function(){
 		dep[0] = '#divDataColetaGenXpert';
 		dep[1] = '#divDataRecebimentoGenXpert';
 		dep[2] = '#divDataRecebimentoGenXpertMedico';
-		dep[3] = '#divResultadoGenXpert';
-		dep[4] = '#divDataResultadoGenXpert';
-		if($(this).val()=='sim')
+		dep[3] = '#divDataResultadoGenXpert';
+
+		var req = new Array();
+		req[0] = '#divResultadoGenXpert';
+
+		if($(this).val()=='sim'){
 			$().showNotRequiredFields(dep);
-		// Se nao, ocultar colunas listadas a cima
-		else 
+			$().showFields(req);
+		}
+		else{
 			$().hideFields(dep);
+			$().hideFields(req);
+		}
 	});
 
 	$('#resultadoGenXpert').change(function(){
@@ -737,13 +743,17 @@ $(document).ready(function(){
 		dep[1] = '#divDataRecebimentoFitaHain';
 		dep[2] = '#divDataRecebimentoMedico';
 		dep[3] = '#divOpcoes';
-		dep[4] = '#divResultadoFitaHain';
-		dep[5] = '#divDataResultadoFitaHain';
-		if($(this).val()=='sim')
+		dep[4] = '#divDataResultadoFitaHain';
+
+		var req = new Array();
+		req[0] = '#divResultadoFitaHain';
+		if($(this).val()=='sim'){
 			$().showNotRequiredFields(dep);
-		// Se nao, ocultar colunas listadas a cima
-		else 
+			$().showFields(req);
+		}else{
 			$().hideFields(dep);
+			$().hideFields(req);
+		}
 	});
 
 	$('#resultadoFitaHain').change(function(){
