@@ -71,7 +71,7 @@ function CEPARow(numCepa){
 				.attr('name', 'origem_cepa_' + numCepa)
 				.attr(  'id', 'origem_cepa_' + numCepa)
 				.addClass('origem_cepa')
-				.append($('<option value=\'\'> </option>'))
+				.append($('<option></option>'))
 			)
 			.attr('rowspan', '6')
 		)

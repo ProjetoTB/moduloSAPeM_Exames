@@ -8,7 +8,7 @@ function CEPACulturaRow(numCepa){
 				.attr('name', 'origem_cultura_' + numCepa)
 				.attr(  'id', 'origem_cultura_' + numCepa)
 				.addClass('origem_cultura')
-				.append($('<option value=\'\'>  </option>'))
+				.append($('<option></option>'))
 			)
 			.attr('rowspan', '5')
 		)

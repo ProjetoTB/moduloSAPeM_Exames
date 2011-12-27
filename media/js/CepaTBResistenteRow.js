@@ -16,7 +16,7 @@ function CEPATBResistenteRow(numCepa){
 				.attr(  'id', 'origem_tbresistente_' + numCepa)
 				.css('width','350px')
 				.addClass('origem_tbresistente')
-				.append($('<option value=\'\'> </option>'))
+				.append($('<option></option>'))
 			)
 			.attr('rowspan', '4')
 		)

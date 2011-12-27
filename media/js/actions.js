@@ -37,6 +37,7 @@ function loadUnidadesSaude(selectObj, num){
 		url: urlbase + 'unidadesSaude/json/',
 		dataType : 'json',
 		cache: false,
+		cache: false,
 		success : function(data){
 			$.each(data, function(key, value){
 				us = value.fields.nome;
@@ -45,7 +46,6 @@ function loadUnidadesSaude(selectObj, num){
 				us += " \(" + value.fields.UF + "\)";
 				$(selectObj + num)
 					.append($('<option>'+us+'</option>')
-					.attr('value', us)
 				);
 			});
 		}
@@ -74,7 +74,6 @@ var resistent = new Array();
 
 //Document is ready, let's play
 $(document).ready(function(){
-
 /*---------------------------Auxiliar function-------------------------------*/
 	$.fn.compareDate = function(argumento){
 		//Essa funcao eh utilizada para comprar a ordem
@@ -256,11 +255,13 @@ $(document).ready(function(){
 				$('#aspecto_escarro_' + j).removeAttr('disabled');
 				$('#baciloscopia_data_recebimento_medico_' + j).removeAttr('disabled');
 
-				loadUnidadesSaude('#origem_cepa_', j);
-
-				$('table').find('#origem_cepa_' + j);
-				$('table').find('#origem_cepa_' + j).val(cepaRow[j]);
-				$('table').find('#origem_cepa_' + j).change();
+				$('#origem_cepa_' + j)
+					.find('option')
+					.remove()
+					.end()
+					.append('<option>'+ cepaRow[j] +'</option>')
+					.attr('selected', true)
+				;
 			}
 			//CepaCulturaRow
 			while(xml.getElementsByTagName('origem_cultura_' + indexCepaCulturaRow.toString())[0] != undefined && xml.getElementsByTagName('origem_cultura_' + indexCepaCulturaRow.toString())[0].childNodes[0] != undefined)
@@ -272,8 +273,6 @@ $(document).ready(function(){
 			for (var j=1;j< cepaCulturaRow.length;j++)
 			{
 				$('#addlineCultura_button').click();
-				$('table').find('#origem_cultura_' + j);
-				$('#origem_cultura_' + j).val(cepaCulturaRow[j]);
 				$('#numero_cepa_cultura_' + j).removeAttr('disabled');
 				$('#cultura_coleta_responsavel_' + j).removeAttr('disabled');
 				$('#data_cultura_cepa_' + j).removeAttr('disabled');
@@ -287,11 +286,14 @@ $(document).ready(function(){
 				$('#identificacao_cultura_cepa_' + j).removeAttr('disabled');
 				$('#data_recebimento_medico_' + j).removeAttr('disabled');
 
-				loadUnidadesSaude('#origem_cultura_', j);
+				$('#origem_cultura_' + j)
+					.find('option')
+					.remove()
+					.end()
+					.append('<option>'+ cepaCulturaRow[j] +'</option>')
+					.attr('selected', true)
+				;
 
-				$('table').find('#origem_cultura_' + j);
-				$('table').find('#origem_cultura_' + j).val(cepaCulturaRow[j]);
-				$('table').find('#origem_cultura_' + j).change();
 			}
 			//TBResistente
 			while(xml.getElementsByTagName('origem_tbresistente_' + indexTbResistente.toString())[0] != undefined && xml.getElementsByTagName('origem_tbresistente_' + indexTbResistente.toString())[0].childNodes[0] != undefined)
@@ -321,11 +323,14 @@ $(document).ready(function(){
 					$(this).removeAttr('disabled');
 				});
 
-				loadUnidadesSaude('#origem_tbresistente_', j);
+				$('#origem_tbresistente_' + j)
+					.find('option')
+					.remove()
+					.end()
+					.append('<option>'+ cepaCulturaRow[j] +'</option>')
+					.attr('selected', true)
+				;
 
-				$('table').find('#origem_tbresistente_' + j);
-				$('table').find('#origem_tbresistente_' + j).val(tbResistente[j]);
-				$('table').find('#origem_tbresistente_' + j).change();
 			}
 			if (xml.getElementsByTagName('error')[0] == undefined){
 				if (urlString.search("edit") != -1){
