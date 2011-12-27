@@ -205,13 +205,22 @@
 		</fieldset>
 		<fieldset>
 		<legend>Resultado do BAAR um mês/dois meses após a Triagem</legend>
-			<div id='divDataResultadoBaarUmMesAposTriagem' name='divDataResultadoBaarUmMesAposTriagem' class='primary'>
+			<div id='divBaarUmMesAposTriagemRealizado' name='divBaarUmMesAposTriagemRealizado' class='primary required'>
+				<label for='divBaarUmMesAposTriagemRealizado'> Realizou o exame? </label>
+				<select name='baarUmMesAposTriagemRealizado' id='baarUmMesAposTriagemRealizado' class='selectOne required'>
+					<option value=''         > </option>
+					<option value='sim'      > Sim </option>
+					<option value='nao'      > Não </option>
+					<option value='ignorado' > Ignorado </option>
+				</select>
+			</div>
+			<div id='divDataResultadoBaarUmMesAposTriagem' name='divDataResultadoBaarUmMesAposTriagem' class='secondary'>
 				<label for='divDataResultadoBaarUmMesAposTriagem'>Data do Resultado do BAAR:</label>
 				<input  name="dataResultadoBaarUmMesAposTriagem" id="dataResultadoBaarUmMesAposTriagem" class='data' type="text" />
 			</div>
-			<div id='divResultadoBaarUmMesAposTriagem' name='divDataResultadoBaarUmMesAposTriagem' class='primary required'>
+			<div id='divResultadoBaarUmMesAposTriagem' name='divDataResultadoBaarUmMesAposTriagem' class='secondary'>
 				<label for='divDataResultadoBaarUmMesAposTriagem'>Resultado do BAAR:</label>
-				<select name='resultadoBaarUmMesAposTriagem' id='resultadoBaarUmMesAposTriagem' class='selectOne required'>
+				<select name='resultadoBaarUmMesAposTriagem' id='resultadoBaarUmMesAposTriagem' class='selectOne'>
 					<option value=''          > </option>
 					<option value='ignorado'  > Ignorado  </option>
 					<option value='negativo'  > Negativo  </option>
@@ -222,11 +231,11 @@
 					<option value='positivo_4'>   +4 </option>
 				</select>
 			</div>
-			<div id='divResponsavelPelaColetaUmMesAposTriagem' name='divResponsavelPelaColetaUmMesAposTriagem' class='primary'>
+			<div id='divResponsavelPelaColetaUmMesAposTriagem' name='divResponsavelPelaColetaUmMesAposTriagem' class='secondary'>
 				<label for='responsavelPelaColetaUmMesAposTriagem'>Responsável pela coleta:</label>
 				<input type='text' class='text' id='responsavelPelaColetaUmMesAposTriagem' name='responsavelPelaColetaUmMesAposTriagem' />
 			</div>
-			<div id='divResponsavelPeloExameUmMesAposTriagem' name='divResponsavelPeloExameUmMesAposTriagem' class='primary'>
+			<div id='divResponsavelPeloExameUmMesAposTriagem' name='divResponsavelPeloExameUmMesAposTriagem' class='secondary'>
 				<label for='responsavelPeloExameUmMesAposTriagem'>Responsável pelo exame:</label>
 				<input type='text' class='text' id='responsavelPeloExameUmMesAposTriagem' name='responsavelPeloExameUmMesAposTriagem' />
 			</div>

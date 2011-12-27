@@ -778,6 +778,25 @@ $(document).ready(function(){
 		}
 	});
 
+	$('#baarUmMesAposTriagemRealizado').change(function(){
+		var required = new Array();
+		required[0] = '#divResultadoBaarUmMesAposTriagem';
+
+		var notRequired = new Array();
+		notRequired[0] = '#divDataResultadoBaarUmMesAposTriagem';
+		notRequired[1] = '#divResponsavelPelaColetaUmMesAposTriagem';
+		notRequired[2] = '#divResponsavelPeloExameUmMesAposTriagem';
+
+		if ($(this).val() == 'sim'){
+			$().showFields(required);
+			$().showNotRequiredFields(notRequired);
+		}
+		else{
+			$().hideFields(required);
+			$().hideFields(notRequired);
+		}
+	});
+
 	$('div.secondary').css('display', 'none');
 
 	//Toggle Options
