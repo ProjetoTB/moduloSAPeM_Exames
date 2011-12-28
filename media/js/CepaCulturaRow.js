@@ -340,6 +340,7 @@ $(document).ready(function(){
 			$('#resultado_cultura_cepa_' + num).removeAttr('disabled');
 			$('#identificacao_cultura_cepa_' + num).removeAttr('disabled');
 			$('#data_recebimento_medico_' + num).removeAttr('disabled');
+
 			$('#data_processamento_cultura_' + num).livequery('change', function(){
 				if ($($(this)).compareDate($('#data_resultado_cultura_' + num)) > 0){
 					alert("A 'Data do Processamento' deve ser anterior à 'Data do resultado'");
@@ -356,6 +357,7 @@ $(document).ready(function(){
 					$(this).val('');
 				}
 			});
+
 			$('#data_cultura_cepa_' + num).livequery('change', function(){
 				if ($($(this)).compareDate($('#data_resultado_cultura_' + num)) > 0){
 					alert("A 'Data do recebimento' deve ser anterior à 'Data do resultado'");
@@ -373,6 +375,7 @@ $(document).ready(function(){
 				}
 
 			});
+
 			$('#data_resultado_cultura_' + num).livequery('change', function(){
 				if ($($(this)).compareDate($('#data_processamento_cultura_' + num)) < 0){
 					alert("A 'Data do resultado' deve ser posterior à 'Data do Processamento'");

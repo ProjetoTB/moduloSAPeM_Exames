@@ -519,9 +519,6 @@ $(document).ready( function(){
 				}
 			});
 		} else {
-			//$('#hora_cepa_' + num).removeClass('required');
-			//$('#hora_recebimento_cepa_'+num).removeClass('required');
-			//$('#baciloscopia_hora_cepa_' + num).removeClass('required');
 			$('#aspecto_escarro_' + num).attr('disabled', true);
 			$('#aspecto_escarro_' + num).val('----');
 			$('#baciloscopia_metodo_' + num).attr('disabled', true);
