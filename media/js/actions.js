@@ -802,11 +802,19 @@ $(document).ready(function(){
 		notRequired[1] = '#divResponsavelPelaColetaUmMesAposTriagem';
 		notRequired[2] = '#divResponsavelPeloExameUmMesAposTriagem';
 
+		var motivo = new Array();
+		motivo[0] = '#divMotivoBaarUmMesAposTriagem';
+
 		if ($(this).val() == 'sim'){
 			$().showFields(required);
 			$().showNotRequiredFields(notRequired);
+			$().hideFields(motivo);
 		}
 		else{
+			if ($(this).val() == 'nao')
+				$().showNotRequiredFields(motivo);
+			else
+				$().hideFields(motivo);
 			$().hideFields(required);
 			$().hideFields(notRequired);
 		}
