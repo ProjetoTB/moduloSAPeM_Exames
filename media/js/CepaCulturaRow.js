@@ -145,7 +145,7 @@ function CEPACulturaRow(numCepa){
 				.append($('<option>  </option>')
 					.attr('value', '')
 				)
-				.append($('<option> Positivo </option>')
+				.append($('<option> Positivo com n° de cruzes IGN </option>')
 					.attr('value', 'positivo')
 				)
 				.append($('<option> + </option>')
