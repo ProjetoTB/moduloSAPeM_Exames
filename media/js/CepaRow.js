@@ -157,7 +157,7 @@ function CEPARow(numCepa){
 				.append($('<option> Ignorado </option>')
 					.attr('value', 'ignorado')
 				)
-				.append($('<option> Positivo </option>')
+				.append($('<option> Positivo com n° de cruzes IGN </option>')
 					.attr('value', 'positivo')
 				)
 				.append($('<option> Positivo Paucibacilar </option>')
