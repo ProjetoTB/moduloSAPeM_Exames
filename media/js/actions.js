@@ -46,6 +46,7 @@ function loadUnidadesSaude(selectObj, num){
 				us += " \(" + value.fields.UF + "\)";
 				$(selectObj + num)
 					.append($('<option>'+us+'</option>')
+						.attr('value', us)
 				);
 			});
 		}
@@ -327,7 +328,7 @@ $(document).ready(function(){
 					.find('option')
 					.remove()
 					.end()
-					.append('<option>'+ cepaCulturaRow[j] +'</option>')
+					.append('<option>'+ tbResistente[j] +'</option>')
 					.attr('selected', true)
 				;
 
@@ -365,7 +366,6 @@ $(document).ready(function(){
 									$('#sensibilidade_tbresistente_' + num + '_' + values[i]).removeAttr('disabled');
 									$('#resistente_tbresistente_' + num + '_' + values[i]).attr('checked',false);
 									$('#resistente_tbresistente_' + num + '_' + values[i]).attr('disabled',true);
-									$('#resultado_tbresistente_cepa_' + num).val('sensivel');
 								}
 							}
 							if (tagname.search('valores_tbresistente_resistencia') != -1)
@@ -378,11 +378,10 @@ $(document).ready(function(){
 									$('#resistente_tbresistente_' + num + '_' + values[i]).removeAttr('disabled');
 									$('#sensibilidade_tbresistente_' + num + '_' + values[i]).attr('checked',false);
 									$('#sensibilidade_tbresistente_' + num + '_' + values[i]).attr('disabled',true);
-									$('#resultado_tbresistente_cepa_' + num).val('resistente');
 								}
 							}
-							if (tagname.search('valores_tbresistente_nao_testado') != -1)
-								$('#nao_testado_tbresistente_' + tagname[tagname.length-1]).html($(el).text());
+							if (tagname == 'valores_tbresistente_nao_testado_' + tagname[tagname.length - 1])
+								$('#nao_testado_tbresistente_' + tagname[tagname.length - 1]).html($(el).text());
 							if ($(el).text())
 								$('#'+tagname).removeAttr('disabled');
 							$('#'+tagname).val($(el).text());
