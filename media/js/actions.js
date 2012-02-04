@@ -355,6 +355,8 @@ $(document).ready(function(){
 									if ($(el).text().search($(this).val()) != -1)
 										$(this).attr('checked',true);
 								});
+							if ($(el).text())
+								$('#'+tagname).removeAttr('disabled');
 							//Tables
 							if (tagname.search('valores_tbresistente_sensibilidade') != -1)
 							{
@@ -363,9 +365,7 @@ $(document).ready(function(){
 								var i;
 								for (i=0;i<values.length;i++){
 									$('#sensibilidade_tbresistente_' + num + '_' + values[i]).attr('checked',true);
-									$('#sensibilidade_tbresistente_' + num + '_' + values[i]).removeAttr('disabled');
-									$('#resistente_tbresistente_' + num + '_' + values[i]).attr('checked',false);
-									$('#resistente_tbresistente_' + num + '_' + values[i]).attr('disabled',true);
+									$('#sensibilidade_tbresistente_' + num + '_' + values[i]).change();
 								}
 							}
 							if (tagname.search('valores_tbresistente_resistencia') != -1)
@@ -375,15 +375,11 @@ $(document).ready(function(){
 								var i;
 								for (i=0;i<values.length;i++){
 									$('#resistente_tbresistente_' + num + '_' + values[i]).attr('checked',true);
-									$('#resistente_tbresistente_' + num + '_' + values[i]).removeAttr('disabled');
-									$('#sensibilidade_tbresistente_' + num + '_' + values[i]).attr('checked',false);
-									$('#sensibilidade_tbresistente_' + num + '_' + values[i]).attr('disabled',true);
+									$('#resistente_tbresistente_' + num + '_' + values[i]).change();
 								}
 							}
 							if (tagname == 'valores_tbresistente_nao_testado_' + tagname[tagname.length - 1])
 								$('#nao_testado_tbresistente_' + tagname[tagname.length - 1]).html($(el).text());
-							if ($(el).text())
-								$('#'+tagname).removeAttr('disabled');
 							$('#'+tagname).val($(el).text());
 							$('#'+tagname).change();
 						}

@@ -550,7 +550,7 @@ $(document).ready(function(){
 			});
 		}
 	});
-	$('input.input_resistente_tbresistente').livequery('click', function(){
+	$('input.input_resistente_tbresistente').livequery('change', function(){
 		params = $(this).attr('id').split('_');
 		id_sensivel = 'sensibilidade_tbresistente_' + params[2] + '_' + params[3];
 		id_resistente = 'resistente_tbresistente_'  + params[2] + '_' + params[3];
@@ -581,7 +581,7 @@ $(document).ready(function(){
 		}
 	});
 
-	$('input.input_sensibilidade_tbresistente').livequery('click', function(){
+	$('input.input_sensibilidade_tbresistente').livequery('change', function(){
 		params = $(this).attr('id').split('_');
 		id_sensivel = 'sensibilidade_tbresistente_' + params[2] + '_' + params[3];
 		id_resistente = 'resistente_tbresistente_'  + params[2] + '_' + params[3];
