@@ -3,12 +3,12 @@
 	<unidade> Unidade </unidade>
 	<numeroPaciente> Número do Paciente </numeroPaciente>
 	<multipleFields fieldset='Sangue'>
-		<sangueColetado> Sangue Coletado </sangueColetado_>
-		<numeroSangue> Número do Sangue </numeroSangue_>
+		<sangueColetado> Sangue Coletado </sangueColetado>
+		<numeroSangue> Número do Sangue </numeroSangue>
 	</multipleFields>
 	<multipleFields fieldset='Soro'>
-		<soroColetado> Soro Extraído </soroColetado_>
-		<numeroSoro> Número do Soro </numeroSoro_>
+		<soroColetado> Soro Extraído </soroColetado>
+		<numeroSoro> Número do Soro </numeroSoro>
 	</multipleFields>
 	<provaRealizada> Prova Tuberculínica Realizada? </provaRealizada>
 	<data_aplicacao> Data de aplicação do PT </data_aplicacao>
@@ -29,21 +29,21 @@
 	<dataInicioUsoRetroviral> Data de início </dataInicioUsoRetroviral>
 	<data_sida_uso_anti_retroviral> Ano do início da utilização </data_sida_uso_anti_retroviral>
 	<multipleFields fieldset='Baciloscopia'>
-		<origem_cepa> Nome do Laboratório </origem_cepa_>
-		<numero_cepa> Número </numero_cepa_>
-		<data_cepa> Data da coleta </data_cepa_>
-		<hora_cepa> hora </hora_cepa_>
-		<data_recebimento_cepa> Data do Recebimento no labo </data_recebimento_cepa_>
-		<hora_recebimento_cepa> hora </hora_recebimento_cepa_>
-		<aspecto_escarro> Aspecto do escarro </aspecto_escarro_>
-		<material_cepa> Tipo </material_cepa_>
-		<baciloscopia_metodo> Método </baciloscopia_metodo_>
-		<baciloscopia_resultado_cepa> Resultado do BAAR </baciloscopia_resultado_cepa_>
-		<baciloscopia_data> Data do Resultado BAAR </baciloscopia_data_>
-		<baciloscopia_hora> hora </baciloscopia_hora_>
-		<baciloscopia_coleta_responsavel> Responsável pela coleta </baciloscopia_coleta_responsavel_>
-		<analise_responsavel> Responsável pelo exame </analise_responsavel_>
-		<baciloscopia_data_recebimento_medico> Data do Receb médico/enferm </baciloscopia_data_recebimento_medico_>
+		<origem_cepa> Nome do Laboratório </origem_cepa>
+		<numero_cepa> Número </numero_cepa>
+		<data_cepa> Data da coleta </data_cepa>
+		<hora_cepa> hora </hora_cepa>
+		<data_recebimento_cepa> Data do Recebimento no labo </data_recebimento_cepa>
+		<hora_recebimento_cepa> hora </hora_recebimento_cepa>
+		<aspecto_escarro> Aspecto do escarro </aspecto_escarro>
+		<material_cepa> Tipo </material_cepa>
+		<baciloscopia_metodo> Método </baciloscopia_metodo>
+		<baciloscopia_resultado_cepa> Resultado do BAAR </baciloscopia_resultado_cepa>
+		<baciloscopia_data> Data do Resultado BAAR </baciloscopia_data>
+		<baciloscopia_hora> hora </baciloscopia_hora>
+		<baciloscopia_coleta_responsavel> Responsável pela coleta </baciloscopia_coleta_responsavel>
+		<analise_responsavel> Responsável pelo exame </analise_responsavel>
+		<baciloscopia_data_recebimento_medico> Data do Receb médico/enferm </baciloscopia_data_recebimento_medico>
 	</multipleFields>
 	<baarUmMesAposTriagemRealizado> Realizou o exame BAAR um mês/dois meses após Triagem? </baarUmMesAposTriagemRealizado>
 	<motivoBaarUmMesAposTriagem> Motivo </motivoBaarUmMesAposTriagem>
