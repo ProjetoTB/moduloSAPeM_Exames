@@ -3,36 +3,36 @@
 	<unidade> Unidade </unidade>
 	<numeroPaciente> Número do Paciente </numeroPaciente>
 	<multipleFields fieldset='Sangue'>
-		<sangueColetado> Sangue Coletado </sangueColetado>
-		<numeroSangue> Número do Sangue </numeroSangue>
+		<sangueColetado> Coletado </sangueColetado>
+		<numeroSangue> Número do </numeroSangue>
 	</multipleFields>
 	<multipleFields fieldset='Soro'>
-		<soroColetado> Soro Extraído </soroColetado>
-		<numeroSoro> Número do Soro </numeroSoro>
+		<soroColetado> Extraído </soroColetado>
+		<numeroSoro> Número do </numeroSoro>
 	</multipleFields>
-	<provaRealizada> Prova Tuberculínica Realizada? </provaRealizada>
+	<provaRealizada> Prova Tuberculínica Realizada </provaRealizada>
 	<data_aplicacao> Data de aplicação do PT </data_aplicacao>
-	<leituraRealizada> A Leitura foi Realizada? </leituraRealizada>
+	<leituraRealizada> A Leitura foi Realizada </leituraRealizada>
 	<resultadoLeitura> Resultado da leitura </resultadoLeitura>
 	<data_leitura> Data da Leitura </data_leitura>
 	<pt> Responsável pela leitura </pt>
 	<IGRA> IGRA </IGRA>
-	<IGRAMetodo> Método </IGRAMetodo>
+	<IGRAMetodo> Método utilizado </IGRAMetodo>
 	<IGRAResultado> Resultado </IGRAResultado>
-	<exameSida> Realizou o exame </exameSida>
+	<exameSida> Realizou o exame de HIV/SIDA (após a triagem) </exameSida>
 	<sida> Resultado </sida>
 	<data_sida> Data do Exame </data_sida>
 	<sidaContagemCD460dias> Valor do CD4 nos últimos 60 dias </sidaContagemCD460dias>
 	<sidaContagemLinfocitos60dias> Valor de linfócitos totais presente no hemograma nos últimos 60 dias </sidaContagemLinfocitos60dias>
 	<data_contagem_linfocitos> Data da realização do exame </data_contagem_linfocitos>
-	<sidaUsoAntiRetroviral> Uso de anti-retroviral? </sidaUsoAntiRetroviral>
+	<sidaUsoAntiRetroviral> Uso de anti-retroviral </sidaUsoAntiRetroviral>
 	<dataInicioUsoRetroviral> Data de início </dataInicioUsoRetroviral>
 	<data_sida_uso_anti_retroviral> Ano do início da utilização </data_sida_uso_anti_retroviral>
 	<multipleFields fieldset='Baciloscopia'>
 		<origem_cepa> Nome do Laboratório </origem_cepa>
 		<numero_cepa> Número </numero_cepa>
 		<data_cepa> Data da coleta </data_cepa>
-		<hora_cepa> hora </hora_cepa>
+		<hora_cepa> Hora </hora_cepa>
 		<data_recebimento_cepa> Data do Recebimento no labo </data_recebimento_cepa>
 		<hora_recebimento_cepa> hora </hora_recebimento_cepa>
 		<aspecto_escarro> Aspecto do escarro </aspecto_escarro>
@@ -40,18 +40,18 @@
 		<baciloscopia_metodo> Método </baciloscopia_metodo>
 		<baciloscopia_resultado_cepa> Resultado do BAAR </baciloscopia_resultado_cepa>
 		<baciloscopia_data> Data do Resultado BAAR </baciloscopia_data>
-		<baciloscopia_hora> hora </baciloscopia_hora>
+		<baciloscopia_hora> Hora </baciloscopia_hora>
 		<baciloscopia_coleta_responsavel> Responsável pela coleta </baciloscopia_coleta_responsavel>
 		<analise_responsavel> Responsável pelo exame </analise_responsavel>
 		<baciloscopia_data_recebimento_medico> Data do Receb médico/enferm </baciloscopia_data_recebimento_medico>
 	</multipleFields>
-	<baarUmMesAposTriagemRealizado> Realizou o exame BAAR um mês/dois meses após Triagem? </baarUmMesAposTriagemRealizado>
+	<baarUmMesAposTriagemRealizado> Realizou o exame BAAR um mês/dois meses após Triagem </baarUmMesAposTriagemRealizado>
 	<motivoBaarUmMesAposTriagem> Motivo </motivoBaarUmMesAposTriagem>
 	<dataResultadoBaarUmMesAposTriagem> Data do Resultado do BAAR </dataResultadoBaarUmMesAposTriagem>
 	<resultadoBaarUmMesAposTriagem> Resultado do BAAR </resultadoBaarUmMesAposTriagem>
 	<responsavelPelaColetaUmMesAposTriagem> Responsável pela coleta </responsavelPelaColetaUmMesAposTriagem>
 	<responsavelPeloExameUmMesAposTriagem> Responsável pelo exame </responsavelPeloExameUmMesAposTriagem>
-	<baarDoisMesesAposTriagemRealizado> Realizou exame BAAR no seguimento clínico (2meses/6 meses após a Triagem)? </baarDoisMesesAposTriagemRealizado>
+	<baarDoisMesesAposTriagemRealizado> Realizou exame BAAR no seguimento clínico (2meses/6 meses após a Triagem) </baarDoisMesesAposTriagemRealizado>
 	<motivoBaarDoisMesesAposTriagem> Motivo </motivoBaarDoisMesesAposTriagem>
 	<dataResultadoBaarDoisMesesAposTriagem> Data do Resultado do BAAR </dataResultadoBaarDoisMesesAposTriagem>
 	<resultadoBaarDoisMesesAposTriagem> Resultado do BAAR </resultadoBaarDoisMesesAposTriagem>
@@ -62,20 +62,20 @@
 		<origem_cultura> Nome do Laboratório </origem_cultura>
 		<numero_cepa_cultura> Número </numero_cepa_cultura>
 		<data_cultura_cepa> Data do recebimento </data_cultura_cepa>
-		<hora_cultura_cepa> hora do recebimento </hora_cultura_cepa>
+		<hora_cultura_cepa> Hora do recebimento </hora_cultura_cepa>
 		<cultura_coleta_responsavel> Responsável </cultura_coleta_responsavel>
 		<data_resultado_cultura> Data do resultado </data_resultado_cultura>
-		<hora_resultado_cultura> hora do resultado</hora_resultado_cultura>
+		<hora_resultado_cultura> Hora do resultado</hora_resultado_cultura>
 		<metodo_cultura_cepa> Método </metodo_cultura_cepa>
 		<outro_metodo_cultura> Outro método </outro_metodo_cultura>
 		<data_processamento_cultura> Data do processamento </data_processamento_cultura>
-		<hora_processamento_cultura> hora do processamento</hora_processamento_cultura>
+		<hora_processamento_cultura> Hora do processamento</hora_processamento_cultura>
 		<resultado_cultura_cepa> Resultado </resultado_cultura_cepa>
 		<colonia_contaminada> Colônia contaminada </colonia_contaminada>
 		<identificacao_cultura_cepa> Identificação </identificacao_cultura_cepa>
 		<data_recebimento_medico> Data do recebimento pelo médico </data_recebimento_medico>
 	</multipleFields>
-	<testesMoleculares> Testes Moleculares </testesMoleculares>
+	<testesMoleculares> Realizou Testes Moleculares </testesMoleculares>
 	<pcrMetodo> Método </pcrMetodo>
 	<outroMetodoPCR> Especificar </outroMetodoPCR>
 	<pcrResultado> Resultado </pcrResultado>

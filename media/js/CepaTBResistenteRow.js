@@ -328,45 +328,10 @@ $(document).ready(function(){
 		}
 
 	}
-	/*---------------------------------------------------------------------------*/
-	var cepaTBResistenteNum = 1;
-	var content = CEPATBResistenteRow(cepaTBResistenteNum);
-	$('table.cepaTBResistente').append(content);
-	loadUnidadesSaude('#origem_tbresistente_', cepaTBResistenteNum);
-	not_tested_tbresistente[cepaTBResistenteNum] = new Array();
-	not_tested_tbresistente[cepaTBResistenteNum] = medicines;
-	$('#nao_testado_tbresistente_'+cepaTBResistenteNum).html(not_tested_tbresistente[cepaTBResistenteNum].toString());
-	resistence_tbresistente[cepaTBResistenteNum] = new Array();
-	sensibility_tbresistente[cepaTBResistenteNum] = new Array();
-	// add row button
-	$('#testeSensibilidade').change(function(){
-		if ($(this).val() == 'naoRealizado')
-			$('select.origem_tbresistente').each(function(){
-				$(this).val('');
-				$(this).change();
-				$(this).attr('disabled',true);
-			});
-		else
-			$('select.origem_tbresistente').removeAttr('disabled');
-	});
-	$("#addlineTBResistente_button").click(function(){
-		var origemStr = $('#origem_tbresistente_'+ cepaTBResistenteNum).val();
-		if(origemStr.replace(/-/g,'')){
-			cepaTBResistenteNum++;
-			var content = CEPATBResistenteRow(cepaTBResistenteNum);
-			$('table.cepaTBResistente').append(content);
-			loadUnidadesSaude('#origem_tbresistente_', cepaTBResistenteNum);
-			not_tested_tbresistente[cepaTBResistenteNum] = new Array();
-			not_tested_tbresistente[cepaTBResistenteNum] = medicines;
-			$('#nao_testado_tbresistente_'+cepaTBResistenteNum).html(not_tested_tbresistente[cepaTBResistenteNum].toString());
-			resistence_tbresistente[cepaTBResistenteNum] = new Array();
-			sensibility_tbresistente[cepaTBResistenteNum] = new Array();
-		}
-	});
-	$('select.origem_tbresistente').livequery('change', function(){
-		var origemStr = $(this).val();
+
+	$.fn.selectTBresistente = function(num){
+		var origemStr = $('#origem_tbresistente_' + num).val();
 		l = medicines;
-		num = parseInt($(this).attr('id').split('_')[2]);
 		if(origemStr.replace(/-/g,'')){
 			$('#numero_cepa_tbresistente_cultura_' + num).removeAttr('disabled');
 			$('#cultura_coleta_tbresistente_responsavel_' + num).removeAttr('disabled');
@@ -549,6 +514,47 @@ $(document).ready(function(){
 					$('#resultado_tbresistente_cepa_' + num).val('');
 			});
 		}
+	}
+
+	/*---------------------------------------------------------------------------*/
+	var cepaTBResistenteNum = 1;
+	var content = CEPATBResistenteRow(cepaTBResistenteNum);
+	$('table.cepaTBResistente').append(content);
+	loadUnidadesSaude('#origem_tbresistente_', cepaTBResistenteNum);
+	not_tested_tbresistente[cepaTBResistenteNum] = new Array();
+	not_tested_tbresistente[cepaTBResistenteNum] = medicines;
+	$('#nao_testado_tbresistente_'+cepaTBResistenteNum).html(not_tested_tbresistente[cepaTBResistenteNum].toString());
+	resistence_tbresistente[cepaTBResistenteNum] = new Array();
+	sensibility_tbresistente[cepaTBResistenteNum] = new Array();
+	// add row button
+	$('#testeSensibilidade').change(function(){
+		if ($(this).val() == 'naoRealizado')
+			$('select.origem_tbresistente').each(function(){
+				$(this).val();
+				$(this).change();
+				$(this).attr('disabled',true);
+			});
+		else
+			$('select.origem_tbresistente').removeAttr('disabled');
+	});
+	$("#addlineTBResistente_button").click(function(){
+		var origemStr = $('#origem_tbresistente_'+ cepaTBResistenteNum).val();
+		if(origemStr.replace(/-/g,'')){
+			cepaTBResistenteNum++;
+			var content = CEPATBResistenteRow(cepaTBResistenteNum);
+			$('table.cepaTBResistente').append(content);
+			loadUnidadesSaude('#origem_tbresistente_', cepaTBResistenteNum);
+			not_tested_tbresistente[cepaTBResistenteNum] = new Array();
+			not_tested_tbresistente[cepaTBResistenteNum] = medicines;
+			$('#nao_testado_tbresistente_'+cepaTBResistenteNum).html(not_tested_tbresistente[cepaTBResistenteNum].toString());
+			resistence_tbresistente[cepaTBResistenteNum] = new Array();
+			sensibility_tbresistente[cepaTBResistenteNum] = new Array();
+		}
+	});
+	$('select.origem_tbresistente').livequery('change', function(){
+		num = parseInt($(this).attr('id').split('_')[2]);
+		$().selectTBresistente(num);
+		
 	});
 	$('input.input_resistente_tbresistente').livequery('change', function(){
 		params = $(this).attr('id').split('_');

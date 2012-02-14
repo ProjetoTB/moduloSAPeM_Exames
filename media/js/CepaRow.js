@@ -405,11 +405,10 @@ $(document).ready( function(){
 
 	}
 	/*---------------------------------------------------------------------------*/
-	
-	$('select.origem_cepa').livequery('change', function(){
-		var origemStr = $(this).val();
-		num = parseInt($(this).attr('id').split('_')[2]);
-		if(origemStr.replace(/-/g,'')){
+
+	$.fn.selectCepa = function(num){
+		var origemStr = $('#origem_cepa_' + num).val();
+		if (origemStr.replace(/-/g,'')){
 			$('#numero_cepa_' + num).removeAttr('disabled');
 			$('#data_cepa_' + num).removeAttr('disabled');
 			$('#hora_cepa_' + num).removeAttr('disabled');
@@ -591,7 +590,11 @@ $(document).ready( function(){
 					jaFoi = false;
 				}
 			});
-			}
+		}
+	}
+	
+	$('select.origem_cepa').livequery('change', function(){
+		index = parseInt($(this).attr('id').split('_')[2]);
+		$().selectCepa(index);
 	});
-
 });

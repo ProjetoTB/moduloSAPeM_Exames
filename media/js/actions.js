@@ -1,4 +1,5 @@
 /**
+ *
  * Actions.js
  *
  * Author: Fernando.Ferreira@icsystems.com.br
@@ -149,7 +150,7 @@ $(document).ready(function(){
 					});
 		}
 	}
-/*---------------------------------------------------------------------------*/
+/*-------------------------------------------------------------------------------*/
 /*------------------------------Edition and Relation-----------------------------*/
 	//Make the urlbase (necessary case SAPeM migrate to another server)
 	var urlString = $(location).attr('href');
@@ -168,27 +169,13 @@ $(document).ready(function(){
 	//Relation between forms
 	//Unidade - Exames e Triagem
 	if (urlString.search("edit") != -1){
-		var fichaId = urlArray[urlArray.length-2];
-		var url = urlbase + 'ficha/' + fichaId + '/';
+		var fichaId         = urlArray[urlArray.length-2];
+		var url             = urlbase + 'ficha/' + fichaId + '/';
+		var fields_xml_path = urlbase + 'form/fields/xml/5/'; // MELHORAR: retirar hard-coded do id do form Exames (5)
 	}else{
 		var fichaId = urlArray[urlArray.length-2];
 		var url = urlbase + 'patientLastRegisterByType/' + fichaId + '/Triagem/';
 	}
-	//Variables created for edition
-	var soroColetado = new Array();
-	var indexSoroColetado = 1;
-	var numeroSoro = new Array();
-	var indexNumeroSoro = 1;
-	var sangueColetado = new Array();
-	var indexSangueColetado = 1;
-	var numeroSangue = new Array();
-	var indexNumeroSangue = 1;
-	var cepaRow = new Array();
-	var indexCepaRow = 1;
-	var cepaCulturaRow = new Array();
-	var indexCepaCulturaRow = 1;
-	var tbResistente = new Array();
-	var indexTbResistente = 1;
 
 	$.ajax({
 		type: 'POST',
@@ -205,250 +192,119 @@ $(document).ready(function(){
 				xml.async="false";
 				xml.loadXML(text);
 			}
-			//Soro Table
-			while(xml.getElementsByTagName('soroColetado_'+indexSoroColetado.toString())[0] != undefined)
-			{
-				var value = xml.getElementsByTagName('soroColetado_' + indexSoroColetado.toString())[0].childNodes[0].nodeValue;
-				soroColetado[indexSoroColetado] = value;
-				indexSoroColetado++;
-			}
-			while(xml.getElementsByTagName('numeroSoro_'+indexNumeroSoro.toString())[0] != undefined)
-			{
-				var value = xml.getElementsByTagName('numeroSoro_' + indexNumeroSoro.toString())[0].childNodes[0].nodeValue;
-				numeroSoro[indexNumeroSoro] = value;
-				indexNumeroSoro++;
-			}
-			//Sangue Table
-			while(xml.getElementsByTagName('sangueColetado_'+indexSangueColetado.toString())[0] != undefined)
-			{
-				var value = xml.getElementsByTagName('sangueColetado_' + indexSangueColetado.toString())[0].childNodes[0].nodeValue;
-				sangueColetado[indexSangueColetado] = value;
-				indexSangueColetado++;
-			}
-			while(xml.getElementsByTagName('numeroSangue_'+indexNumeroSangue.toString())[0] != undefined)
-			{
-				var value = xml.getElementsByTagName('numeroSangue_' + indexNumeroSangue.toString())[0].childNodes[0].nodeValue;
-				numeroSangue[indexNumeroSangue] = value;
-				indexNumeroSangue++;
-			}
-			//CepaRow
-			while(xml.getElementsByTagName('origem_cepa_' + indexCepaRow.toString())[0] != undefined && xml.getElementsByTagName('origem_cepa_' + indexCepaRow.toString())[0].childNodes[0] != undefined)
-			{
-				var value = xml.getElementsByTagName('origem_cepa_' + indexCepaRow.toString())[0].childNodes[0].nodeValue;
-				cepaRow[indexCepaRow] = value;
-				indexCepaRow++;
-			}
+			// Parseando arquivo que determina a ordem dos campos...
+			$.ajax({
+				type: 'POST',
+				url: fields_xml_path,
+				dataType: 'html',
+				cache: false,
+				success: function(text){
+					parser = new DOMParser();
+					fields_xml = parser.parseFromString(text, 'text/xml');
+					field = fields_xml.getElementsByTagName('fields')[0].childNodes;
+					for (f=0; f < fields_xml.getElementsByTagName('fields')[0].childNodes.length; f ++){
+						if (field[f].tagName != undefined){
+							// Tratando primeiro os campos que não são mûltiplos...
+							if (field[f].tagName != 'multipleFields'){
+								if (xml.getElementsByTagName(field[f].tagName)[0] != undefined){
+									if (xml.getElementsByTagName(field[f].tagName)[0].childNodes.length != 0){
+										// Tratando os elementos Radios
+										$('input:radio').each(function(){
+											if (xml.getElementsByTagName($(this).attr('name'))[0].childNodes[0].nodeValue.search($(this).val()) != -1)
+												$(this).attr('checked', true);
+										});
 
-			for (var j=1;j< cepaRow.length;j++)
-			{
-				$('#addline_button').click();
-				$('#baciloscopia_metodo_' + j).removeAttr('disabled');
-				$('#baciloscopia_coleta_responsavel_' + j).removeAttr('disabled');
-				$('#baciloscopia_data_' + j).removeAttr('disabled');
-				$('#baciloscopia_hora_' + j).removeAttr('disabled');
-				$('#numero_cepa_' + j).removeAttr('disabled');
-				$('#data_cepa_' + j).removeAttr('disabled');
-				$('#hora_cepa_' + j).removeAttr('disabled');
-				$('#baciloscopia_resultado_cepa_' + j).removeAttr('disabled');
-				$('#data_recebimento_cepa_' + j).removeAttr('disabled');
-				$('#hora_recebimento_cepa_' + j).removeAttr('disabled');
-				$('#material_cepa_' + j).removeAttr('disabled');
-				$('#analise_responsavel_' + j).removeAttr('disabled');
-				$('#aspecto_escarro_' + j).removeAttr('disabled');
-				$('#baciloscopia_data_recebimento_medico_' + j).removeAttr('disabled');
-
-				$('#origem_cepa_' + j)
-					.find('option')
-					.remove()
-					.end()
-					.append('<option>'+ cepaRow[j] +'</option>')
-					.attr('selected', true)
-				;
-			}
-			//CepaCulturaRow
-			while(xml.getElementsByTagName('origem_cultura_' + indexCepaCulturaRow.toString())[0] != undefined && xml.getElementsByTagName('origem_cultura_' + indexCepaCulturaRow.toString())[0].childNodes[0] != undefined)
-			{
-				var value = xml.getElementsByTagName('origem_cultura_' + indexCepaCulturaRow.toString())[0].childNodes[0].nodeValue;
-				cepaCulturaRow[indexCepaCulturaRow] = value;
-				indexCepaCulturaRow++;
-			}
-			for (var j=1;j< cepaCulturaRow.length;j++)
-			{
-				$('#addlineCultura_button').click();
-				$('#numero_cepa_cultura_' + j).removeAttr('disabled');
-				$('#cultura_coleta_responsavel_' + j).removeAttr('disabled');
-				$('#data_cultura_cepa_' + j).removeAttr('disabled');
-				$('#hora_cultura_cepa_' + j).removeAttr('disabled');
-				$('#data_processamento_cultura_' + j).removeAttr('disabled');
-				$('#hora_processamento_cultura_' + j).removeAttr('disabled');
-				$('#data_resultado_cultura_' + j).removeAttr('disabled');
-				$('#hora_resultado_cultura_' + j).removeAttr('disabled');
-				$('#metodo_cultura_cepa_' + j).removeAttr('disabled');
-				$('#resultado_cultura_cepa_' + j).removeAttr('disabled');
-				$('#identificacao_cultura_cepa_' + j).removeAttr('disabled');
-				$('#data_recebimento_medico_' + j).removeAttr('disabled');
-
-				$('#origem_cultura_' + j)
-					.find('option')
-					.remove()
-					.end()
-					.append('<option>'+ cepaCulturaRow[j] +'</option>')
-					.attr('selected', true)
-				;
-
-			}
-			//TBResistente
-			while(xml.getElementsByTagName('origem_tbresistente_' + indexTbResistente.toString())[0] != undefined && xml.getElementsByTagName('origem_tbresistente_' + indexTbResistente.toString())[0].childNodes[0] != undefined)
-			{
-				var value = xml.getElementsByTagName('origem_tbresistente_' + indexTbResistente.toString())[0].childNodes[0].nodeValue;
-				tbResistente[indexTbResistente] = value;
-				indexTbResistente++;
-			}
-			for (var j=1;j< tbResistente.length;j++)
-			{
-				$('#addlineTBResistente_button').click();
-				$('table').find('#origem_tbresistente_' + j);
-				$('#origem_tbresistente_' + j).val(tbResistente[j]);
-				$('#numero_cepa_tbresistente_cultura_' + j).removeAttr('disabled');
-				$('#cultura_coleta_tbresistente_responsavel_' + j).removeAttr('disabled');
-				$('#hora_processamento_tbresistente_cultura_' + j).removeAttr('disabled');
-				$('#hora_resultado_tbresistente_cultura_' + j).removeAttr('disabled');
-				$('#data_processamento_tbresistente_cultura_' + j).removeAttr('disabled');
-				$('#data_resultado_tbresistente_cultura_' + j).removeAttr('disabled');
-				$('#metodo_tbresistente_cepa_' + j).removeAttr('disabled');
-				$('#resultado_tbresistente_cepa_' + j).removeAttr('disabled');
-				$('#data_recebimento_TSA_medico_' + j).removeAttr('disabled');
-				$('.input_sensibilidade_tbresistente').each(function(){
-					$(this).removeAttr('disabled');
-				});
-				$('.input_resistente_tbresistente').each(function(){
-					$(this).removeAttr('disabled');
-				});
-
-				$('#origem_tbresistente_' + j)
-					.find('option')
-					.remove()
-					.end()
-					.append('<option>'+ tbResistente[j] +'</option>')
-					.attr('selected', true)
-				;
-
-			}
-			if (xml.getElementsByTagName('error')[0] == undefined){
-				if (urlString.search("edit") != -1){
-					//Edit
-					$('#form_exams').append("<input type='hidden' name='edit' id='edit' value='" + fichaId  + "'/>");
-					var elements = xml.getElementsByTagName('documento')[0].childNodes;
-					$(elements).each(function(){
-						var el = $(this).get(0);
-						if($(el)[0].nodeType == xml.ELEMENT_NODE){
-							var tagname = $(el)[0].tagName;
-							var hlcolor = '#FFF8C6';
-							//Radio
-							if (tagname == 'amostra')
-								$('input[name=amostra]').each(function(){
-									if ($(el).text().search($(this).val()) != -1)
-										$(this).attr('checked',true);
-								});
-							//Checkbox
-							if (tagname == 'fitaHain')
-								$('input[name=fitaHain]').each(function(){
-									if ($(el).text().search($(this).val()) != -1)
-										$(this).attr('checked',true);
-								});
-							if ($(el).text())
-								$('#'+tagname).removeAttr('disabled');
-							//Tables
-							if (tagname.search('valores_tbresistente_sensibilidade') != -1)
-							{
-								var num = tagname[tagname.length - 1];
-								var values = $(el).text().split(',');
-								var i;
-								for (i=0;i<values.length;i++){
-									$('#sensibilidade_tbresistente_' + num + '_' + values[i]).attr('checked',true);
-									$('#sensibilidade_tbresistente_' + num + '_' + values[i]).change();
+										$('#' + field[f].tagName).val(xml.getElementsByTagName(field[f].tagName)[0].childNodes[0].nodeValue);
+									}
 								}
 							}
-							if (tagname.search('valores_tbresistente_resistencia') != -1)
-							{
-								var num = tagname[tagname.length - 1];
-								var values = $(el).text().split(',');
-								var i;
-								for (i=0;i<values.length;i++){
-									$('#resistente_tbresistente_' + num + '_' + values[i]).attr('checked',true);
-									$('#resistente_tbresistente_' + num + '_' + values[i]).change();
-								}
+							// Se estivermos tratando campos mûltiplos...
+							else{
+								for (child = 0; child < field[f].childNodes.length; child++)
+									if (field[f].childNodes[child].tagName != undefined){
+										index  = 1;
+										while (xml.getElementsByTagName(field[f].childNodes[child].tagName + "_" + index)[0] != undefined && xml.getElementsByTagName(field[f].childNodes[child].tagName + "_" + index)[0].childNodes[0] != undefined){
+											if (field[f].childNodes[child].tagName.search('origem_') != -1){
+												fieldset = field[f].childNodes[child].tagName.split('_')[1];
+												// Tratando casos de mais de uma linha em Baciloscopia, Cultura ou TB Resistente
+												if (index > 1){
+													switch(fieldset){
+														case 'cepa':
+															$('#addline_button').click();
+															break;
+														case 'cultura':
+															$('#addlineCultura_button').click();
+															break;
+														case 'tbresistente':
+															$('#addlineTBResistente_button').click();
+															break;
+													}
+												}
+												// Forçando adição da Unidade de Saûde nos campos Origem. Caso contrário, em alguns casos não funciona. Não foi possível identificar um padrão para os casos em que não funciona
+												$('#' + field[f].childNodes[child].tagName + "_" + index)
+													.find('option')
+													.end()
+													.append('<option>'+ xml.getElementsByTagName(field[f].childNodes[child].tagName + "_" + index)[0].childNodes[0].nodeValue +'</option>')
+													.val(xml.getElementsByTagName(field[f].childNodes[child].tagName + "_" + index)[0].childNodes[0].nodeValue)
+													.attr('selected', true)
+												;
+												// Tratando dos outros campos envolvidos com a adição de uma nova linha
+												switch(fieldset){
+													case 'cepa':
+														$().selectCepa(index);
+														break;
+													case 'cultura':
+														$().selectCultura(index);
+														break;
+													case 'tbresistente':
+														$().selectTBresistente(index);
+														break;
+												}
+											}
+											// Tratando campos de sangue ou soro coletados
+											if (field[f].childNodes[child].tagName.search('Coletado') != -1){
+												fieldset = field[f].childNodes[child].tagName.split('Coletado')[0];
+												if (index > 1){
+													switch(fieldset){
+														case 'sangue':
+															$('#addSangue_button').click();
+															break;
+														case 'soro':
+															$('#addSoro_button').click();
+															break;
+													}
+												}
+											}
+											index ++;
+										}
+										for (i=1; i <= (index + 1); i++){
+											if (xml.getElementsByTagName(field[f].childNodes[child].tagName + '_' + i)[0] != undefined && xml.getElementsByTagName(field[f].childNodes[child].tagName + '_' + i)[0].childNodes[0] != undefined){
+												$('#' + field[f].childNodes[child].tagName + '_' + i)
+													.removeAttr('disabled')
+													.val(xml.getElementsByTagName(field[f].childNodes[child].tagName + '_' + i)[0].childNodes[0].nodeValue)
+													.change()
+												;
+												if ($('#' + field[f].childNodes[child].tagName + '_' + i).attr('type') == 'checkbox'){
+													if (xml.getElementsByTagName(field[f].childNodes[child].tagName + '_' + i)[0].childNodes[0].nodeValue == 'on')
+														$('#' + field[f].childNodes[child].tagName + '_' + i).attr('checked', true);
+												}
+												if (field[f].childNodes[child].tagName.split('_')[0] == 'valores'){
+													values = xml.getElementsByTagName(field[f].childNodes[child].tagName + "_" + i)[0].childNodes[0].nodeValue.split(',');
+													for (v=0; v < values.length; v++){
+														$('#' + field[f].childNodes[child].tagName.split('_')[2] + '_tbresistente_' + i + '_' + values[v])
+															.attr('checked', true)
+															.change()
+														;
+													}
+												}
+											}
+										}
+									}
 							}
-							if (tagname == 'valores_tbresistente_nao_testado_' + tagname[tagname.length - 1])
-								$('#nao_testado_tbresistente_' + tagname[tagname.length - 1]).html($(el).text());
-							$('#'+tagname).val($(el).text());
-							$('#'+tagname).change();
 						}
-					});
-				}else{
-				//Relation
-					var elements = xml.getElementsByTagName('documento')[0].childNodes;
-					$(elements).each(function(){
-						var el = $(this).get(0);
-						if($(el)[0].nodeType == xml.ELEMENT_NODE){
-							var tagname = $(el)[0].tagName;
-							idDiv = $('#'+tagname).parent().attr('id');
-							var hlcolor = '#FFF8C6';
-							if (tagname == 'numeroPaciente')
-								$('#' + tagname).val($(el).text());
-							if (tagname == 'unidade')
-								$('#' + tagname).val($(el).text());
-						}
-					});
+					}
 				}
-			}
-		},
-		complete: function(){
-			//When edition is complete, complete the tables
-			//Complete soro table
-			var j;
-			for (j=1;j<soroColetado.length;j++)
-			{
-				$('table').find('#soroColetado_' + j);
-				$('table').find('#numeroSoro_' + j);
-				$('#addSoro_button').click();
-				if (soroColetado[j] == 'sim')
-					$('#numeroSoro_' + j).removeAttr('disabled');
-				$('table').find('#soroColetado_' + j ).val(soroColetado[j]);
-				$('table').find('#numeroSoro_' + j ).val(numeroSoro[j]);
-			}
-			//Complete sangue table
-			for (j=1;j<sangueColetado.length;j++)
-			{
-				$('table').find('#sangueColetado_' + j);
-				$('table').find('#numeroSangue_' + j);
-				$('#addSangue_button').click();
-				if (sangueColetado[j] == 'sim')
-					$('#numeroSangue_' + j).removeAttr('disabled');
-				$('table').find('#sangueColetado_' + j ).val(sangueColetado[j]);
-				$('table').find('#numeroSangue_' + j ).val(numeroSangue[j]);
-			}
-			// Complete Baciloscopia table
-			for (var j=1;j< cepaRow.length;j++){
-				//loadUnidadesSaude('#origem_cepa_', j);
-				$('table').find('#origem_cepa_' + j);
-				$('table').find('#origem_cepa_' + j).val(cepaRow[j]);
-				$('table').find('#origem_cepa_' + j).change();
-			}
-			// Complete Cultura table
-			for (var j=1; j< cepaCulturaRow.length; j++){
-				//loadUnidadesSaude('#origem_cultura_', j);
-				$('table').find('#origem_cultura_'+j);
-				$('table').find('#origem_cultura_'+j).val(cepaCulturaRow[j]);
-				$('table').find('#origem_cultura_'+j).change();
-			}
-			// Complete TB resistente table
-			for (var j=1; j< tbResistente.length; j++){
-				//loadUnidadesSaude('#origem_tbresistente_', j);
-				$('table').find('#origem_tbresistente_'+  j);
-				$('table').find('#origem_tbresistente_' + j).val(tbResistente[j]);
-				$('table').find('#origem_tbresistente_'+  j).change();
-			}
+			});
 		}
 	});
 /*-------------------------------------------------------------------------------*/
@@ -733,7 +589,7 @@ $(document).ready(function(){
 			$().hideFields(dep);
 	});
 
-	$('#fitaHain').change(function(){
+	$('#fitaHainRealizado').change(function(){
 		var dep = new Array();
 		dep[0] = '#divDataColetaFitaHain';
 		dep[1] = '#divDataRecebimentoFitaHain';
@@ -852,15 +708,13 @@ $(document).ready(function(){
 	$('table.soro').append(content);
 	// add row button
 	$("#addSoro_button").click(function(){
-		if($('#soroColetado_'+soroNum).val() == 'sim'){
-			if($('#numeroSoro_'+soroNum).valid()){
-				$('#numeroSoro_'+ soroNum).attr('readonly', 'true');
-				$('#soroColetado_'+ soroNum).attr('readonly', 'true');
-				soroNum++;
-				var content = soroRow(soroNum);
-				$('table.soro').append(content);
-			}
+		if($('#soroColetado_'+soroNum).val() == 'sim' && $('#numeroSoro_'+soroNum).valid()){
+			$('#numeroSoro_'+ soroNum).attr('readonly', 'true');
+			$('#soroColetado_'+ soroNum).attr('readonly', 'true');
 		}
+		soroNum++;
+		var content = soroRow(soroNum);
+		$('table.soro').append(content);
 	});
 	$('select.soro').live('change', function(){
 		params = $(this).attr('id').split('_');
@@ -881,15 +735,13 @@ $(document).ready(function(){
 	$('table.sangue').append(content);
 	// add row button
 	$("#addSangue_button").click(function(){
-		if($('#sangueColetado_'+sangueNum).val() == 'sim'){
-			if($('#numeroSangue_'+sangueNum).valid()){
-				$('#numeroSangue_'+ numSangue).attr('readonly', 'true');
-				$('#sangueColetado_'+ numSangue).attr('readonly', 'true');
-				sangueNum++;
-				var content = sangueRow(sangueNum);
-				$('table.sangue').append(content);
-			}
+		if($('#sangueColetado_'+sangueNum).val() == 'sim' && $('#numeroSangue_'+sangueNum).valid()){
+			$('#numeroSangue_'+ numSangue).attr('readonly', 'true');
+			$('#sangueColetado_'+ numSangue).attr('readonly', 'true');
 		}
+		sangueNum++;
+		var content = sangueRow(sangueNum);
+		$('table.sangue').append(content);
 	});
 	$('select.sangue').live('change', function(){
 		params = $(this).attr('id').split('_');

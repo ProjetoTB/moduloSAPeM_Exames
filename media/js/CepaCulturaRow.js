@@ -321,13 +321,13 @@ $(document).ready(function(){
 			$('#nao_testado_'+cepaCulturaNum).html(not_tested[cepaCulturaNum].toString());
 		}
 	});
-	$('select.origem_cultura').livequery('change', function(){
-		var origemStr = $(this).val();
+
+	$.fn.selectCultura = function(num){
+		var origemStr = $('#origem_cultura_' + num).val();
 		l = medicines;
-		num = parseInt($(this).attr('id').split('_')[2]);
 		if(origemStr.replace(/-/g,'')){
 			$('#numero_cepa_cultura_' + num).removeAttr('disabled');
-			$('#numero_colonias_' + num).removeAttr('disabled');
+			//$('#numero_colonias_' + num).removeAttr('disabled');
 			$('#colonia_contaminada_' + num).removeAttr('disabled');
 			$('#cultura_coleta_responsavel_' + num).removeAttr('disabled');
 			$('#data_cultura_cepa_' + num).removeAttr('disabled');
@@ -411,8 +411,6 @@ $(document).ready(function(){
 			$('#hora_processamento_cultura_' + num).removeClass('required');
 			$('#hora_resultado_cultura_' + num).removeClass('required');
 			$('#numero_cepa_cultura_' + num).attr('disabled', true);
-			$('#numero_colonias_' + num).attr('disabled',true);
-			$('#numero_colonias_' + num).val('');
 			$('#colonia_contaminada_' + num).attr('disabled',true);
 			$('#colonia_contaminada_' + num).attr('checked',false);
 			$('#numero_cepa_cultura_' + num).val('');
@@ -437,7 +435,13 @@ $(document).ready(function(){
 			$('#identificacao_cultura_cepa_' + num).attr('disabled', true);
 			$('#data_recebimento_medico_' + num).attr('disabled', true);
 		}
+	}
+
+	$('select.origem_cultura').livequery('change', function(){
+		index = parseInt($(this).attr('id').split('_')[2]);
+		$().selectCultura(index);
 	});
+
 	$('select.metodo_cultura_cepa').livequery('change', function(){
 		var origemStr = $('select.origem_cultura').val();
 		l = medicines;
