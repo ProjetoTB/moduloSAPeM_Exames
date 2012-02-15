@@ -264,6 +264,9 @@ function CEPATBResistenteRow(numCepa){
 				.append($('<option> Resistente </option>')
 					.attr('value', 'resistente')
 				)
+				.append($('<option> Contaminado </option>')
+					.attr('value', 'contaminado')
+				)
 			)
 		)
 		.append($('<td />')
@@ -344,6 +347,7 @@ $(document).ready(function(){
 			$('#metodo_tbresistente_cepa_' + num).removeAttr('disabled');
 			$('#dias_tbresistente_cepa_' + num).removeAttr('disabled');
 			$('#data_recebimento_TSA_medico_' + num).removeAttr('disabled');
+			$('#resultado_tbresistente_cepa_' + num).removeAttr('disabled');
 			$('#identificacao_tbresistente_cepa_' + num).removeAttr('disabled');
 			for(var i= 0; i<l.length; i++){
 				$('#sensibilidade_tbresistente_'+num+'_'+l[i]).removeAttr('disabled');
@@ -351,6 +355,7 @@ $(document).ready(function(){
 				$('#sensibilidade_tbresistente_'+num+'_'+l[i]).parent().removeClass('disabledField');
 				$('#resistente_tbresistente_'+num+'_'+l[i]).parent().removeClass('disabledField');
 			}
+			/*
 			$('.input_sensibilidade_tbresistente').livequery('change',function(){
 				var allChecked = true;
 				for(var i= 0; i<l.length; i++){
@@ -371,7 +376,7 @@ $(document).ready(function(){
 					$('#resultado_tbresistente_cepa_' + num).val('resistente');
 				else
 					$('#resultado_tbresistente_cepa_' + num).val('');
-			});
+			});*/
 			$('#data_processamento_tbresistente_cultura_' + num).livequery('change', function(){
 				if ($($(this)).compareDate($('#data_resultado_tbresistente_cultura_' + num)) > 0){
 					alert("A 'Data do Processamento' deve ser anterior à 'Data do Resultado'");
@@ -503,6 +508,7 @@ $(document).ready(function(){
 					$('#data_resultado_tbresistente_cultura_'+num).val('');
 				}
 			});
+			/*
 			$('.input_resistente_tbresistente').livequery('change',function(){
 				var oneChecked = false;
 				for(var i= 0; i<l.length; i++)
@@ -513,6 +519,7 @@ $(document).ready(function(){
 				else
 					$('#resultado_tbresistente_cepa_' + num).val('');
 			});
+			*/
 		}
 	}
 
