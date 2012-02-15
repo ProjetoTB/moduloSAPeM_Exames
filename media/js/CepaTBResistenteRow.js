@@ -530,8 +530,7 @@ $(document).ready(function(){
 	$('#testeSensibilidade').change(function(){
 		if ($(this).val() == 'naoRealizado')
 			$('select.origem_tbresistente').each(function(){
-				$(this).val();
-				$(this).change();
+				$(this).val('');
 				$(this).attr('disabled',true);
 			});
 		else

@@ -130,7 +130,7 @@ $(document).ready(function(){
 					});
 			if($(dep[div]).css('display') != 'none')
 				$(dep[div]).toggle();
-		}
+	}
 	}
 	$.fn.showNotRequiredFields = function(argumento){
 		var dep = argumento;
@@ -192,119 +192,152 @@ $(document).ready(function(){
 				xml.async="false";
 				xml.loadXML(text);
 			}
-			// Parseando arquivo que determina a ordem dos campos...
-			$.ajax({
-				type: 'POST',
-				url: fields_xml_path,
-				dataType: 'html',
-				cache: false,
-				success: function(text){
-					parser = new DOMParser();
-					fields_xml = parser.parseFromString(text, 'text/xml');
-					field = fields_xml.getElementsByTagName('fields')[0].childNodes;
-					for (f=0; f < fields_xml.getElementsByTagName('fields')[0].childNodes.length; f ++){
-						if (field[f].tagName != undefined){
-							// Tratando primeiro os campos que não são mûltiplos...
-							if (field[f].tagName != 'multipleFields'){
-								if (xml.getElementsByTagName(field[f].tagName)[0] != undefined){
-									if (xml.getElementsByTagName(field[f].tagName)[0].childNodes.length != 0){
-										// Tratando os elementos Radios
-										$('input:radio').each(function(){
-											if (xml.getElementsByTagName($(this).attr('name'))[0].childNodes[0].nodeValue.search($(this).val()) != -1)
-												$(this).attr('checked', true);
-										});
-
-										$('#' + field[f].tagName).val(xml.getElementsByTagName(field[f].tagName)[0].childNodes[0].nodeValue);
+			if (xml.getElementsByTagName('error')[0] == undefined){
+				if (urlString.search("edit") != -1){
+					//Edit
+					$('#form_exams')
+						.append($('<input type="hidden"/> ')
+							.attr( 'name', 'edit')
+							.attr(   'id', 'edit')
+							.attr('value', fichaId)
+						)
+					;
+					// Parseando arquivo que determina a ordem dos campos...
+					$.ajax({
+						type: 'POST',
+						url: fields_xml_path,
+						dataType: 'html',
+						cache: false,
+						success: function(text){
+							parser = new DOMParser();
+							fields_xml = parser.parseFromString(text, 'text/xml');
+							field = fields_xml.getElementsByTagName('fields')[0].childNodes;
+							for (f=0; f < fields_xml.getElementsByTagName('fields')[0].childNodes.length; f ++){
+								if (field[f].tagName != undefined){
+									// Tratando primeiro os campos que não são mûltiplos...
+									if (field[f].tagName != 'multipleFields'){
+										if (xml.getElementsByTagName(field[f].tagName)[0] != undefined){
+											if (xml.getElementsByTagName(field[f].tagName)[0].childNodes.length != 0){
+												// Tratando os elementos Radios
+												$('input:radio').each(function(){
+													if (xml.getElementsByTagName($(this).attr('name'))[0] != undefined)
+														if (xml.getElementsByTagName($(this).attr('name'))[0].childNodes[0].nodeValue.search($(this).val()) != -1)
+															$(this).attr('checked', true);
+												});
+												$('#' + field[f].tagName)
+													.val(xml.getElementsByTagName(field[f].tagName)[0].childNodes[0].nodeValue)
+													.trigger('change')
+												;
+											}
+										}
+									}
+									
+									// Se estivermos tratando campos mûltiplos...
+									else{
+										for (child = 0; child < field[f].childNodes.length; child++)
+											if (field[f].childNodes[child].tagName != undefined){
+												index  = 1;
+												while (xml.getElementsByTagName(field[f].childNodes[child].tagName + "_" + index)[0] != undefined && xml.getElementsByTagName(field[f].childNodes[child].tagName + "_" + index)[0].childNodes[0] != undefined){
+													if (field[f].childNodes[child].tagName.search('origem_') != -1){
+														fieldset = field[f].childNodes[child].tagName.split('_')[1];
+														// Tratando casos de mais de uma linha em Baciloscopia, Cultura ou TB Resistente
+														if (index > 1){
+															switch(fieldset){
+																case 'cepa':
+																	$('#addline_button').click();
+																	break;
+																case 'cultura':
+																	$('#addlineCultura_button').click();
+																	break;
+																case 'tbresistente':
+																	$('#addlineTBResistente_button').click();
+																	break;
+															}
+														}
+														// Forçando adição da Unidade de Saûde nos campos Origem. Caso contrário, em alguns casos não funciona. Não foi possível identificar um padrão para os casos em que não funciona
+														$('#' + field[f].childNodes[child].tagName + "_" + index)
+															.find('option')
+															.end()
+															.append('<option>'+ xml.getElementsByTagName(field[f].childNodes[child].tagName + "_" + index)[0].childNodes[0].nodeValue +'</option>')
+															.val(xml.getElementsByTagName(field[f].childNodes[child].tagName + "_" + index)[0].childNodes[0].nodeValue)
+															.attr('selected', true)
+														;
+														// Tratando dos outros campos envolvidos com a adição de uma nova linha
+														switch(fieldset){
+															case 'cepa':
+																$().selectCepa(index);
+																break;
+															case 'cultura':
+																$().selectCultura(index);
+																break;
+															case 'tbresistente':
+																$().selectTBresistente(index);
+																break;
+														}
+													}
+													// Tratando campos de sangue ou soro coletados
+													if (field[f].childNodes[child].tagName.search('Coletado') != -1){
+														fieldset = field[f].childNodes[child].tagName.split('Coletado')[0];
+														if (index > 1){
+															switch(fieldset){
+																case 'sangue':
+																	$('#addSangue_button').click();
+																	break;
+																case 'soro':
+																	$('#addSoro_button').click();
+																	break;
+															}
+														}
+													}
+													index ++;
+												}
+												for (i=1; i <= (index + 1); i++){
+													if (xml.getElementsByTagName(field[f].childNodes[child].tagName + '_' + i)[0] != undefined && xml.getElementsByTagName(field[f].childNodes[child].tagName + '_' + i)[0].childNodes[0] != undefined){
+														$('#' + field[f].childNodes[child].tagName + '_' + i)
+															.removeAttr('disabled')
+															.val(xml.getElementsByTagName(field[f].childNodes[child].tagName + '_' + i)[0].childNodes[0].nodeValue)
+															.change()
+														;
+														if ($('#' + field[f].childNodes[child].tagName + '_' + i).attr('type') == 'checkbox'){
+															if (xml.getElementsByTagName(field[f].childNodes[child].tagName + '_' + i)[0].childNodes[0].nodeValue == 'on')
+																$('#' + field[f].childNodes[child].tagName + '_' + i).attr('checked', true);
+														}
+														if (field[f].childNodes[child].tagName.split('_')[0] == 'valores'){
+															values = xml.getElementsByTagName(field[f].childNodes[child].tagName + "_" + i)[0].childNodes[0].nodeValue.split(',');
+															for (v=0; v < values.length; v++){
+																$('#' + field[f].childNodes[child].tagName.split('_')[2] + '_tbresistente_' + i + '_' + values[v])
+																	.attr('checked', true)
+																	.change()
+																;
+															}
+														}
+													}
+												}
+											}
 									}
 								}
 							}
-							// Se estivermos tratando campos mûltiplos...
-							else{
-								for (child = 0; child < field[f].childNodes.length; child++)
-									if (field[f].childNodes[child].tagName != undefined){
-										index  = 1;
-										while (xml.getElementsByTagName(field[f].childNodes[child].tagName + "_" + index)[0] != undefined && xml.getElementsByTagName(field[f].childNodes[child].tagName + "_" + index)[0].childNodes[0] != undefined){
-											if (field[f].childNodes[child].tagName.search('origem_') != -1){
-												fieldset = field[f].childNodes[child].tagName.split('_')[1];
-												// Tratando casos de mais de uma linha em Baciloscopia, Cultura ou TB Resistente
-												if (index > 1){
-													switch(fieldset){
-														case 'cepa':
-															$('#addline_button').click();
-															break;
-														case 'cultura':
-															$('#addlineCultura_button').click();
-															break;
-														case 'tbresistente':
-															$('#addlineTBResistente_button').click();
-															break;
-													}
-												}
-												// Forçando adição da Unidade de Saûde nos campos Origem. Caso contrário, em alguns casos não funciona. Não foi possível identificar um padrão para os casos em que não funciona
-												$('#' + field[f].childNodes[child].tagName + "_" + index)
-													.find('option')
-													.end()
-													.append('<option>'+ xml.getElementsByTagName(field[f].childNodes[child].tagName + "_" + index)[0].childNodes[0].nodeValue +'</option>')
-													.val(xml.getElementsByTagName(field[f].childNodes[child].tagName + "_" + index)[0].childNodes[0].nodeValue)
-													.attr('selected', true)
-												;
-												// Tratando dos outros campos envolvidos com a adição de uma nova linha
-												switch(fieldset){
-													case 'cepa':
-														$().selectCepa(index);
-														break;
-													case 'cultura':
-														$().selectCultura(index);
-														break;
-													case 'tbresistente':
-														$().selectTBresistente(index);
-														break;
-												}
-											}
-											// Tratando campos de sangue ou soro coletados
-											if (field[f].childNodes[child].tagName.search('Coletado') != -1){
-												fieldset = field[f].childNodes[child].tagName.split('Coletado')[0];
-												if (index > 1){
-													switch(fieldset){
-														case 'sangue':
-															$('#addSangue_button').click();
-															break;
-														case 'soro':
-															$('#addSoro_button').click();
-															break;
-													}
-												}
-											}
-											index ++;
-										}
-										for (i=1; i <= (index + 1); i++){
-											if (xml.getElementsByTagName(field[f].childNodes[child].tagName + '_' + i)[0] != undefined && xml.getElementsByTagName(field[f].childNodes[child].tagName + '_' + i)[0].childNodes[0] != undefined){
-												$('#' + field[f].childNodes[child].tagName + '_' + i)
-													.removeAttr('disabled')
-													.val(xml.getElementsByTagName(field[f].childNodes[child].tagName + '_' + i)[0].childNodes[0].nodeValue)
-													.change()
-												;
-												if ($('#' + field[f].childNodes[child].tagName + '_' + i).attr('type') == 'checkbox'){
-													if (xml.getElementsByTagName(field[f].childNodes[child].tagName + '_' + i)[0].childNodes[0].nodeValue == 'on')
-														$('#' + field[f].childNodes[child].tagName + '_' + i).attr('checked', true);
-												}
-												if (field[f].childNodes[child].tagName.split('_')[0] == 'valores'){
-													values = xml.getElementsByTagName(field[f].childNodes[child].tagName + "_" + i)[0].childNodes[0].nodeValue.split(',');
-													for (v=0; v < values.length; v++){
-														$('#' + field[f].childNodes[child].tagName.split('_')[2] + '_tbresistente_' + i + '_' + values[v])
-															.attr('checked', true)
-															.change()
-														;
-													}
-												}
-											}
-										}
-									}
-							}
 						}
-					}
+					});
+				}else{
+					// Se não for para editar...
+					var elements = xml.getElementsByTagName('documento')[0].childNodes;
+					$(elements).each(function(){
+						var el = $(this).get(0);
+						if($(el)[0].nodeType == xml.ELEMENT_NODE){
+							var tagname = $(el)[0].tagName;
+							idDiv = $('#'+tagname).parent().attr('id');
+							var hlcolor = '#FFF8C6';
+
+							if (tagname == 'numeroPaciente')
+								$('#' + tagname).val($(el).text());
+
+							if (tagname == 'unidade')
+								$('#' + tagname).val($(el).text());
+						}
+					});
 				}
-			});
+			}
 		}
 	});
 /*-------------------------------------------------------------------------------*/
