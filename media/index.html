@@ -464,9 +464,35 @@
 				<label for='dataRecebimentoFitaHain'>Data do Recebimento no Laboratório:</label>
 				<input id='dataRecebimentoFitaHain' name='dataRecebimentoFitaHain' class='data' type="text" />
 			</div>
-			<div id='divDataRecebimentoMedico' class='secondary'>
-				<label for='dataRecebimentoMedico'> Data do Recebimento pelo Médico: </label>
-				<input id='dataRecebimentoMedico' name='dataRecebimentoMedico' class='data' type='text'/>
+			<div id='divDataResultadoFitaHain' class='secondary'>
+				<label for='dataResultadoFitaHain'>Data do Resultado:</label>
+				<input id='dataResultadoFitaHain' name='dataResultadoFitaHain' class='data' type="text" />
+			</div>
+
+			<div id='divResultadoFitaHain' class='secondary'>
+				<label for='resultadoFitaHain'> Resultado: </label>
+				<select id='resultadoFitaHain' name='resultadoFitaHain'>
+					<option value=''             > </option>
+					<option value='detectado'    > Detectado </option>
+					<option value='naoDetectado' > Não detectado </option>
+					<option value='ignorado'     > Ignorado </option>
+				</select>
+			</div>
+			<div id='divIsoniazida' class='secondary'>
+				<label for='isoniazida'> Isoniazida </label>
+				<select id='isoniaziada' name='isoniaziada'>
+					<option value=''            > </option>
+					<option value='sensivel'    > Sensível </option>
+					<option value='resistente>' > Resistente </option>
+				</select>
+			</div>
+			<div id='divRifampicina' class='secondary'>
+				<label for='rifampicina'> Rifampicina </label>
+				<select id='rifampicina' name='rifampicina'>
+					<option value=''           > </option>
+					<option value='sensivel'   > Sensível </option>
+					<option value='resistente' > Resistente </option>
+				</select>
 			</div>
 			<div id='divOpcoes' class='secondary'>
 				<fieldset>
@@ -524,34 +550,9 @@
 					</label>
 				</fieldset><br />
 			</div>
-			<div id='divResultadoFitaHain' class='secondary'>
-				<label for='resultadoFitaHain'> Resultado: </label>
-				<select id='resultadoFitaHain' name='resultadoFitaHain'>
-					<option value=''             > </option>
-					<option value='detectado'    > Detectado </option>
-					<option value='naoDetectado' > Não detectado </option>
-					<option value='ignorado'     > Ignorado </option>
-				</select>
-			</div>
-			<div id='divIsoniazida' class='secondary'>
-				<label for='isoniazida'> Isoniazida </label>
-				<select id='isoniaziada' name='isoniaziada'>
-					<option value=''            > </option>
-					<option value='sensivel'    > Sensível </option>
-					<option value='resistente>' > Resistente </option>
-				</select>
-			</div>
-			<div id='divRifampicina' class='secondary'>
-				<label for='rifampicina'> Rifampicina </label>
-				<select id='rifampicina' name='rifampicina'>
-					<option value=''           > </option>
-					<option value='sensivel'   > Sensível </option>
-					<option value='resistente' > Resistente </option>
-				</select>
-			</div>
-			<div id='divDataResultadoFitaHain' class='secondary'>
-				<label for='dataResultadoFitaHain'>Data do Resultado:</label>
-				<input id='dataResultadoFitaHain' name='dataResultadoFitaHain' class='data' type="text" />
+			<div id='divDataRecebimentoMedico' class='secondary'>
+				<label for='dataRecebimentoMedico'> Data do Recebimento pelo Médico: </label>
+				<input id='dataRecebimentoMedico' name='dataRecebimentoMedico' class='data' type='text'/>
 			</div>
 		</fieldset>
 		<fieldset>
