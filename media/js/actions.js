@@ -616,7 +616,7 @@ $(document).ready(function(){
 	$('#resultadoGenXpert').change(function(){
 		var dep = new Array();
 		dep[0] = '#divGenXpertPositivo';
-		if ($(this).val() == 'positivo')
+		if ($(this).val() == 'detectavel')
 			$().showNotRequiredFields(dep);
 		else
 			$().hideFields(dep);
