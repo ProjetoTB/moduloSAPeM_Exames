@@ -630,6 +630,7 @@ $(document).ready(function(){
 		dep[2] = '#divDataRecebimentoMedico';
 		dep[3] = '#divOpcoes';
 		dep[4] = '#divDataResultadoFitaHain';
+		dep[5] = '#divResponsavelPeloExameFitaHain';
 
 		var req = new Array();
 		req[0] = '#divResultadoFitaHain';
