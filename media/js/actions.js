@@ -599,6 +599,7 @@ $(document).ready(function(){
 		dep[1] = '#divDataRecebimentoGenXpert';
 		dep[2] = '#divDataRecebimentoGenXpertMedico';
 		dep[3] = '#divDataResultadoGenXpert';
+		dep[4] = '#divResponsavelPeloExameGenXpert';
 
 		var req = new Array();
 		req[0] = '#divResultadoGenXpert';
