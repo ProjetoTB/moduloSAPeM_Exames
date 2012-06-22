@@ -103,17 +103,19 @@
 	<genXpert> GenXpert realizado </genXpert>
 	<dataColetaGenXpert> Data da Coleta </dataColetaGenXpert>
 	<dataRecebimentoGenXpert> Data do Recebimento no Laboratório </dataRecebimentoGenXpert>
-	<dataRecebimentoGenXpertMedico> Data do Recebimento pelo Médico </dataRecebimentoGenXpertMedico>
+	<dataResultadoGenXpert> Data do Resultado </dataResultadoGenXpert>
 	<resultadoGenXpert> Resultado </resultadoGenXpert>
 	<genXpertPositivo>  </genXpertPositivo>
-	<dataResultadoGenXpert> Data do Resultado </dataResultadoGenXpert>
+	<dataRecebimentoGenXpertMedico> Data do Recebimento pelo Médico </dataRecebimentoGenXpertMedico>
+	<responsavelPeloExameGenExpert> Responsável pelo exame </responsavelPeloExameGenExpert>
 	<fitaHainRealizado> FitaHain realizado </fitaHainRealizado>
 	<dataColetaFitaHain> Data da Coleta </dataColetaFitaHain>
 	<dataRecebimentoFitaHain> Data do Recebimento no Laboratório </dataRecebimentoFitaHain>
-	<dataRecebimentoMedico> Data do Recebimento pelo Médico </dataRecebimentoMedico>
-	<fitaHain> Opções fita hain </fitaHain>
+	<dataResultadoFitaHain> Data do Resultado </dataResultadoFitaHain>
 	<resultadoFitaHain> Resultado </resultadoFitaHain>
 	<isoniaziada> Isoniazida </isoniaziada>
 	<rifampicina> Rifampicina </rifampicina>
-	<dataResultadoFitaHain> Data do Resultado </dataResultadoFitaHain>
+	<fitaHain> Opções fita hain </fitaHain>
+	<dataRecebimentoMedico> Data do Recebimento pelo Médico </dataRecebimentoMedico>
+	<responsavelPeloExameFitaHain> Responsável pelo exame </responsavelPeloExameFitaHain>
 </fields>
